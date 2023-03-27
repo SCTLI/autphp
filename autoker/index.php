@@ -7,7 +7,7 @@
         <meta charset="utf-8" />
     </head>
     <body>
-                <nav>
+        <nav>
             <ul>
                 <li><a href="index.php">Kezdő Oldal</a></li>
                 <li><a href="autok.php">Autók tábla</a></li>

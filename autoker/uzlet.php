@@ -18,14 +18,14 @@
     </ul>
 </nav>
 <?php
-$conn = oci_connect('C##admin', 'Admin123', "localhost/XE",'UTF8');
+$conn = oci_connect('C##admin', 'admin123', "localhost/XE",'UTF8');
 
-echo '<h2>Autók </h2>';
+echo '<h2>Üzletek </h2>';
 echo '<table border="0">';
 
 
 //// -- lekerdezzuk a tabla tartalmat
-$stid = oci_parse($conn, 'SELECT * FROM Autok');
+$stid = oci_parse($conn, 'SELECT * FROM Uzlet');
 
 oci_execute($stid);
 
