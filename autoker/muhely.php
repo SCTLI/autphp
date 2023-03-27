@@ -57,5 +57,8 @@ oci_close($conn);
 
 
 ?>
+<footer>
+    <p>&copy;Ami jog van az fent van tartva:)</p>
+</footer>
 </body>
 </html>

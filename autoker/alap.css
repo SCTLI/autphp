@@ -57,8 +57,14 @@ h1{
 }
 table{
     margin:auto auto;
-    background-color: darkkhaki;
+    background-color: slategray;
     color:white;
     border-color: black;
     text-align: center;
+}
+
+table,th,td{
+    border: 1px solid lightslategray;
+    border-collapse: collapse;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
