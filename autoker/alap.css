@@ -55,3 +55,10 @@ h1{
     color: rgb(134, 163, 163);
     text-align: center;
 }
+table{
+    margin:auto auto;
+    background-color: darkkhaki;
+    color:white;
+    border-color: black;
+    text-align: center;
+}

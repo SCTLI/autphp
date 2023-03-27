@@ -1,6 +1,9 @@
 <html>
 <head>
-
+    <title>Muhelyek tabla</title>
+    <link rel="stylesheet" type="text/css" href="alap.css">
+    <link rel="icon" href="icon.png" type="image/icon">
+    <meta charset="utf-8" />
 </head>
 <body>
 <nav>
