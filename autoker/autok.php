@@ -28,7 +28,7 @@ echo '<table border="0">';
 
 
 //// -- lekerdezzuk a tabla tartalmat
-$stid = oci_parse($conn, 'SELECT * FROM Autok');
+$stid = oci_parse($conn, 'SELECT alvazszam AS "Alvázszám", marka AS "Márka", modell AS "Modell", uzemanyag_tipus AS "Üzemanyag", teljesitmeny AS "Teljesítmény", szin AS "Szín", ar AS "Ár (Ft)" FROM Autok');
 
 oci_execute($stid);
 

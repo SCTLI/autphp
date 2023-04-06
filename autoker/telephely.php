@@ -28,7 +28,7 @@ echo '<table border="0">';
 
 
 //// -- lekerdezzuk a tabla tartalmat
-$stid = oci_parse($conn, 'SELECT * FROM Telephely');
+$stid = oci_parse($conn, 'SELECT telep_nev AS "Neve", telep_varos AS "Városa"FROM Telephely');
 
 oci_execute($stid);
 

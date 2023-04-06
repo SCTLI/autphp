@@ -28,7 +28,7 @@ echo '<table border="0">';
 
 
 //// -- lekerdezzuk a tabla tartalmat
-$stid = oci_parse($conn, 'SELECT * FROM Elado');
+$stid = oci_parse($conn, 'SELECT eladoigszam AS "Igazolvány szám", elado_nev AS "Név", elado.felhasznalonev AS "Felhasználónév" FROM Elado');
 
 oci_execute($stid);
 
