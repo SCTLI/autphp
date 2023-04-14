@@ -1,3 +1,8 @@
+<?php
+include_once('navigation.php');
+include_once('dbfunctions.php');
+?>
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>Autok tabla</title>
@@ -6,56 +11,41 @@
     <meta charset="utf-8" />
 </head>
 <body>
-<nav>
-    <ul>
-        <li><a href="index.php">Kezdő Oldal</a></li>
-        <li><a href="autok.php">Autók tábla</a></li>
-        <li><a href="telephely.php">Telephelyek tábla</a></li>
-        <li><a href="elado.php">Eladók tábla</a></li>
-        <li><a href="muhely.php">Műhelyek tábla</a></li>
-        <li><a href="uzlet.php">Üzletek tábla</a></li>
-        <!--<li><a href="szerelo.php">Szerelők tábla</a></li> -->
-        <!--<li><a href="ugyfel.php">Ügyfelek tábla</a></li> -->
-        <!--<li><a href="vasarlasok.php">Vásárlások tábla</a></li> -->
-        <!--<li><a href="szerelesek.php">Szerelések tábla</a></li> -->
-    </ul>
-</nav>
+<?php echo navigation();?>
+
+<h2>Autók </h2>
+<table border="0">
+<tr>
+    <th>Alvázszám</th>
+    <th>Márka</th>
+    <th>Modell</th>
+    <th>Üzemanyag</th>
+    <th>Teljesítmény</th>
+    <th>Szín</th>
+    <th>Ár (Ft)</th>
+    <th></th>
+</tr>
 <?php
-$conn = oci_connect('C##admin', 'admin123', "localhost/XE",'UTF8');
 
-echo '<h2>Autók </h2>';
-echo '<table border="0">';
-
-
-//// -- lekerdezzuk a tabla tartalmat
-$stid = oci_parse($conn, 'SELECT alvazszam AS "Alvázszám", marka AS "Márka", modell AS "Modell", uzemanyag_tipus AS "Üzemanyag", teljesitmeny AS "Teljesítmény", szin AS "Szín", ar AS "Ár (Ft)" FROM Autok');
-
-oci_execute($stid);
-
-//// -- eloszor csak az oszlopneveket kerem le
-$nfields = oci_num_fields($stid);
-echo '<tr>';
-for ($i = 1; $i<=$nfields; $i++){
-    $field = oci_field_name($stid, $i);
-    echo '<td>' . $field . '</td>';
-}
-echo '</tr>';
-
-//// -- ujra vegrehajtom a lekerdezest, es kiiratom a sorokat
+$stid = getAutokList();
 oci_execute($stid);
 
 while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<tr>';
-    foreach ($row as $item) {
-        echo '<td>' . $item . '</td>';
-    }
+    echo '<td>'. $row["Alvázszám"] . '</td>';
+    echo '<td>'. $row["Márka"] . '</td>';
+    echo '<td>'. $row["Modell"] . '</td>';
+    echo '<td>'. $row["Üzemanyag"] . '</td>';
+    echo '<td>'. $row["Teljesítmény"] . '</td>';
+    echo '<td>'. $row["Szín"] . '</td>';
+    echo '<td>'. $row["Ár (Ft)"] . '</td>';
+    echo '<td><form method="POST" action="Delete/autoDelete.php">
+				  <input type="hidden" name="autoDelete" value="'. $row["Alvázszám"] .'" />
+				  <input type="submit" value="Törlés" />
+		          </form></td>';
     echo '</tr>';
 }
 echo '</table>';
-
-oci_close($conn);
-
-
 ?>
 
 <footer>
