@@ -2,7 +2,7 @@
 
 include_once("../common/dbFunctions.php");
 
-$delete = $_POST["szerelDelete"];
+$delete = $_POST["autoDelete"];
 
 if ( isset($delete) ) {
     $sikeres = deleteAuto($delete);
