@@ -12,7 +12,37 @@ include_once('common/dbfunctions.php');
 </head>
 <body>
 <?php echo navigation();?>
+<h2>Új Autó felvitele az adatbázisba</h2>
+<span class="kozepre">Ahoz, hogy egy új autót vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
+<form method="POST" action="Insert/autofel.php" accept-charset="utf-8">
+    <label>Alvázszám:</label>
+    <input type="number" name="alvazszam" placeholder="123456">
+    <br />
+    <label>Márka:</label>
+    <input type="text" name="marka" placeholder="Audi">
+    <br />
+    <label>Modell</label>
+    <input type="text" name="modell" placeholder="SUV">
+    <br />
+    <label>Teljesítmény:</label>
+    <input type="text" name="teljesitmeny" placeholder="xkW, xLE">
+    <br />
+    <label>Szín:</label>
+    <input type="text" name="szin" placeholder="Piros">
+    <br />
+    <label>Üzemanyag típus:</label>
+    <select name="uzemanyag">
+        <option value="Benzin">Benzin</option>
+        <option value="Dízel">Dízel</option>
+        <option value="Elektromos">Elektromos</option>
+        <option value="PB Gáz">PB Gáz</option>
+    </select>
+    <br />
+    <label>Telephely:</label>
+    <select name="telephelyid">
 
+    </select>
+</form>
 <h2>Autók </h2>
 <table border="0">
 <tr>
