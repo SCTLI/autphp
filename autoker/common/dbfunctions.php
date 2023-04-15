@@ -92,7 +92,7 @@ function getSzereloList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT eladoigszam AS "Igazolvány szám", elado_nev AS "Név", elado.felhasznalonev AS "Felhasználónév" FROM Elado');
+    $result = oci_parse($conn, 'SELECT szereloigszam AS "Igazolvány szám", szerelo_nev AS "Név", szerelo.felhasznalonev AS "Felhasználónév" FROM Elado');
 
     oci_close($conn);
     return $result;
