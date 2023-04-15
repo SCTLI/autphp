@@ -16,17 +16,7 @@ if ( isset($autoAlvazszam) && isset($autoMarka) && isset($autoModell) && isset($
     $sikeres=insertAutok($telepID,$autoMarka,$autoUzemanyag,$autoModell,$autoTeljesitmeny,$autoSzin,$autoAr,$autoAlvazszam);
 if ($sikeres==true){
     header("Location: ../autok.php");
-}else{
-    echo $autoAlvazszam;
-    echo $autoMarka;
-    echo $autoModell;
-    echo $autoTeljesitmeny;
-    echo $autoSzin;
-    echo $autoUzemanyag;
-    echo $telepID;
-    echo $autoAr;
 }
-
 
 } else {
     error_log("Nem lett kitöltve a mező!");
