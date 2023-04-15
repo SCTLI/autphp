@@ -2,18 +2,19 @@
 
 include_once('../dbfunctions.php');
 
-$delete = $_POST["autoDelete"];
+$delete1 = $_POST["szerelAlvazszamDelete"];
+$delete2 = $_POST["szerelIdoDelete"];
 
 if ( isset($delete) ) {
-    $sikeres = deleteAru($delete);
+    $sikeres = deleteSzerel($delete1,$delete2);
 
     if ( $sikeres ) {
-        header('Location: ../auto.php');
+        header('Location: ../szerel.php');
     } else {
-        echo 'Hiba! Nem sikerült az autó törlése!';
+        echo 'Hiba! Nem sikerült a szerelés törlése!';
     }
 } else {
-    echo 'Hiba! Nem sikerült az autó törlése!';
+    echo 'Hiba! Nem sikerült a szerelés törlése!';
 
 }
 
