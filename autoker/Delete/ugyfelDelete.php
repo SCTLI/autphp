@@ -1,6 +1,6 @@
 <?php
 
-include_once('../dbfunctions.php');
+include_once("../common/dbFunctions.php");
 
 $delete = $_POST["ugyfelDelete"];
 

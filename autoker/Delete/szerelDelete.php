@@ -1,6 +1,6 @@
 <?php
 
-include_once('../dbfunctions.php');
+include_once("../common/dbFunctions.php");
 
 $delete1 = $_POST["szerelAlvazszamDelete"];
 $delete2 = $_POST["szerelIdoDelete"];

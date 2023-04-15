@@ -53,7 +53,7 @@ function getTelephelyList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT telep_nev AS "Neve", telep_varos AS "Városa", telepid FROM Telephely');
+    $result = oci_parse($conn, 'SELECT telep_nev AS "Neve", telep_varos AS "Városa", telepid AS "telepid" FROM Telephely');
 
     oci_close($conn);
     return $result;
@@ -235,7 +235,7 @@ function insertUzlet($uzletNev, $uzletVaros) {
         return false;
     }
     $szam =lekeruzlet()+1;
-    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (".$szam.",".$uzletNev.",".$uzletVaros);
+    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (".$szam.",".$uzletNev.",".$uzletVaros.")");
 
     $result = oci_execute($insert);
 
@@ -250,14 +250,22 @@ function lekerautok(){
     $szam = oci_parse($conn, "SELECT MAX(Alvazszam) FROM Autok");
     return  $szam;
 }
-function insertAutok($telepid, $marka, $uzemanyag, $model, $teljesitmeny , $szin, $ar) {
+function insertAutok($telepid, $marka, $uzemanyag, $model, $teljesitmeny , $szin, $ar, $alvazszam) {
 
 
     if ( !($conn = dbConnect()) ) {
         return false;
     }
     $szam =lekerautok()+1;
-    $insert = oci_parse( $conn,"INSERT INTO autok VALUES (".$szam.",".$telepid.",".$marka.",".$uzemanyag.",".$model.",".$teljesitmeny.",".$szin.",".$ar.",0)");
+    $insert = oci_parse( $conn,"INSERT INTO autok VALUES (:alvazszam,:telepid,:marka,:uzemanyag,:modell,:teljesitmeny,:szin,:ar,0)");
+    oci_bind_by_name($insert,":alvazszam",$alvazszam  );
+    oci_bind_by_name($insert,":telepid",$telepid  );
+    oci_bind_by_name($insert,":marka",$marka  );
+    oci_bind_by_name($insert,":uzemanyag",$uzemanyag  );
+    oci_bind_by_name($insert,":modell",$model  );
+    oci_bind_by_name($insert,":teljesitmeny",$teljesitmeny  );
+    oci_bind_by_name($insert,":szin",$szin  );
+    oci_bind_by_name($insert,":ar",$ar  );
 
     $result = oci_execute($insert);
 
