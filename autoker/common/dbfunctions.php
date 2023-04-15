@@ -227,7 +227,7 @@ function lekeruzlet(){
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $szam = oci_parse($conn, "SELECT MAX(UzletId) FROM Uzlet");
+    $szam = oci_parse($conn, 'SELECT MAX(UzletId) FROM Uzlet');
     return  $szam;
 }
 function insertUzlet($uzletNev, $uzletVaros) {
@@ -236,22 +236,21 @@ function insertUzlet($uzletNev, $uzletVaros) {
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $szam =lekeruzlet()+1;
-    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (".$szam.",".$uzletNev.",".$uzletVaros.")");
-
+    $max =lekeruzlet();
+    oci_execute($max);
+    $szam=0;
+    while ( $row = oci_fetch_array($max, OCI_ASSOC + OCI_RETURN_NULLS)) {
+        $szam=$row["szam"]+1;
+    }
+    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (:telepid,:uzletnev,:uzletvaros)");
+    oci_bind_by_name($insert,":telepid",$szam  );
+    oci_bind_by_name($insert,":uzletnev",$uzletNev  );
+    oci_bind_by_name($insert,":uzletvaros",$uzletVaros  );
     $result = oci_execute($insert);
 
     oci_close($conn);
     return $result;
 
-}
-function lekerautok(){
-    if ( !($conn = dbConnect()) ) {
-        return false;
-    }
-    $szam = oci_parse($conn, 'SELECT MAX(Alvazszam) AS "szam" FROM Autok');
-    oci_close($conn);
-    return  $szam;
 }
 function insertAutok($telepid, $marka, $uzemanyag, $model, $teljesitmeny , $szin, $ar, $alvazszam) {
 
@@ -259,15 +258,9 @@ function insertAutok($telepid, $marka, $uzemanyag, $model, $teljesitmeny , $szin
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $max =lekerautok();
-    oci_execute($max);
-    $szam=0;
-    while ( $row = oci_fetch_array($max, OCI_ASSOC + OCI_RETURN_NULLS)) {
-        $szam=$row["szam"]+1;
-    }
 
     $insert = oci_parse( $conn,"INSERT INTO autok VALUES (:alvazszam,:telepid,:marka,:uzemanyag,:modell,:teljesitmeny,:szin,:ar,0)");
-    oci_bind_by_name($insert,":alvazszam",$szam  );
+    oci_bind_by_name($insert,":alvazszam",$alvazszam  );
     oci_bind_by_name($insert,":telepid",$telepid  );
     oci_bind_by_name($insert,":marka",$marka  );
     oci_bind_by_name($insert,":uzemanyag",$uzemanyag  );
@@ -281,4 +274,145 @@ function insertAutok($telepid, $marka, $uzemanyag, $model, $teljesitmeny , $szin
     return $result;
 
 }
+function lekertelep(){
+    if ( !($conn = dbConnect()) ) {
+        return false;
+    }
+    $szam = oci_parse($conn, 'SELECT MAX(TelepId) FROM Telephely');
+    return  $szam;
+}
+function insertTelep($telepNev, $telepVaros) {
 
+
+    if ( !($conn = dbConnect()) ) {
+        return false;
+    }
+    $max =lekertelep();
+    oci_execute($max);
+    $szam=0;
+    while ( $row = oci_fetch_array($max, OCI_ASSOC + OCI_RETURN_NULLS)) {
+        $szam=$row["szam"]+1;
+    }
+    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (:telepid,:telepvaros,:telepnev)");
+    oci_bind_by_name($insert,":telepid",$szam  );
+    oci_bind_by_name($insert,":telepnev",$telepNev  );
+    oci_bind_by_name($insert,":telepvaros",$telepVaros  );
+    $result = oci_execute($insert);
+
+    oci_close($conn);
+    return $result;
+
+}
+function lekermuhely(){
+    if ( !($conn = dbConnect()) ) {
+        return false;
+    }
+    $szam = oci_parse($conn, 'SELECT MAX(MuhelyId) FROM Muhely');
+    return  $szam;
+}
+function insertMuhely($muhelyNev, $muhelyVaros) {
+
+
+    if ( !($conn = dbConnect()) ) {
+        return false;
+    }
+    $max =lekermuhely();
+    oci_execute($max);
+    $szam=0;
+    while ( $row = oci_fetch_array($max, OCI_ASSOC + OCI_RETURN_NULLS)) {
+        $szam=$row["szam"]+1;
+    }
+    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (:muhelyid,:muhelyvaros,:muhelynev)");
+    oci_bind_by_name($insert,":muhelyid",$szam  );
+    oci_bind_by_name($insert,":muhelynev",$muhelyNev  );
+    oci_bind_by_name($insert,":muhelyvaros",$muhelyVaros  );
+    $result = oci_execute($insert);
+
+    oci_close($conn);
+    return $result;
+
+}
+function insertSzerelo($SzereloIgszam,$SzereloNev, $Felhasznalonev, $Jelszo) {
+
+
+    if ( !($conn = dbConnect()) ) {
+        return false;
+    }
+    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (:szereloIgszam,Null,:szerelonev,:Felhasznalonev,:Jelszo)");
+    oci_bind_by_name($insert,":szereloIgszam",$SzereloIgszam  );
+    oci_bind_by_name($insert,":szerelonev",$SzereloNev  );
+    oci_bind_by_name($insert,":Felhasznalonev",$Felhasznalonev  );
+    oci_bind_by_name($insert,":Jelszo",$Jelszo  );
+    $result = oci_execute($insert);
+
+    oci_close($conn);
+    return $result;
+
+}
+function insertElado($EladoIgszam,$EladoNev, $Felhasznalonev, $Jelszo) {
+
+
+    if ( !($conn = dbConnect()) ) {
+        return false;
+    }
+    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (:eladoIgszam,NULL,:eladonev,:Felhasznalonev,:Jelszo)");
+    oci_bind_by_name($insert,":eladoIgszam",$EladoIgszam  );
+    oci_bind_by_name($insert,":eladonev",$EladoNev  );
+    oci_bind_by_name($insert,":Felhasznalonev",$Felhasznalonev  );
+    oci_bind_by_name($insert,":Jelszo",$Jelszo  );
+    $result = oci_execute($insert);
+
+    oci_close($conn);
+    return $result;
+
+}
+function insertUgyfel($UgyfelIgszam,$UgyfelNev, $Felhasznalonev, $Jelszo) {
+
+
+    if ( !($conn = dbConnect()) ) {
+        return false;
+    }
+    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (:ugyfelIgszam,:ugyfelnev,:Felhasznalonev,:Jelszo)");
+    oci_bind_by_name($insert,":ugyfelIgszam",$UgyfelIgszam  );
+    oci_bind_by_name($insert,":ugyfelnev",$UgyfelNev  );
+    oci_bind_by_name($insert,":Felhasznalonev",$Felhasznalonev  );
+    oci_bind_by_name($insert,":Jelszo",$Jelszo  );
+    $result = oci_execute($insert);
+
+    oci_close($conn);
+    return $result;
+
+}
+function insertVasarol($Alvazszam,$UzletId, $UgyfelIgszam) {
+
+
+    if ( !($conn = dbConnect()) ) {
+        return false;
+    }
+    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (:Alvazszam,:UzletId,:ugyfelIgszam)");
+    oci_bind_by_name($insert,":ugyfelIgszam",$UgyfelIgszam  );
+    oci_bind_by_name($insert,":Alvazszam",$Alvazszam  );
+    oci_bind_by_name($insert,":UzletId",$UzletId  );
+    $result = oci_execute($insert);
+
+    oci_close($conn);
+    return $result;
+
+}
+function insertSzerel($Alvazszam,$Idopont, $MuhelyId, $SzereltAlkatresz) {
+
+
+    if ( !($conn = dbConnect()) ) {
+        return false;
+    }
+    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (:Alvazszam,:Idopont,:MuhelyId,:Jelszo)");
+    oci_bind_by_name($insert,":Alvazszam",$Alvazszam  );
+    oci_bind_by_name($insert,":Idopont",$Idopont  );
+    oci_bind_by_name($insert,":MuhelyId",$MuhelyId  );
+    oci_bind_by_name($insert,":SzereltAlkatresz",$SzereltAlkatresz  );
+    $result = oci_execute($insert);
+
+    oci_close($conn);
+    return $result;
+
+}
