@@ -109,9 +109,10 @@ function deleteAuto($id)
     }
 
     $delete = oci_parse($conn, "DELETE FROM autok WHERE alvazszam = ".$id);
-    oci_execute($delete);
+    $result = oci_execute($delete);
 
     oci_close($conn);
+    return $result;
 
 }
 function deleteUzlet($id)
@@ -122,9 +123,10 @@ function deleteUzlet($id)
     }
 
     $delete = oci_parse($conn, "DELETE FROM uzlet WHERE uzletid = ".$id);
-    oci_execute($delete);
+    $result = oci_execute($delete);
 
     oci_close($conn);
+    return $result;
 
 }
 function deleteMuhely($id)
