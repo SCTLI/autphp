@@ -30,6 +30,9 @@ include_once('common/dbfunctions.php');
     <label>Szín:</label>
     <input type="text" name="szin" placeholder="Piros">
     <br />
+    <label>Ár:</label>
+    <input type="number" name="ar" placeholder="100000">
+    <br />
     <label>Üzemanyag típus:</label>
     <select name="uzemanyag">
         <option value="Benzin">Benzin</option>
@@ -44,10 +47,12 @@ include_once('common/dbfunctions.php');
         $stid = getTelephelyList();
         oci_execute($stid);
         while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
-            echo '<option value="'.$row['telepid'].'">Telephely neve: '.$row['Neve'].' Telephely városa: '.$row['Városa'].'</option>';
+            echo '<option value="'.$row['telepid'].'">'.$row['Neve'].'</option>';
         }
         ?>
     </select>
+    <br />
+    <input type="submit" value="Feltöltés">
 </form>
 <h2>Autók </h2>
 <table border="0">

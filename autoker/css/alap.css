@@ -66,3 +66,13 @@ table,th,td{
     border-collapse: collapse;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+form{
+    margin: auto auto;
+    text-align: center;
+}
+
+.kozepre{
+    margin: auto auto;
+    text-align: center;
+}
