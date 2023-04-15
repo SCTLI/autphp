@@ -221,6 +221,28 @@ function deleteSzerel($id1,$id2)
 //
 // ---------------------------------------------- Táblába beszúrás ----------------------------------------------
 //
+function lekeruzlet(){
+    if ( !($conn = dbConnect()) ) {
+        return false;
+    }
+    $szam = oci_parse($conn, "SELECT MAX(UzletId) FROM Uzlet");
+    return  $szam;
+}
+function insertUzlet($uzletNev, $uzletVaros) {
+
+
+    if ( !($conn = dbConnect()) ) {
+        return false;
+    }
+    $szam =lekeruzlet()+1;
+    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (".$szam.",".$uzletNev.",".$uzletVaros);
+
+    $result = oci_execute($insert);
+
+    oci_close($conn);
+    return $result;
+
+}
 function lekerautok(){
     if ( !($conn = dbConnect()) ) {
         return false;
@@ -235,7 +257,7 @@ function insertAutok($telepid, $marka, $uzemanyag, $model, $teljesitmeny , $szin
         return false;
     }
     $szam =lekerautok()+1;
-    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (".$szam.",".$telepid.",".$marka.",".$uzemanyag.",".$model.",".$teljesitmeny.",".$szin.",".$ar.",0)");
+    $insert = oci_parse( $conn,"INSERT INTO autok VALUES (".$szam.",".$telepid.",".$marka.",".$uzemanyag.",".$model.",".$teljesitmeny.",".$szin.",".$ar.",0)");
 
     $result = oci_execute($insert);
 
