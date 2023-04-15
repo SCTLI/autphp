@@ -40,7 +40,13 @@ include_once('common/dbfunctions.php');
     <br />
     <label>Telephely:</label>
     <select name="telephelyid">
-
+        <?php
+        $stid = getTelephelyList();
+        oci_execute($stid);
+        while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
+            echo '<option value="'.$row['telepid'].'">Telephely neve: '.$row['Neve'].' Telephely városa: '.$row['Városa'].'</option>';
+        }
+        ?>
     </select>
 </form>
 <h2>Autók </h2>
