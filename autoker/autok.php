@@ -1,6 +1,6 @@
 <?php
-include_once('navigation.php');
-include_once('dbfunctions.php');
+include_once('common/navigation.php');
+include_once('common/dbfunctions.php');
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -48,8 +48,8 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
 echo '</table>';
 ?>
 
-<footer>
-    <p>&copy;Ami jog van az fent van tartva:)</p>
-</footer>
+    <?php
+    include_once "common/footer.php";
+    ?>
 </body>
 </html>

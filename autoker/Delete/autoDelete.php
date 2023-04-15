@@ -1,6 +1,6 @@
 <?php
 
-include_once('../dbFunctions.php');
+include_once('../dbfunctions.php');
 
 $delete = $_POST["autoDelete"];
 
