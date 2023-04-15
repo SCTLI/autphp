@@ -14,7 +14,7 @@ include_once('common/dbfunctions.php');
 <?php echo navigation();?>
 <h2>Új Autó felvitele az adatbázisba</h2>
 <span class="kozepre">Ahoz, hogy egy új autót vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
-<form method="POST" action="Insert/autofel.php" accept-charset="utf-8">
+<form method="POST" action="Insert/autoInsert.php" accept-charset="utf-8">
     <label>Alvázszám:</label>
     <input type="number" name="alvazszam" placeholder="123456">
     <br />

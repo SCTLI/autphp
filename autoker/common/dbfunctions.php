@@ -218,4 +218,29 @@ function deleteSzerel($id1,$id2)
     oci_close($conn);
     return $result;
 }
+//
+// ---------------------------------------------- Táblába beszúrás ----------------------------------------------
+//
+function lekerautok(){
+    if ( !($conn = dbConnect()) ) {
+        return false;
+    }
+    $szam = oci_parse($conn, "SELECT MAX(Alvazszam) FROM Autok");
+    return  $szam;
+}
+function insertAutok($telepid, $marka, $uzemanyag, $model, $teljesitmeny , $szin, $ar) {
+
+
+    if ( !($conn = dbConnect()) ) {
+        return false;
+    }
+    $szam =lekerautok()+1;
+    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (".$szam.",".$telepid.",".$marka.",".$uzemanyag.",".$model.",".$teljesitmeny.",".$szin.",".$ar.",0)");
+
+    $result = oci_execute($insert);
+
+    oci_close($conn);
+    return $result;
+
+}
 
