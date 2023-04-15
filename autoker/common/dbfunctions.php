@@ -27,7 +27,7 @@ function getMuhelyList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT muhely_nev AS "Neve", muhely_varos AS "Városa" FROM Muhely');
+    $result = oci_parse($conn, 'SELECT muhely_nev AS "Neve", muhely_varos AS "Városa", muhelyid FROM Muhely');
 
     oci_close($conn);
     return $result;
@@ -40,7 +40,7 @@ function getUzletList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT uzlet_nev AS "Neve", uzlet_varos AS "Városa"  FROM Uzlet');
+    $result = oci_parse($conn, 'SELECT uzlet_nev AS "Neve", uzlet_varos AS "Városa", uzletid  FROM Uzlet');
 
     oci_close($conn);
     return $result;
@@ -53,7 +53,7 @@ function getTelephelyList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT telep_nev AS "Neve", telep_varos AS "Városa"FROM Telephely');
+    $result = oci_parse($conn, 'SELECT telep_nev AS "Neve", telep_varos AS "Városa", telepid FROM Telephely');
 
     oci_close($conn);
     return $result;
@@ -113,5 +113,109 @@ function deleteAuto($id)
 
     oci_close($conn);
 
+}
+function deleteUzlet($id)
+{
+
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+
+    $delete = oci_parse($conn, "DELETE FROM uzlet WHERE uzletid = ".$id);
+    oci_execute($delete);
+
+    oci_close($conn);
+
+}
+function deleteMuhely($id)
+{
+
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+
+    $delete = oci_parse($conn, "DELETE FROM muhely WHERE muhelyid = ".$id);
+    $result = oci_execute($delete);
+
+    oci_close($conn);
+    return $result;
+}
+function deleteTelephely($id)
+{
+
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+
+    $delete = oci_parse($conn, "DELETE FROM telephely WHERE telepid = ".$id);
+    $result = oci_execute($delete);
+
+    oci_close($conn);
+    return $result;
+}
+function deleteElado($id)
+{
+
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+
+    $delete = oci_parse($conn, "DELETE FROM elado WHERE eladoigszam = ".$id);
+    $result = oci_execute($delete);
+
+    oci_close($conn);
+    return $result;
+}
+function deleteUgyfel($id)
+{
+
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+
+    $delete = oci_parse($conn, "DELETE FROM ugyfel WHERE ugyfeligszam = ".$id);
+    $result = oci_execute($delete);
+
+    oci_close($conn);
+    return $result;
+}
+function deleteSzerelo($id)
+{
+
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+
+    $delete = oci_parse($conn, "DELETE FROM szerelo WHERE szereloigszam = ".$id);
+    $result = oci_execute($delete);
+
+    oci_close($conn);
+    return $result;
+}
+function deleteVasarol($id)
+{
+
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+
+    $delete = oci_parse($conn, "DELETE FROM vasarol WHERE vasarol.alvazszam = ".$id);
+    $result = oci_execute($delete);
+
+    oci_close($conn);
+    return $result;
+}
+function deleteSzerel($id1,$id2)
+{
+
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+
+    $delete = oci_parse($conn, "DELETE FROM szerel WHERE szerel.alvazszam = ".$id1." AND idopont = ".$id2);
+    $result = oci_execute($delete);
+
+    oci_close($conn);
+    return $result;
 }
 

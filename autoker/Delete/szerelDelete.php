@@ -2,10 +2,10 @@
 
 include_once('../dbfunctions.php');
 
-$delete = $_POST["szerelDelete"];
+$delete = $_POST["autoDelete"];
 
 if ( isset($delete) ) {
-    $sikeres = deleteSzerel($delete);
+    $sikeres = deleteAru($delete);
 
     if ( $sikeres ) {
         header('Location: ../auto.php');
