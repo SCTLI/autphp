@@ -249,7 +249,8 @@ function lekerautok(){
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $szam = oci_parse($conn, "SELECT MAX(Alvazszam) FROM Autok");
+    $szam = oci_parse($conn, 'SELECT MAX(Alvazszam) AS "szam" FROM Autok');
+    oci_close($conn);
     return  $szam;
 }
 function insertAutok($telepid, $marka, $uzemanyag, $model, $teljesitmeny , $szin, $ar, $alvazszam) {
@@ -258,9 +259,15 @@ function insertAutok($telepid, $marka, $uzemanyag, $model, $teljesitmeny , $szin
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $szam =lekerautok()+1;
+    $max =lekerautok();
+    oci_execute($max);
+    $szam=0;
+    while ( $row = oci_fetch_array($max, OCI_ASSOC + OCI_RETURN_NULLS)) {
+        $szam=$row["szam"]+1;
+    }
+
     $insert = oci_parse( $conn,"INSERT INTO autok VALUES (:alvazszam,:telepid,:marka,:uzemanyag,:modell,:teljesitmeny,:szin,:ar,0)");
-    oci_bind_by_name($insert,":alvazszam",$alvazszam  );
+    oci_bind_by_name($insert,":alvazszam",$szam  );
     oci_bind_by_name($insert,":telepid",$telepid  );
     oci_bind_by_name($insert,":marka",$marka  );
     oci_bind_by_name($insert,":uzemanyag",$uzemanyag  );
@@ -268,7 +275,6 @@ function insertAutok($telepid, $marka, $uzemanyag, $model, $teljesitmeny , $szin
     oci_bind_by_name($insert,":teljesitmeny",$teljesitmeny  );
     oci_bind_by_name($insert,":szin",$szin  );
     oci_bind_by_name($insert,":ar",$ar  );
-
     $result = oci_execute($insert);
 
     oci_close($conn);

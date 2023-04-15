@@ -8,7 +8,7 @@ if ( isset($delete) ) {
     $sikeres = deleteAuto($delete);
 
     if ( $sikeres ) {
-        header('Location: ../auto.php');
+        header('Location: ../autok.php');
     } else {
         echo 'Hiba! Nem sikerült az autó törlése!';
     }
