@@ -6,8 +6,8 @@ include_once('common/dbfunctions.php');
 <html>
 <head>
     <title>Eladok tabla</title>
-    <link rel="stylesheet" type="text/css" href="alap.css">
-    <link rel="icon" href="icon.png" type="image/icon">
+    <link rel="stylesheet" type="text/css" href="css/alap.css">
+    <link rel="icon" href="image/icon.png" type="image/icon">
     <meta charset="utf-8" />
 </head>
 <body>
