@@ -25,8 +25,8 @@ include_once('common/dbfunctions.php');
 
 while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<tr>';
-    echo '<td>'.$row['Neve'].'</td>';
-    echo '<td>'.$row['Városa'].'</td>';
+    echo '<td>'.$row['nev'].'</td>';
+    echo '<td>'.$row['varos'].'</td>';
     echo '</tr>';
 }
 echo '</table>';

@@ -26,9 +26,9 @@ e<h2>Eladók </h2>
 
 while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<tr>';
-    echo '<td>'.$row['Igazolvány szám'].'</td>';
-    echo '<td>'.$row['Név'].'</td>';
-    echo '<td>'.$row['Felhasználónév'].'</td>';
+    echo '<td>'.$row['igsz'].'</td>';
+    echo '<td>'.$row['nev'].'</td>';
+    echo '<td>'.$row['felhasznalonev'].'</td>';
     echo '</tr>';
 }
 echo '</table>';

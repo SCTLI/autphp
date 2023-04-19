@@ -73,15 +73,15 @@ oci_execute($stid);
 
 while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<tr>';
-    echo '<td>'. $row["Alvázszám"] . '</td>';
-    echo '<td>'. $row["Márka"] . '</td>';
-    echo '<td>'. $row["Modell"] . '</td>';
-    echo '<td>'. $row["Üzemanyag"] . '</td>';
-    echo '<td>'. $row["Teljesítmény"] . '</td>';
-    echo '<td>'. $row["Szín"] . '</td>';
-    echo '<td>'. $row["Ár (Ft)"] . '</td>';
+    echo '<td>'. $row["alvazszam"] . '</td>';
+    echo '<td>'. $row["marka"] . '</td>';
+    echo '<td>'. $row["modell"] . '</td>';
+    echo '<td>'. $row["uzemanyag"] . '</td>';
+    echo '<td>'. $row["teljesitmeny"] . '</td>';
+    echo '<td>'. $row["szin"] . '</td>';
+    echo '<td>'. $row["ar"] . '</td>';
     echo '<td><form method="POST" action="Delete/autoDelete.php">
-				  <input type="hidden" name="autoDelete" value="'. $row["Alvázszám"] .'" />
+				  <input type="hidden" name="autoDelete" value="'. $row["alvazszam"] .'" />
 				  <input type="submit" value="Törlés" />
 		          </form></td>';
     echo '</tr>';

@@ -14,7 +14,7 @@ function getAutokList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT alvazszam AS "Alvázszám", marka AS "Márka", modell AS "Modell", uzemanyag_tipus AS "Üzemanyag", teljesitmeny AS "Teljesítmény", szin AS "Szín", ar AS "Ár (Ft)" FROM Autok');
+    $result = oci_parse($conn, 'SELECT alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzemanyag_tipus AS "uzemanyag", teljesitmeny AS "teljesitmeny", szin AS "szin", ar AS "ar",telepid AS "telepid", eladva AS "eladva" FROM Autok');
 
     oci_close($conn);
     return $result;
@@ -27,7 +27,7 @@ function getMuhelyList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT muhely_nev AS "Neve", muhely_varos AS "Városa", muhelyid FROM Muhely');
+    $result = oci_parse($conn, 'SELECT muhely_nev AS "nev", muhely_varos AS "varos", muhelyid AS "muhelyid" FROM Muhely');
 
     oci_close($conn);
     return $result;
@@ -40,7 +40,7 @@ function getUzletList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT uzlet_nev AS "Neve", uzlet_varos AS "Városa", uzletid  FROM Uzlet');
+    $result = oci_parse($conn, 'SELECT uzlet_nev AS "nev", uzlet_varos AS "varos", uzletid AS "uzletid"  FROM Uzlet');
 
     oci_close($conn);
     return $result;
@@ -53,7 +53,7 @@ function getTelephelyList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT telep_nev AS "Neve", telep_varos AS "Városa", telepid AS "telepid" FROM Telephely');
+    $result = oci_parse($conn, 'SELECT telep_nev AS "nev", telep_varos AS "varos", telepid AS "telepid" FROM Telephely');
 
     oci_close($conn);
     return $result;
@@ -66,7 +66,7 @@ function getEladoList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT eladoigszam AS "Igazolvány szám", elado_nev AS "Név", elado.felhasznalonev AS "Felhasználónév" FROM Elado');
+    $result = oci_parse($conn, 'SELECT eladoigszam AS "igsz", elado_nev AS "nev", elado.felhasznalonev AS "felhasznalonev", uzletid AS "uzletid" FROM Elado');
 
     oci_close($conn);
     return $result;
