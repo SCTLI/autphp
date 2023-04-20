@@ -12,7 +12,17 @@ include_once('common/dbfunctions.php');
 </head>
 <body>
 <?php echo navigation();?>
-
+<h2>Új Műhely felvitele az adatbázisba</h2>
+<span class="kozepre">Ahoz, hogy egy új műhelyt vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
+<form method="POST" action="Insert/muhelyInsert.php" accept-charset="utf-8">
+    <label>Műhely Városa:</label>
+    <input type="number" name="varos" placeholder="Miskolc">
+    <br />
+    <label>Műhely Neve:</label>
+    <input type="text" name="nev" placeholder="Nem Megy Még a Vasba">
+    <br />
+    <input type="submit" value="Feltöltés">
+</form>
 <h2>Műhelyek</h2>
 <table>
     <tr>
