@@ -1,13 +1,13 @@
 <?php
 
-include_once("../common/dbfunctions.php");
+include_once("common/dbfunctions.php");
 
 $szereloIgszam= $_POST["igszam"];
 $muhelyID = $_POST["muhelyid"];
 $szereloNev = $_POST["nev"];
 $szereloFelhasznlonev = $_POST["felhasznalonev"];
 
-include_once('../common/navigation.php');
+include_once('common/navigation.php');
 
 ?>
     <!DOCTYPE HTML>
@@ -21,7 +21,7 @@ include_once('../common/navigation.php');
 <?php echo navigation();?>
     <h1>Szerelő szerkesztés:</h1>
 
-    <form method="POST" action="szereloUpdate.php" accept-charset="utf-8">
+    <form method="POST" action="Update/szereloUpdate.php" accept-charset="utf-8">
         <table><tr>
                 <td><label>Igazolványszáma: <?php echo $szereloIgszam ?></label></td>
                 <td><label>Neve: <?php echo $szereloNev ?></label></td>

@@ -2,7 +2,7 @@
 include_once('../common/dbfunctions.php');
 
 $autoAlvazszam = $_POST["autoAlvazszam"];
-$telepID = $_POST["telepid"];
+$telepID = $_POST["telepID"];
 $autoTeljesitmeny = $_POST["autoTeljesitmeny"];
 $autoSzin = $_POST["autoSzin"];
 $autoAr = $_POST["autoAr"];

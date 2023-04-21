@@ -8,7 +8,7 @@ $uzletNev = $_POST["uzletNev"];
 
 if ( isset($uzletID) && isset($uzletVaros) && isset($uzletNev)) {
 
-    updateTelephely($uzletID,  $uzletNev, $uzletVaros);
+    updateUzlet($uzletID,  $uzletNev, $uzletVaros);
 
     header("Location: ../uzlet.php");
 

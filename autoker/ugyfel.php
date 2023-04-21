@@ -35,6 +35,7 @@ include_once('common/dbfunctions.php');
         <th>Igazolvány szám</th>
         <th>Név</th>
         <th>Felhasználónév</th>
+        <th></th>
     </tr>
     <?php
     $stid = getUgyfelList();
@@ -45,6 +46,11 @@ include_once('common/dbfunctions.php');
         echo '<td>'.$row['igsz'].'</td>';
         echo '<td>'.$row['nev'].'</td>';
         echo '<td>'.$row['felhasznalonev'].'</td>';
+        echo '<td><form method="POST" action="Delete/ugyfelDelete.php">
+				  <input type="hidden" name="ugyfelDelete" value="'. $row["igsz"] .'" />
+				  <input type="submit" value="Törlés" />
+		          </form></td>';
+        echo '</tr>';
         echo '</tr>';
     }
     echo '</table>';

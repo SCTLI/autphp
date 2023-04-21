@@ -16,7 +16,7 @@ include_once('common/dbfunctions.php');
 <span class="kozepre">Ahoz, hogy egy új műhelyt vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
 <form method="POST" action="Insert/muhelyInsert.php" accept-charset="utf-8">
     <label>Műhely Városa:</label>
-    <input type="number" name="varos" placeholder="Miskolc">
+    <input type="text" name="varos" placeholder="Miskolc">
     <br />
     <label>Műhely Neve:</label>
     <input type="text" name="nev" placeholder="Nem Megy Még a Vasba">
@@ -28,6 +28,7 @@ include_once('common/dbfunctions.php');
     <tr>
         <th>Neve</th>
         <th>Városa</th>
+        <th></th>
     </tr>
 <?php
 
@@ -38,6 +39,17 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<tr>';
     echo '<td>'.$row['nev'].'</td>';
     echo '<td>'.$row['varos'].'</td>';
+    echo '<td><form method="POST" action="Delete/muhelyDelete.php">
+				  <input type="hidden" name="muhelyDelete" value="'. $row["muhelyid"] .'" />
+				  <input type="submit" value="Törlés" />
+		          </form></td>';
+    echo '<td style="text-align: center" class="lista"><form method="POST" action="muhelyUpdatePage.php">
+				  <input type="hidden" name="varos" value="'. $row["varos"] .'" />
+				  <input type="hidden" name="nev" value="'. $row["nev"] .'" />
+				  <input type="hidden" name="muhelyid" value="'. $row["muhelyid"] .'" />
+				  <input type="submit" value="Szerkeszt" />
+		          </form></td>';
+    echo '</tr>';
     echo '</tr>';
 }
 ?>

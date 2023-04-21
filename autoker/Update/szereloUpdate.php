@@ -6,7 +6,7 @@ $muhelyID = $_POST["muhelyID"];
 
 if ( isset($muhelyID) && isset($szereloIgszam)) {
 
-    updateAutok($szereloIgszam, $muhelyID);
+    updateSzerelo($szereloIgszam, $muhelyID);
 
     header("Location: ../szerelo.php");
 

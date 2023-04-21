@@ -2,11 +2,11 @@
 include_once('../common/dbfunctions.php');
 
 $eladoIgszam= $_POST["eladoIgszam"];
-$uzletID = $_POST["telepid"];
+$uzletID = $_POST["uzletID"];
 
 if ( isset($uzletID) && isset($eladoIgszam)) {
 
-    updateAutok($eladoIgszam, $uzletID);
+    updateElado($eladoIgszam, $uzletID);
 
     header("Location: ../elado.php");
 

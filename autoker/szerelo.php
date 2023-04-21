@@ -35,6 +35,7 @@ include_once('common/dbfunctions.php');
         <th>Igazolvány szám</th>
         <th>Név</th>
         <th>Felhasználónév</th>
+        <th></th>
     </tr>
     <?php
     $stid = getSzereloList();
@@ -45,6 +46,18 @@ include_once('common/dbfunctions.php');
         echo '<td>'.$row['igsz'].'</td>';
         echo '<td>'.$row['nev'].'</td>';
         echo '<td>'.$row['felhasznalonev'].'</td>';
+        echo '<td><form method="POST" action="Delete/szereloDelete.php">
+				  <input type="hidden" name="szereloDelete" value="'. $row["igsz"] .'" />
+				  <input type="submit" value="Törlés" />
+		          </form></td>';
+        echo '<td style="text-align: center" class="lista"><form method="POST" action="szereloUpdatePage.php">
+				  <input type="hidden" name="igszam" value="'. $row["igsz"] .'" />
+				  <input type="hidden" name="nev" value="'. $row["nev"] .'" />
+				  <input type="hidden" name="felhasznalonev" value="'. $row["felhasznalonev"] .'" />
+				  <input type="hidden" name="muhelyid" value="'. $row["muhelyid"] .'" />
+				  <input type="submit" value="Szerkeszt" />
+		          </form></td>';
+        echo '</tr>';
         echo '</tr>';
     }
     echo '</table>';

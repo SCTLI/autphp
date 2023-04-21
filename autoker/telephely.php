@@ -16,7 +16,7 @@ include_once('common/dbfunctions.php');
 <span class="kozepre">Ahoz, hogy egy új telephelyet vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
 <form method="POST" action="Insert/telepInsert.php" accept-charset="utf-8">
     <label>Telephely Városa:</label>
-    <input type="number" name="varos" placeholder="Kiskunmajsa">
+    <input type="text" name="varos" placeholder="Kiskunmajsa">
     <br />
     <label>Telephely Neve:</label>
     <input type="text" name="nev" placeholder="Kismajkaker">
@@ -28,6 +28,7 @@ include_once('common/dbfunctions.php');
     <tr>
         <th>Neve</th>
         <th>Városa</th>
+        <th></th>
     </tr>
     <?php
     $stid = getTelephelyList();
@@ -37,6 +38,17 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<tr>';
     echo '<td>'.$row['nev'].'</td>';
     echo '<td>'.$row['varos'].'</td>';
+    echo '<td><form method="POST" action="Delete/telepDelete.php">
+				  <input type="hidden" name="telepDelete" value="'. $row["telepid"] .'" />
+				  <input type="submit" value="Törlés" />
+		          </form></td>';
+    echo '<td style="text-align: center" class="lista"><form method="POST" action="telephelyUpdatePage.php">
+				  <input type="hidden" name="varos" value="'. $row["varos"] .'" />
+				  <input type="hidden" name="nev" value="'. $row["nev"] .'" />
+				  <input type="hidden" name="telepid" value="'. $row["telepid"] .'" />
+				  <input type="submit" value="Szerkeszt" />
+		          </form></td>';
+    echo '</tr>';
     echo '</tr>';
 }
 ?>

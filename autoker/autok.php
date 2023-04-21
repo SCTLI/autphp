@@ -47,7 +47,7 @@ include_once('common/dbfunctions.php');
         $stid = getTelephelyList();
         oci_execute($stid);
         while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
-            echo '<option value="'.$row['telepid'].'">'.$row['Neve'].'</option>';
+            echo '<option value="'.$row['telepid'].'">'.$row['nev'].'</option>';
         }
         ?>
     </select>
@@ -83,6 +83,17 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<td><form method="POST" action="Delete/autoDelete.php">
 				  <input type="hidden" name="autoDelete" value="'. $row["alvazszam"] .'" />
 				  <input type="submit" value="Törlés" />
+		          </form></td>';
+    echo '<td style="text-align: center" class="lista"><form method="POST" action="autokUpdatePage.php">
+				  <input type="hidden" name="telepid" value="'. $row["telepid"] .'" />
+				  <input type="hidden" name="alvazszam" value="'. $row["alvazszam"] .'" />
+				  <input type="hidden" name="marka" value="'. $row["marka"] .'" />
+				  <input type="hidden" name="modell" value="'. $row["modell"] .'" />
+				  <input type="hidden" name="uzemanyag" value="'. $row["uzemanyag"] .'" />
+				  <input type="hidden" name="teljesitmeny" value="'. $row["teljesitmeny"] .'" />
+				  <input type="hidden" name="szin" value="'. $row["szin"] .'" />
+				  <input type="hidden" name="ar" value="'. $row["ar"] .'" />
+				  <input type="submit" value="Szerkeszt" />
 		          </form></td>';
     echo '</tr>';
 }

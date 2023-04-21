@@ -7,7 +7,7 @@ $telepNev = $_POST['nev'];
 
 if ( isset($telepNev) && isset($telepVaros)) {
 
-    $sikeres=inserttelephely($telepVaros,$telepNev);
+    $sikeres=insertTelephely($telepVaros,$telepNev);
     if ($sikeres==true){
         header("Location: ../telephely.php");
     }

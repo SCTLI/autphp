@@ -1,12 +1,12 @@
 <?php
 
-include_once('../common/dbfunctions.php');
+include_once('common/dbfunctions.php');
 
 $telepID = $_POST["telepid"];
 $telepVaros = $_POST["varos"];
 $telepNev = $_POST["nev"];
 
-include_once('../common/navigation.php');
+include_once('common/navigation.php');
 
 ?>
     <!DOCTYPE HTML>
@@ -20,7 +20,7 @@ include_once('../common/navigation.php');
 <?php echo navigation();?>
     <h1>Telephely szerkesztés:</h1>
 
-    <form method="POST" action="telephelyUpdate.php" accept-charset="utf-8">
+    <form method="POST" action="Update/telephelyUpdate.php" accept-charset="utf-8">
         <table><tr>
                 <td><label for="telepNev">Neve:</label></td>
                 <td><input type="text" name="telepNev" value="<?php echo $telepNev ?>" required></td>

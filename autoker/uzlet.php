@@ -28,6 +28,7 @@ include_once('common/dbfunctions.php');
     <tr>
         <th>Neve</th>
         <th>Városa</th>
+        <th></th>
     </tr>
     <?php
     $stid = getUzletList();
@@ -37,6 +38,17 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<tr>';
     echo '<td>'.$row['nev'].'</td>';
     echo '<td>'.$row['varos'].'</td>';
+    echo '<td><form method="POST" action="Delete/uzletDelete.php">
+				  <input type="hidden" name="uzletDelete" value="'. $row["uzletid"] .'" />
+				  <input type="submit" value="Törlés" />
+		          </form></td>';
+    echo '<td style="text-align: center" class="lista"><form method="POST" action="uzletUpdatePage.php">
+				  <input type="hidden" name="varos" value="'. $row["varos"] .'" />
+				  <input type="hidden" name="nev" value="'. $row["nev"] .'" />
+				  <input type="hidden" name="uzletid" value="'. $row["uzletid"] .'" />
+				  <input type="submit" value="Szerkeszt" />
+		          </form></td>';
+    echo '</tr>';
     echo '</tr>';
 }
 echo '</table>';
