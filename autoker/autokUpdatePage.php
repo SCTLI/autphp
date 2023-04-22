@@ -17,15 +17,18 @@ include_once('common/navigation.php');
     <!DOCTYPE HTML>
     <HTML>
     <HEAD>
-
+        <title>Autó Adatai Frissítése</title>
+        <link rel="stylesheet" type="text/css" href="css/alap.css">
+        <link rel="icon" href="image/icon.png" type="image/icon">
+        <meta charset="utf-8" />
     </HEAD>
 <BODY >
 
 
 <?php echo navigation();?>
-    <h1>Autó szerkesztés:</h1>
+    <h1 class="kozepre">Autó szerkesztés:</h1>
 
-    <form method="POST" action="Update/autokUpdate.php" accept-charset="utf-8">
+    <form method="POST" action="Update/autokUpdate.php" accept-charset="utf-8" class="kozepre">
         <table><tr>
                 <td><label>Alvázszám: <?php echo $autoAlvazszam ?></label></td>
                 <td><label>Márka: <?php echo $autoMarka ?></label></td>
@@ -56,5 +59,8 @@ include_once('common/navigation.php');
             </tr></table>
     </form>
 <?php
-
+include_once "common/footer.php";
+?>
+</body>
+</html>
 

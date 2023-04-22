@@ -12,15 +12,18 @@ include_once('common/navigation.php');
     <!DOCTYPE HTML>
     <HTML>
     <HEAD>
-
+        <title>Műhely Adatai Frissítése</title>
+        <link rel="stylesheet" type="text/css" href="css/alap.css">
+        <link rel="icon" href="image/icon.png" type="image/icon">
+        <meta charset="utf-8" />
     </HEAD>
 <BODY>
 
 
 <?php echo navigation();?>
-    <h1>Műhely szerkesztés:</h1>
+    <h1 class="kozepre">Műhely szerkesztés:</h1>
 
-    <form method="POST" action="Update/muhelyUpdate.php" accept-charset="utf-8">
+    <form method="POST" action="Update/muhelyUpdate.php" accept-charset="utf-8" class="kozepre">
         <table><tr>
                 <td><label for="muhelyNev">Neve:</label></td>
                 <td><input type="text" name="muhelyNev" value="<?php echo $muhelyNev ?>" required></td>
@@ -30,5 +33,8 @@ include_once('common/navigation.php');
             </tr></table>
     </form>
 <?php
-
+include_once "common/footer.php";
+?>
+</body>
+</html>
 
