@@ -50,7 +50,12 @@ include_once('common/dbfunctions.php');
 				  <input type="hidden" name="ugyfelDelete" value="'. $row["igsz"] .'" />
 				  <input type="submit" value="Törlés" />
 		          </form></td>';
-        echo '</tr>';
+        echo '<td style="text-align: center" class="lista"><form method="POST" action="ugyfelUpdatePage.php">
+				  <input type="hidden" name="ugyfeligszam" value="'. $row["igsz"] .'" />
+				  <input type="hidden" name="ugyfelneve" value="'. $row["nev"] .'" />
+				  <input type="hidden" name="ugyfelfelhnev" value="'. $row["felhasznalonev"] .'" />
+				  <input type="submit" value="Szerkeszt" />
+		          </form></td>';
         echo '</tr>';
     }
     echo '</table>';
