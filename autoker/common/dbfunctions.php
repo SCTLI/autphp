@@ -517,6 +517,21 @@ function UpdateSzerelo($szereloIgszam, $muhelyID)
     oci_close($conn);
     return $result;
 }
+function UpdateUgyfel($UgyfelIgszam,$UgyfelNev, $Felhasznalonev, $Jelszo)
+{
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $update = oci_parse($conn, "UPDATE ugyfel set UgyfelNev=:ugyfelnev, Felhasznalonev=:felh, Jelszo=:jel WHERE UgyfelIgszam=:ugyfelIgszam");
+    oci_bind_by_name($update, ":ugyfelnev", $UgyfelNev);
+    oci_bind_by_name($update, ":felh", $Felhasznalonev);
+    oci_bind_by_name($update, ":jel", $Jelszo);
+    oci_bind_by_name($update, ":ugyfelIgszam", $UgyfelIgszam);
+    $result = oci_execute($update);
+
+    oci_close($conn);
+    return $result;
+}
 function UpdateTelephely($telepID, $telepVaros, $telepNev)
 {
 
