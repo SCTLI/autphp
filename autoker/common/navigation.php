@@ -9,8 +9,8 @@ function navigation() {
     $navigation .= '<li><a href="uzlet.php">Üzletek tábla</a></li>';
     $navigation .= '<li><a href="szerelo.php">Szerelők tábla</a></li> ';
     $navigation .= '<li><a href="ugyfel.php">Ügyfelek tábla</a></li>';
-    $navigation .= '<li><a href="vasarlasok.php">Vásárlások tábla</a></li>';
-    $navigation .= '<li><a href="szerelesek.php">Szerelések tábla</a></li>';
+    $navigation .= '<li><a href="vasarol.php">Vásárlások tábla</a></li>';
+    $navigation .= '<li><a href="szerel.php">Szerelések tábla</a></li>';
     $navigation .= '</ul></nav>';
 
     return $navigation;

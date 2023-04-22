@@ -27,7 +27,7 @@ function getMuhelyList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT muhely_nev AS "nev", muhely_varos AS "varos", muhelyid AS "muhelyid" FROM Muhely');
+    $result = oci_parse($conn, 'SELECT muhely_nev AS "nev", muhely_varos AS "varos", muhelyid AS "muhelyid" FROM Muhely WHERE muhelyid!=30');
 
     oci_close($conn);
     return $result;
@@ -40,7 +40,7 @@ function getUzletList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT uzlet_nev AS "nev", uzlet_varos AS "varos", uzletid AS "uzletid"  FROM Uzlet');
+    $result = oci_parse($conn, 'SELECT uzlet_nev AS "nev", uzlet_varos AS "varos", uzletid AS "uzletid"  FROM Uzlet WHERE uzletid!=30');
 
     oci_close($conn);
     return $result;
@@ -53,7 +53,7 @@ function getTelephelyList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT telep_nev AS "nev", telep_varos AS "varos", telepid AS "telepid" FROM Telephely');
+    $result = oci_parse($conn, 'SELECT telep_nev AS "nev", telep_varos AS "varos", telepid AS "telepid" FROM Telephely WHERE telepid!=30');
 
     oci_close($conn);
     return $result;
@@ -104,8 +104,9 @@ function getSzerelList()
     if (!($conn = dbConnect())) {
         return false;
     }
-
-    $result = oci_parse($conn, 'SELECT szerel.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", muhely_nev AS "muhelynev", szerelt_alkatresz AS "alkatresz", idopont AS "idopont"  FROM Szerel, muhely, autok WHERE autok.alvazszam=szerel.alvazszam AND muhely.muhelyid=szerel.muhelyid');
+    $datesess = oci_parse($conn, 'ALTER SESSION SET NLS_DATE_FORMAT = "YYYY-MM-DD HH24:MI:SS"');
+    oci_execute($datesess);
+    $result = oci_parse($conn, 'SELECT szerel.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", muhely_nev AS "muhelynev", szerelt_alkatresz AS "alkatresz",idopont AS "idopont"  FROM Szerel, muhely, autok WHERE autok.alvazszam=szerel.alvazszam AND muhely.muhelyid=szerel.muhelyid');
 
     oci_close($conn);
     return $result;
@@ -118,7 +119,7 @@ function getVasarolList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT vasarol.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzlet_nev AS "uzletnev", vasarol.ugyfeligszam AS "igsz", ugyfel_nev AS "nev"  FROM vasarol, uzlet, autok, ugyfel WHERE autok.alvazszam=vasarol.alvazszam AND uzlet.uzletid=vasarol.uzletid AND ugyfel.ugyfeligszam=vasarol.ugyfeligszam');
+    $result = oci_parse($conn, 'SELECT vasarol.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzlet_nev AS "uzletnev", vasarol.ugyfeligszam AS "igsz", ugyfel_nev AS "nev",vasarol.uzletid AS "uzletid"  FROM vasarol, uzlet, autok, ugyfel WHERE autok.alvazszam=vasarol.alvazszam AND uzlet.uzletid=vasarol.uzletid AND ugyfel.ugyfeligszam=vasarol.ugyfeligszam');
 
     oci_close($conn);
     return $result;
@@ -220,14 +221,17 @@ function deleteSzerelo($id)
     oci_close($conn);
     return $result;
 }
-function deleteVasarol($id)
+function deleteVasarol($id1,$id2,$id3)
 {
 
     if (!($conn = dbConnect())) {
         return false;
     }
 
-    $delete = oci_parse($conn, "DELETE FROM vasarol WHERE vasarol.alvazszam = ".$id);
+    $delete = oci_parse($conn, "DELETE FROM vasarol WHERE vasarol.alvazszam =:id1 AND vasarol.uzletid=:id2 AND vasarol.ugyfeligszam=:id3");
+    oci_bind_by_name($delete,":id1",$id1);
+    oci_bind_by_name($delete,":id2",$id2);
+    oci_bind_by_name($delete,":id3",$id3);
     $result = oci_execute($delete);
 
     oci_close($conn);
@@ -239,8 +243,11 @@ function deleteSzerel($id1,$id2)
     if (!($conn = dbConnect())) {
         return false;
     }
-
-    $delete = oci_parse($conn, "DELETE FROM szerel WHERE szerel.alvazszam = ".$id1." AND idopont = ".$id2);
+    $datesess = oci_parse($conn, 'ALTER SESSION SET NLS_DATE_FORMAT = "YYYY-MM-DD HH24:MI:SS"');
+    oci_execute($datesess);
+    $delete = oci_parse($conn, "DELETE FROM szerel WHERE szerel.alvazszam =:alvazszam AND szerel.idopont =:ido ");
+    oci_bind_by_name($delete,":alvazszam",$id1);
+    oci_bind_by_name($delete,":ido",$id2);
     $result = oci_execute($delete);
 
     oci_close($conn);
@@ -425,17 +432,18 @@ function insertVasarol($Alvazszam,$UzletId, $UgyfelIgszam) {
     return $result;
 
 }
-function insertSzerel($Alvazszam,$Idopont, $MuhelyId, $SzereltAlkatresz) {
+function insertSzerel($Alvazszam, $MuhelyId, $SzereltAlkatresz) {
 
 
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $insert = oci_parse( $conn,"INSERT INTO szerel VALUES (:Alvazszam,:Idopont,:MuhelyId,:Jelszo)");
+    $datesess = oci_parse($conn, 'ALTER SESSION SET NLS_DATE_FORMAT = "YYYY-MM-DD HH24:MI:SS"');
+    oci_execute($datesess);
+    $insert = oci_parse( $conn,"INSERT INTO szerel VALUES (:Alvazszam,sysdate,:MuhelyId,:SzereltAlkatresz)");
     oci_bind_by_name($insert,":Alvazszam",$Alvazszam  );
-    oci_bind_by_name($insert,":Idopont",$Idopont  );
-    oci_bind_by_name($insert,":MuhelyId",$MuhelyId  );
-    oci_bind_by_name($insert,":SzereltAlkatresz",$SzereltAlkatresz  );
+    oci_bind_by_name($insert,":MuhelyId",$MuhelyId);
+    oci_bind_by_name($insert,":SzereltAlkatresz",$SzereltAlkatresz);
     $result = oci_execute($insert);
 
     oci_close($conn);

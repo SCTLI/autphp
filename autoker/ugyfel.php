@@ -14,7 +14,7 @@ include_once('common/dbfunctions.php');
 <?php echo navigation();?>
 <h2>Új Ügyfél felvitele az adatbázisba</h2>
 <span class="kozepre">Ahoz, hogy egy új ügyfelet vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
-<form method="POST" action="Insert/eladoInsert.php" accept-charset="utf-8">
+<form method="POST" action="Insert/ugyfelInsert.php" accept-charset="utf-8">
     <label>Ügyfél Igazolvány szám:</label>
     <input type="number" name="igszam" placeholder="123456">
     <br />
