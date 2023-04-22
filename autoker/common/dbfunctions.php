@@ -66,7 +66,7 @@ function getEladoList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT eladoigszam AS "igsz", elado_nev AS "nev", elado.felhasznalonev AS "felhasznalonev", uzletid AS "uzletid" FROM Elado');
+    $result = oci_parse($conn, 'SELECT eladoigszam AS "igsz", elado_nev AS "nev", elado.felhasznalonev AS "felhasznalonev", elado.uzletid AS "uzletid", uzlet_nev AS "uzletnev" FROM Elado, uzlet WHERE uzlet.uzletid=elado.uzletid');
 
     oci_close($conn);
     return $result;
@@ -92,7 +92,33 @@ function getSzereloList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT szereloigszam AS "igsz", szerelo_nev AS "nev", szerelo.felhasznalonev AS "felhasznalonev", muhelyid AS "muhelyid" FROM Szerelo');
+    $result = oci_parse($conn, 'SELECT szereloigszam AS "igsz", szerelo_nev AS "nev", szerelo.felhasznalonev AS "felhasznalonev", szerelo.muhelyid AS "muhelyid", muhely_nev AS "muhelynev" FROM Szerelo, Muhely WHERE muhely.muhelyid=szerelo.muhelyid');
+
+    oci_close($conn);
+    return $result;
+
+}
+function getSzerelList()
+{
+
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+
+    $result = oci_parse($conn, 'SELECT szerel.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", muhely_nev AS "muhelynev", szerelt_alkatresz AS "alkatresz", idopont AS "idopont"  FROM Szerel, muhely, autok WHERE autok.alvazszam=szerel.alvazszam AND muhely.muhelyid=szerel.muhelyid');
+
+    oci_close($conn);
+    return $result;
+
+}
+function getVasarolList()
+{
+
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+
+    $result = oci_parse($conn, 'SELECT vasarol.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzlet_nev AS "uzletnev", vasarol.ugyfeligszam AS "igsz", ugyfel_nev AS "nev"  FROM vasarol, uzlet, autok, ugyfel WHERE autok.alvazszam=vasarol.alvazszam AND uzlet.uzletid=vasarol.uzletid AND ugyfel.ugyfeligszam=vasarol.ugyfeligszam');
 
     oci_close($conn);
     return $result;
@@ -338,7 +364,7 @@ function insertSzerelo($SzereloIgszam,$SzereloNev, $Felhasznalonev, $Jelszo) {
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $insert = oci_parse( $conn,"INSERT INTO szerelo VALUES (:szereloIgszam,Null,:szerelonev,:Felhasznalonev,:Jelszo)");
+    $insert = oci_parse( $conn,"INSERT INTO szerelo VALUES (:szereloIgszam,100,:szerelonev,:Felhasznalonev,:Jelszo)");
     oci_bind_by_name($insert,":szereloIgszam",$SzereloIgszam  );
     oci_bind_by_name($insert,":szerelonev",$SzereloNev  );
     oci_bind_by_name($insert,":Felhasznalonev",$Felhasznalonev  );
@@ -355,7 +381,7 @@ function insertElado($EladoIgszam,$EladoNev, $Felhasznalonev, $Jelszo) {
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $insert = oci_parse( $conn,"INSERT INTO elado VALUES (:eladoIgszam,NULL,:eladonev,:Felhasznalonev,:Jelszo)");
+    $insert = oci_parse( $conn,"INSERT INTO elado VALUES (:eladoIgszam,100,:eladonev,:Felhasznalonev,:Jelszo)");
     oci_bind_by_name($insert,":eladoIgszam",$EladoIgszam  );
     oci_bind_by_name($insert,":eladonev",$EladoNev  );
     oci_bind_by_name($insert,":Felhasznalonev",$Felhasznalonev  );

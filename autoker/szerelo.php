@@ -14,7 +14,7 @@ include_once('common/dbfunctions.php');
 <?php echo navigation();?>
 <h2>Új Szerelő felvitele az adatbázisba</h2>
 <span class="kozepre">Ahoz, hogy egy új szerelőt vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
-<form method="POST" action="Insert/eladoInsert.php" accept-charset="utf-8">
+<form method="POST" action="Insert/szerloInsert.php" accept-charset="utf-8">
     <label>Szerelő Igazolvány szám:</label>
     <input type="number" name="igszam" placeholder="123456">
     <br />
@@ -35,6 +35,7 @@ include_once('common/dbfunctions.php');
         <th>Igazolvány szám</th>
         <th>Név</th>
         <th>Felhasználónév</th>
+        <th>Munkahelye(Műhely)</th>
         <th></th>
     </tr>
     <?php
@@ -46,6 +47,7 @@ include_once('common/dbfunctions.php');
         echo '<td>'.$row['igsz'].'</td>';
         echo '<td>'.$row['nev'].'</td>';
         echo '<td>'.$row['felhasznalonev'].'</td>';
+        echo '<td>'.$row['muhelynev'].'</td>';
         echo '<td><form method="POST" action="Delete/szereloDelete.php">
 				  <input type="hidden" name="szereloDelete" value="'. $row["igsz"] .'" />
 				  <input type="submit" value="Törlés" />
