@@ -7,6 +7,7 @@ $uzletID = $_POST["vasarolDeleteUzletID"];
 $ugyfelIgsz = $_POST["vasarolDeleteUgyfeligsz"];
 
 if ( isset($vasarolAlvazszam) && isset($uzletID) && isset($ugyfelIgsz) ){
+    AcceptVasarol($vasarolAlvazszam);
     $sikeres = deleteVasarol($vasarolAlvazszam,$uzletID,$ugyfelIgsz);
 
     if ( $sikeres ) {

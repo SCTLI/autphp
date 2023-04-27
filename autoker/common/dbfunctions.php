@@ -14,7 +14,7 @@ function getAutokList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzemanyag_tipus AS "uzemanyag", teljesitmeny AS "teljesitmeny", szin AS "szin", ar AS "ar",telepid AS "telepid", eladva AS "eladva" FROM Autok');
+    $result = oci_parse($conn, 'SELECT alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzemanyag_tipus AS "uzemanyag", teljesitmeny AS "teljesitmeny", szin AS "szin", ar AS "ar",autok.telepid AS "telepid", eladva AS "eladva", telephely.telep_nev AS "telepnev" FROM Autok, telephely WHERE autok.telepid=telephely.telepid AND autok.eladva=0');
 
     oci_close($conn);
     return $result;
@@ -228,10 +228,8 @@ function deleteVasarol($id1,$id2,$id3)
         return false;
     }
 
-    $delete = oci_parse($conn, "DELETE FROM vasarol WHERE vasarol.alvazszam =:id1 AND vasarol.uzletid=:id2 AND vasarol.ugyfeligszam=:id3");
+    $delete = oci_parse($conn, "DELETE FROM vasarol WHERE vasarol.alvazszam =:id1");
     oci_bind_by_name($delete,":id1",$id1);
-    oci_bind_by_name($delete,":id2",$id2);
-    oci_bind_by_name($delete,":id3",$id3);
     $result = oci_execute($delete);
 
     oci_close($conn);
@@ -261,6 +259,8 @@ function lekeruzlet(){
         return false;
     }
     $szam = oci_parse($conn, 'SELECT MAX(UzletId) AS "szam" FROM Uzlet');
+
+    oci_close($conn);
     return  $szam;
 }
 function insertUzlet($uzletNev, $uzletVaros) {
@@ -312,6 +312,8 @@ function lekertelep(){
         return false;
     }
     $szam = oci_parse($conn, 'SELECT MAX(TelepId) AS "szam" FROM Telephely');
+
+    oci_close($conn);
     return  $szam;
 }
 function insertTelephely($telepNev, $telepVaros) {
@@ -341,6 +343,8 @@ function lekermuhely(){
         return false;
     }
     $szam = oci_parse($conn, 'SELECT MAX(MuhelyId) AS "szam" FROM Muhely');
+
+    oci_close($conn);
     return  $szam;
 }
 function insertMuhely($muhelyNev, $muhelyVaros) {
@@ -563,4 +567,41 @@ function UpdateUzlet($uzletID,  $uzletNev, $uzletVaros)
 
     oci_close($conn);
     return $result;
+}
+//
+// ---------------------------------------------- Egyedi funkciók ----------------------------------------------
+//
+function CountAutokInTelephely($telepid){
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $count = oci_parse($conn, 'begin :szam:=autoklistaz(:telepid); end;');
+    oci_bind_by_name($count, ':szam',$szam);
+    oci_bind_by_name($count, ':telepid',$telepid);
+
+    oci_execute($count);
+
+    oci_close($conn);
+    return $szam;
+}
+function CountUzemanyag(){
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $count = oci_parse($conn, 'SELECT COUNT(Autok.Uzemanyag_tipus),Autok.Uzemanyag_tipus FROM Autok GROUP BY Autok.Uzemanyag_tipus ORDER BY COUNT(Autok.Uzemanyag_tipus) DESC');
+
+    oci_close($conn);
+    return $count;
+}
+function AcceptVasarol($alvazszam){
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $accept = oci_parse($conn, 'begin vasarolelfogad(:alvazszam); end;');
+    oci_bind_by_name($accept, ':alvazszam',$alvazszam);
+
+    oci_execute($accept);
+
+    oci_close($conn);
+    return $accept;
 }

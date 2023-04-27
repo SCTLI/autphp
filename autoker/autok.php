@@ -64,6 +64,7 @@ include_once('common/dbfunctions.php');
     <th>Teljesítmény</th>
     <th>Szín</th>
     <th>Ár (Ft)</th>
+    <th>Elhelyezkedése(Telep)</th>
     <th></th>
 </tr>
 <?php
@@ -80,6 +81,7 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<td>'. $row["teljesitmeny"] . '</td>';
     echo '<td>'. $row["szin"] . '</td>';
     echo '<td>'. $row["ar"] . '</td>';
+    echo '<td>'. $row["telepnev"] . '</td>';
     echo '<td><form method="POST" action="vasarolpreInsert.php">
             <input type="hidden" name="alvazszam" value="'. $row["alvazszam"] .'" />
             <input type="submit" value="Vásárol" />

@@ -28,6 +28,7 @@ include_once('common/dbfunctions.php');
     <tr>
         <th>Neve</th>
         <th>Városa</th>
+        <th>Autók száma</th>
         <th></th>
     </tr>
     <?php
@@ -38,6 +39,7 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<tr>';
     echo '<td>'.$row['nev'].'</td>';
     echo '<td>'.$row['varos'].'</td>';
+    echo '<td>'.CountAutokInTelephely($row["telepid"]).'</td>';
     echo '<td><form method="POST" action="Delete/telepDelete.php">
 				  <input type="hidden" name="telepDelete" value="'. $row["telepid"] .'" />
 				  <input type="submit" value="Törlés" />
