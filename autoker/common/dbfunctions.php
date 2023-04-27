@@ -371,7 +371,7 @@ function insertSzerelo($SzereloIgszam,$SzereloNev, $Felhasznalonev, $Jelszo) {
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $insert = oci_parse( $conn,"INSERT INTO szerelo VALUES (:szereloIgszam,100,:szerelonev,:Felhasznalonev,:Jelszo)");
+    $insert = oci_parse( $conn,"INSERT INTO szerelo VALUES (:szereloIgszam,30,:szerelonev,:Felhasznalonev,:Jelszo)");
     oci_bind_by_name($insert,":szereloIgszam",$SzereloIgszam  );
     oci_bind_by_name($insert,":szerelonev",$SzereloNev  );
     oci_bind_by_name($insert,":Felhasznalonev",$Felhasznalonev  );
@@ -388,7 +388,7 @@ function insertElado($EladoIgszam,$EladoNev, $Felhasznalonev, $Jelszo) {
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $insert = oci_parse( $conn,"INSERT INTO elado VALUES (:eladoIgszam,100,:eladonev,:Felhasznalonev,:Jelszo)");
+    $insert = oci_parse( $conn,"INSERT INTO elado VALUES (:eladoIgszam,30,:eladonev,:Felhasznalonev,:Jelszo)");
     oci_bind_by_name($insert,":eladoIgszam",$EladoIgszam  );
     oci_bind_by_name($insert,":eladonev",$EladoNev  );
     oci_bind_by_name($insert,":Felhasznalonev",$Felhasznalonev  );

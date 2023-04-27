@@ -16,7 +16,7 @@ include_once('common/dbfunctions.php');
 <span class="kozepre">Ahoz, hogy egy új üzletet vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
 <form method="POST" action="Insert/uzletInsert.php" accept-charset="utf-8">
     <label>Üzlet Városa:</label>
-    <input type="number" name="varos" placeholder="Tázlár">
+    <input type="text" name="varos" placeholder="Tázlár">
     <br />
     <label>Üzlet Neve:</label>
     <input type="text" name="nev" placeholder="Árazva">
