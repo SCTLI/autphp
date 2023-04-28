@@ -612,3 +612,33 @@ function AcceptVasarol($alvazszam){
     oci_close($conn);
     return $accept;
 }
+
+function TotalCarCount(){
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $db = oci_parse($conn, 'SELECT COUNT(*) FROM C##admin.autok WHERE eladva == 0');
+    oci_execute($db);
+    oci_close($conn);
+    return $db;
+}
+
+function CountSoldCars(){
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $db = oci_parse($conn, 'SELECT COUNT(*) FROM C##admin.autok WHERE eladva == 1');
+    oci_execute($db);
+    oci_close($conn);
+    return $db;
+}
+
+function CountUzlet(){
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $db = oci_parse($conn, 'SELECT COUNT(*) FROM C##admin.uzlet');
+    oci_execute($db);
+    oci_close($conn);
+    return $db;
+}
