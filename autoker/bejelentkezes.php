@@ -1,3 +1,7 @@
+<?php
+include_once('common/dbfunctions.php');
+session_start();
+?>
 <!DOCTYPE HTML>
 <html>
 <head>

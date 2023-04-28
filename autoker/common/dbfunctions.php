@@ -1,6 +1,6 @@
 <?php
-function dbConnect(){
-    $conn = oci_connect('C##vendeg', 'vendeg', "localhost/XE",'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
+function dbConnect($felhasznalo, $jelszo){
+    $conn = oci_connect($felhasznalo, $jelszo, "localhost/XE",'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
 
     return $conn;
 }
