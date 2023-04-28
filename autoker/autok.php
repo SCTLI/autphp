@@ -1,11 +1,6 @@
 <?php
 include_once('common/navigation.php');
 include_once('common/dbfunctions.php');
-session_start();
-$felhasznalo = $_SESSION["felhasz"];
-$jelszo = $_SESSION["jelsz"];
-echo "felhasznalo: $felhasznalo";
-echo "jelszo: $jelszo";
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -17,7 +12,9 @@ echo "jelszo: $jelszo";
 </head>
 <body>
 <?php echo navigation();?>
+<?php if ($_SESSION["role"]!="0"){?>
 <h2>Új Autó felvitele az adatbázisba</h2>
+
 <span class="kozepre">Ahoz, hogy egy új autót vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
 <form method="POST" action="Insert/autoInsert.php" accept-charset="utf-8">
     <label>Alvázszám:</label>
@@ -59,6 +56,7 @@ echo "jelszo: $jelszo";
     <br />
     <input type="submit" value="Feltöltés">
 </form>
+<?php } ?>
 <h2>Autók </h2>
 <table border="0">
 <tr>
