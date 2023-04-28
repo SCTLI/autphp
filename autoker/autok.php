@@ -11,7 +11,10 @@ include_once('common/dbfunctions.php');
     <meta charset="utf-8" />
 </head>
 <body>
-<?php echo navigation();?>
+<?php
+include_once "common/header.php";
+echo navigation();
+?>
 <?php if ($_SESSION["role"]!="0"){?>
 <h2>Új Autó felvitele az adatbázisba</h2>
 
