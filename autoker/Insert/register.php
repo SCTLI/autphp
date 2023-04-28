@@ -2,6 +2,7 @@
 
 include_once("../common/dbFunctions.php");
 
+
 $igszam = $_POST['igszam'];
 $nev = $_POST['nev'];
 $felhasznalonev = $_POST['felhasznalonev'];
@@ -10,9 +11,9 @@ $szerepkor = $_POST['szerepkor'];
 
 if ($szerepkor='elado'){
     if ( isset($igszam) && isset($nev) && isset($felhasznalonev) && isset($jelszo)) {
-
+        $eladofel = eladoletre($felhasznalonev, $jelszo);
         $sikeres=insertElado($igszam,$nev,$felhasznalonev,password_hash($jelszo, PASSWORD_DEFAULT));
-        if ($sikeres==true){
+        if ($sikeres==true && $eladofel == true){
             header("Location: ../index.php");
         }
     } else {

@@ -642,3 +642,46 @@ function CountUzlet(){
     oci_close($conn);
     return $db;
 }
+
+//
+// ---------------------------------------------- Felhasználó létrehozása funkciók ----------------------------------------------
+//
+
+function admincon(){
+    $conn = oci_pconnect("C##admin", "admin123", "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
+    return $conn;
+}
+
+function eladoletre($eladofelh, $eladojelsz){
+    if (!($conn = admincon())) {
+        return false;
+    }
+    $siker = oci_parse($conn, "CREATE USER C##:felsz IDENTIFIED BY :jelszo");
+    oci_bind_by_name($siker, ":felsz", $eladofelh);
+    oci_bind_by_name($siker, ":jelszo", $eladojelsz);
+    oci_execute($siker);
+    $siker2 = oci_parse($conn, "GRANT connect TO C##:felsz");
+    oci_bind_by_name($siker2, ":felsz", $eladofelh);
+    oci_execute($siker2);
+    $siker3 = oci_parse($conn, "GRANT select, insert, update, delete on C##admin.autok to C##:felsz");
+    oci_bind_by_name($siker3, ":felsz", $eladofelh);
+    oci_execute($siker3);
+    $siker4 = oci_parse($conn, "GRANT select on C##admin.telephely to C##:felsz");
+    oci_bind_by_name($siker4, ":felsz", $eladofelh);
+    oci_execute($siker4);
+    $siker5 = oci_parse($conn, "GRANT select on C##admin.uzlet to C##:felsz");
+    oci_bind_by_name($siker5, ":felsz", $eladofelh);
+    oci_execute($siker5);
+    $siker6 = oci_parse($conn, "GRANT select, delete on C##admin.vasarol to C##:felsz");
+    oci_bind_by_name($siker6, ":felsz", $eladofelh);
+    oci_execute($siker6);
+    $siker7 = oci_parse($conn, "GRANT select on C##admin.ugyfel to C##:felsz");
+    oci_bind_by_name($siker7, ":felsz", $eladofelh);
+    oci_execute($siker7);
+
+    if($siker && $siker2 && $siker3 && $siker4 && $siker5 && $siker6 && $siker7){
+        return true;
+    }else{
+        return false;
+    }
+}
