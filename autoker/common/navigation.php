@@ -3,7 +3,7 @@ function navigation() {
     $navigation  = '<nav><ul>';
     $navigation .= '<li><a href="index.php">Kezdő Oldal</a></li>';
     $navigation .= '<li><a href="autok.php">Autók tábla</a></li>';
-    $navigation .= '<li><a href="telephely.php">Telephelyek tábla</a></li>';
+    if ($_SESSION["role"]=="vezeto"){$navigation .= '<li><a href="telephely.php">Telephelyek tábla</a></li>';}
     if ($_SESSION["role"]=="vezeto"){$navigation .= '<li><a href="elado.php">Eladók tábla</a></li>';}
     if ($_SESSION["role"]=="vezeto"){$navigation .= '<li><a href="muhely.php">Műhelyek tábla</a></li>';}
     if ($_SESSION["role"]=="vezeto"){$navigation .= '<li><a href="uzlet.php">Üzletek tábla</a></li>';}
@@ -14,7 +14,7 @@ function navigation() {
     if ($_SESSION["role"]=="szerelo"){$navigation .= '<li><a href="szerel.php">Szerelések tábla</a></li>';}
     if ($_SESSION["role"]=="vendeg"){$navigation .= '<li><a href="bejelentkezes.php">Bejelentkezés</a></li>';}
     if ($_SESSION["role"]!="vendeg"){$navigation .= '<li><a href="logout.php">Kijelentkezés</a></li>';}
-    $navigation .= '</ul></nav>';
+    $navigation .= '</ul>'.$_SESSION["felhasz"].'</nav>';
 
     return $navigation;
 }
