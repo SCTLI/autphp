@@ -1,6 +1,6 @@
 <?php
 function dbConnect(){
-    $conn = oci_connect('C##admin', 'admin123', "localhost/XE",'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
+    $conn = oci_connect('C##vendeg', 'vendeg', "localhost/XE",'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
 
     return $conn;
 }
@@ -14,7 +14,7 @@ function getAutokList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzemanyag_tipus AS "uzemanyag", teljesitmeny AS "teljesitmeny", szin AS "szin", ar AS "ar",autok.telepid AS "telepid", eladva AS "eladva", telephely.telep_nev AS "telepnev" FROM Autok, telephely WHERE autok.telepid=telephely.telepid AND autok.eladva=0');
+    $result = oci_parse($conn, 'SELECT alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzemanyag_tipus AS "uzemanyag", teljesitmeny AS "teljesitmeny", szin AS "szin", ar AS "ar",autok.telepid AS "telepid", eladva AS "eladva", telephely.telep_nev AS "telepnev" FROM C##admin.Autok, C##admin.telephely WHERE autok.telepid=telephely.telepid AND autok.eladva=0');
 
     oci_close($conn);
     return $result;
@@ -27,7 +27,7 @@ function getMuhelyList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT muhely_nev AS "nev", muhely_varos AS "varos", muhelyid AS "muhelyid" FROM Muhely WHERE muhelyid!=30');
+    $result = oci_parse($conn, 'SELECT muhely_nev AS "nev", muhely_varos AS "varos", muhelyid AS "muhelyid" FROM C##admin.Muhely WHERE muhelyid!=30');
 
     oci_close($conn);
     return $result;
@@ -40,7 +40,7 @@ function getUzletList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT uzlet_nev AS "nev", uzlet_varos AS "varos", uzletid AS "uzletid"  FROM Uzlet WHERE uzletid!=30');
+    $result = oci_parse($conn, 'SELECT uzlet_nev AS "nev", uzlet_varos AS "varos", uzletid AS "uzletid"  FROM C##admin.Uzlet WHERE uzletid!=30');
 
     oci_close($conn);
     return $result;
@@ -53,7 +53,7 @@ function getTelephelyList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT telep_nev AS "nev", telep_varos AS "varos", telepid AS "telepid" FROM Telephely WHERE telepid!=30');
+    $result = oci_parse($conn, 'SELECT telep_nev AS "nev", telep_varos AS "varos", telepid AS "telepid" FROM C##admin.Telephely WHERE telepid!=30');
 
     oci_close($conn);
     return $result;
@@ -66,7 +66,7 @@ function getEladoList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT eladoigszam AS "igsz", elado_nev AS "nev", elado.felhasznalonev AS "felhasznalonev", elado.uzletid AS "uzletid", uzlet_nev AS "uzletnev" FROM Elado, uzlet WHERE uzlet.uzletid=elado.uzletid');
+    $result = oci_parse($conn, 'SELECT eladoigszam AS "igsz", elado_nev AS "nev", elado.felhasznalonev AS "felhasznalonev", elado.uzletid AS "uzletid", uzlet_nev AS "uzletnev" FROM C##admin.Elado, C##admin.uzlet WHERE uzlet.uzletid=elado.uzletid');
 
     oci_close($conn);
     return $result;
@@ -79,7 +79,7 @@ function getUgyfelList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT ugyfeligszam AS "igsz", ugyfel_nev AS "nev", ugyfel.felhasznalonev AS "felhasznalonev" FROM Ugyfel');
+    $result = oci_parse($conn, 'SELECT ugyfeligszam AS "igsz", ugyfel_nev AS "nev", ugyfel.felhasznalonev AS "felhasznalonev" FROM C##admin.Ugyfel');
 
     oci_close($conn);
     return $result;
@@ -92,7 +92,7 @@ function getSzereloList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT szereloigszam AS "igsz", szerelo_nev AS "nev", szerelo.felhasznalonev AS "felhasznalonev", szerelo.muhelyid AS "muhelyid", muhely_nev AS "muhelynev" FROM Szerelo, Muhely WHERE muhely.muhelyid=szerelo.muhelyid');
+    $result = oci_parse($conn, 'SELECT szereloigszam AS "igsz", szerelo_nev AS "nev", szerelo.felhasznalonev AS "felhasznalonev", szerelo.muhelyid AS "muhelyid", muhely_nev AS "muhelynev" FROM C##admin.Szerelo, C##admin.Muhely WHERE muhely.muhelyid=szerelo.muhelyid');
 
     oci_close($conn);
     return $result;
@@ -106,7 +106,7 @@ function getSzerelList()
     }
     $datesess = oci_parse($conn, 'ALTER SESSION SET NLS_DATE_FORMAT = "YYYY-MM-DD HH24:MI:SS"');
     oci_execute($datesess);
-    $result = oci_parse($conn, 'SELECT szerel.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", muhely_nev AS "muhelynev", szerelt_alkatresz AS "alkatresz",idopont AS "idopont"  FROM Szerel, muhely, autok WHERE autok.alvazszam=szerel.alvazszam AND muhely.muhelyid=szerel.muhelyid');
+    $result = oci_parse($conn, 'SELECT szerel.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", muhely_nev AS "muhelynev", szerelt_alkatresz AS "alkatresz",idopont AS "idopont"  FROM C##admin.Szerel, C##admin.muhely, C##admin.autok WHERE autok.alvazszam=szerel.alvazszam AND muhely.muhelyid=szerel.muhelyid');
 
     oci_close($conn);
     return $result;
@@ -119,7 +119,7 @@ function getVasarolList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT vasarol.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzlet_nev AS "uzletnev", vasarol.ugyfeligszam AS "igsz", ugyfel_nev AS "nev",vasarol.uzletid AS "uzletid"  FROM vasarol, uzlet, autok, ugyfel WHERE autok.alvazszam=vasarol.alvazszam AND uzlet.uzletid=vasarol.uzletid AND ugyfel.ugyfeligszam=vasarol.ugyfeligszam');
+    $result = oci_parse($conn, 'SELECT vasarol.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzlet_nev AS "uzletnev", vasarol.ugyfeligszam AS "igsz", ugyfel_nev AS "nev",vasarol.uzletid AS "uzletid"  FROM C##admin.vasarol, C##admin.uzlet, C##admin.autok, C##admin.ugyfel WHERE autok.alvazszam=vasarol.alvazszam AND uzlet.uzletid=vasarol.uzletid AND ugyfel.ugyfeligszam=vasarol.ugyfeligszam');
 
     oci_close($conn);
     return $result;
@@ -135,7 +135,7 @@ function deleteAuto($id)
         return false;
     }
 
-    $delete = oci_parse($conn, "DELETE FROM autok WHERE alvazszam = ".$id);
+    $delete = oci_parse($conn, "DELETE FROM C##admin.autok WHERE alvazszam = ".$id);
     $result = oci_execute($delete);
 
     oci_close($conn);
@@ -149,7 +149,7 @@ function deleteUzlet($id)
         return false;
     }
 
-    $delete = oci_parse($conn, "DELETE FROM uzlet WHERE uzletid = ".$id);
+    $delete = oci_parse($conn, "DELETE FROM C##admin.uzlet WHERE uzletid = ".$id);
     $result = oci_execute($delete);
 
     oci_close($conn);
@@ -163,7 +163,7 @@ function deleteMuhely($id)
         return false;
     }
 
-    $delete = oci_parse($conn, "DELETE FROM muhely WHERE muhelyid = ".$id);
+    $delete = oci_parse($conn, "DELETE FROM C##admin.muhely WHERE muhelyid = ".$id);
     $result = oci_execute($delete);
 
     oci_close($conn);
@@ -176,7 +176,7 @@ function deleteTelephely($id)
         return false;
     }
 
-    $delete = oci_parse($conn, "DELETE FROM telephely WHERE telepid = ".$id);
+    $delete = oci_parse($conn, "DELETE FROM C##admin.telephely WHERE telepid = ".$id);
     $result = oci_execute($delete);
 
     oci_close($conn);
@@ -189,7 +189,7 @@ function deleteElado($id)
         return false;
     }
 
-    $delete = oci_parse($conn, "DELETE FROM elado WHERE eladoigszam = ".$id);
+    $delete = oci_parse($conn, "DELETE FROM C##admin.elado WHERE eladoigszam = ".$id);
     $result = oci_execute($delete);
 
     oci_close($conn);
@@ -202,7 +202,7 @@ function deleteUgyfel($id)
         return false;
     }
 
-    $delete = oci_parse($conn, "DELETE FROM ugyfel WHERE ugyfeligszam = ".$id);
+    $delete = oci_parse($conn, "DELETE FROM C##admin.ugyfel WHERE ugyfeligszam = ".$id);
     $result = oci_execute($delete);
 
     oci_close($conn);
@@ -215,7 +215,7 @@ function deleteSzerelo($id)
         return false;
     }
 
-    $delete = oci_parse($conn, "DELETE FROM szerelo WHERE szereloigszam = ".$id);
+    $delete = oci_parse($conn, "DELETE FROM C##admin.szerelo WHERE szereloigszam = ".$id);
     $result = oci_execute($delete);
 
     oci_close($conn);
@@ -228,7 +228,7 @@ function deleteVasarol($id1,$id2,$id3)
         return false;
     }
 
-    $delete = oci_parse($conn, "DELETE FROM vasarol WHERE vasarol.alvazszam =:id1");
+    $delete = oci_parse($conn, "DELETE FROM C##admin.vasarol WHERE vasarol.alvazszam =:id1");
     oci_bind_by_name($delete,":id1",$id1);
     $result = oci_execute($delete);
 
@@ -243,7 +243,7 @@ function deleteSzerel($id1,$id2)
     }
     $datesess = oci_parse($conn, 'ALTER SESSION SET NLS_DATE_FORMAT = "YYYY-MM-DD HH24:MI:SS"');
     oci_execute($datesess);
-    $delete = oci_parse($conn, "DELETE FROM szerel WHERE szerel.alvazszam =:alvazszam AND szerel.idopont =:ido ");
+    $delete = oci_parse($conn, "DELETE FROM C##admin.szerel WHERE szerel.alvazszam =:alvazszam AND szerel.idopont =:ido ");
     oci_bind_by_name($delete,":alvazszam",$id1);
     oci_bind_by_name($delete,":ido",$id2);
     $result = oci_execute($delete);
@@ -258,7 +258,7 @@ function lekeruzlet(){
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $szam = oci_parse($conn, 'SELECT MAX(UzletId) AS "szam" FROM Uzlet');
+    $szam = oci_parse($conn, 'SELECT MAX(UzletId) AS "szam" FROM C##admin.Uzlet');
 
     oci_close($conn);
     return  $szam;
@@ -275,7 +275,7 @@ function insertUzlet($uzletNev, $uzletVaros) {
     while ( $row = oci_fetch_array($max, OCI_ASSOC + OCI_RETURN_NULLS)) {
         $szam=$row["szam"]+1;
     }
-    $insert = oci_parse( $conn,"INSERT INTO uzlet VALUES (:telepid,:uzletnev,:uzletvaros)");
+    $insert = oci_parse( $conn,"INSERT INTO C##admin.uzlet VALUES (:telepid,:uzletnev,:uzletvaros)");
     oci_bind_by_name($insert,":telepid",$szam  );
     oci_bind_by_name($insert,":uzletnev",$uzletNev  );
     oci_bind_by_name($insert,":uzletvaros",$uzletVaros  );
@@ -292,7 +292,7 @@ function insertAutok($telepid, $marka, $uzemanyag, $model, $teljesitmeny , $szin
         return false;
     }
 
-    $insert = oci_parse( $conn,"INSERT INTO autok VALUES (:alvazszam,:telepid,:marka,:uzemanyag,:modell,:teljesitmeny,:szin,:ar,0)");
+    $insert = oci_parse( $conn,"INSERT INTO C##admin.autok VALUES (:alvazszam,:telepid,:marka,:uzemanyag,:modell,:teljesitmeny,:szin,:ar,0)");
     oci_bind_by_name($insert,":alvazszam",$alvazszam  );
     oci_bind_by_name($insert,":telepid",$telepid  );
     oci_bind_by_name($insert,":marka",$marka  );
@@ -311,7 +311,7 @@ function lekertelep(){
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $szam = oci_parse($conn, 'SELECT MAX(TelepId) AS "szam" FROM Telephely');
+    $szam = oci_parse($conn, 'SELECT MAX(TelepId) AS "szam" FROM C##admin.Telephely');
 
     oci_close($conn);
     return  $szam;
@@ -328,7 +328,7 @@ function insertTelephely($telepNev, $telepVaros) {
     while ( $row = oci_fetch_array($max, OCI_ASSOC + OCI_RETURN_NULLS)) {
         $szam=$row["szam"]+1;
     }
-    $insert = oci_parse( $conn,"INSERT INTO telephely VALUES (:telepid,:telepvaros,:telepnev)");
+    $insert = oci_parse( $conn,"INSERT INTO C##admin.telephely VALUES (:telepid,:telepvaros,:telepnev)");
     oci_bind_by_name($insert,":telepid",$szam  );
     oci_bind_by_name($insert,":telepnev",$telepNev  );
     oci_bind_by_name($insert,":telepvaros",$telepVaros  );
@@ -342,7 +342,7 @@ function lekermuhely(){
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $szam = oci_parse($conn, 'SELECT MAX(MuhelyId) AS "szam" FROM Muhely');
+    $szam = oci_parse($conn, 'SELECT MAX(MuhelyId) AS "szam" FROM C##admin.Muhely');
 
     oci_close($conn);
     return  $szam;
@@ -359,7 +359,7 @@ function insertMuhely($muhelyNev, $muhelyVaros) {
     while ( $row = oci_fetch_array($max, OCI_ASSOC + OCI_RETURN_NULLS)) {
         $szam=$row["szam"]+1;
     }
-    $insert = oci_parse( $conn,"INSERT INTO muhely VALUES (:muhelyid,:muhelyvaros,:muhelynev)");
+    $insert = oci_parse( $conn,"INSERT INTO C##admin.muhely VALUES (:muhelyid,:muhelyvaros,:muhelynev)");
     oci_bind_by_name($insert,":muhelyid",$szam  );
     oci_bind_by_name($insert,":muhelynev",$muhelyNev  );
     oci_bind_by_name($insert,":muhelyvaros",$muhelyVaros  );
@@ -375,7 +375,8 @@ function insertSzerelo($SzereloIgszam,$SzereloNev, $Felhasznalonev, $Jelszo) {
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $insert = oci_parse( $conn,"INSERT INTO szerelo VALUES (:szereloIgszam,30,:szerelonev,:Felhasznalonev,:Jelszo)");
+
+    $insert = oci_parse( $conn,"INSERT INTO C##admin.szerelo VALUES (:szereloIgszam,30,:szerelonev,:Felhasznalonev,:Jelszo)");
     oci_bind_by_name($insert,":szereloIgszam",$SzereloIgszam  );
     oci_bind_by_name($insert,":szerelonev",$SzereloNev  );
     oci_bind_by_name($insert,":Felhasznalonev",$Felhasznalonev  );
@@ -392,7 +393,7 @@ function insertElado($EladoIgszam,$EladoNev, $Felhasznalonev, $Jelszo) {
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $insert = oci_parse( $conn,"INSERT INTO elado VALUES (:eladoIgszam,30,:eladonev,:Felhasznalonev,:Jelszo)");
+    $insert = oci_parse( $conn,"INSERT INTO C##admin.elado VALUES (:eladoIgszam,30,:eladonev,:Felhasznalonev,:Jelszo)");
     oci_bind_by_name($insert,":eladoIgszam",$EladoIgszam  );
     oci_bind_by_name($insert,":eladonev",$EladoNev  );
     oci_bind_by_name($insert,":Felhasznalonev",$Felhasznalonev  );
@@ -409,7 +410,7 @@ function insertUgyfel($UgyfelIgszam,$UgyfelNev, $Felhasznalonev, $Jelszo) {
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $insert = oci_parse( $conn,"INSERT INTO ugyfel VALUES (:ugyfelIgszam,:ugyfelnev,:Felhasznalonev,:Jelszo)");
+    $insert = oci_parse( $conn,"INSERT INTO C##admin.ugyfel VALUES (:ugyfelIgszam,:ugyfelnev,:Felhasznalonev,:Jelszo)");
     oci_bind_by_name($insert,":ugyfelIgszam",$UgyfelIgszam  );
     oci_bind_by_name($insert,":ugyfelnev",$UgyfelNev  );
     oci_bind_by_name($insert,":Felhasznalonev",$Felhasznalonev  );
@@ -426,7 +427,7 @@ function insertVasarol($Alvazszam,$UzletId, $UgyfelIgszam) {
     if ( !($conn = dbConnect()) ) {
         return false;
     }
-    $insert = oci_parse( $conn,"INSERT INTO vasarol VALUES (:Alvazszam,:UzletId,:ugyfelIgszam)");
+    $insert = oci_parse( $conn,"INSERT INTO C##admin.vasarol VALUES (:Alvazszam,:UzletId,:ugyfelIgszam)");
     oci_bind_by_name($insert,":ugyfelIgszam",$UgyfelIgszam  );
     oci_bind_by_name($insert,":Alvazszam",$Alvazszam  );
     oci_bind_by_name($insert,":UzletId",$UzletId  );
@@ -444,7 +445,7 @@ function insertSzerel($Alvazszam, $MuhelyId, $SzereltAlkatresz) {
     }
     $datesess = oci_parse($conn, 'ALTER SESSION SET NLS_DATE_FORMAT = "YYYY-MM-DD HH24:MI:SS"');
     oci_execute($datesess);
-    $insert = oci_parse( $conn,"INSERT INTO szerel VALUES (:Alvazszam,sysdate,:MuhelyId,:SzereltAlkatresz)");
+    $insert = oci_parse( $conn,"INSERT INTO C##admin.szerel VALUES (:Alvazszam,sysdate,:MuhelyId,:SzereltAlkatresz)");
     oci_bind_by_name($insert,":Alvazszam",$Alvazszam  );
     oci_bind_by_name($insert,":MuhelyId",$MuhelyId);
     oci_bind_by_name($insert,":SzereltAlkatresz",$SzereltAlkatresz);
@@ -464,7 +465,7 @@ function UpdateAutok($autoAlvazszam, $telepID, $autoTeljesitmeny, $autoSzin, $au
     if (!($conn = dbConnect())) {
         return false;
     }
-    $update = oci_parse($conn, "UPDATE autok set telepid=:telepID, teljesitmeny=:autoTeljesitmeny, szin=:autoSzin, ar=:autoAr WHERE alvazszam=:autoAlvazszam");
+    $update = oci_parse($conn, "UPDATE C##admin.autok set telepid=:telepID, teljesitmeny=:autoTeljesitmeny, szin=:autoSzin, ar=:autoAr WHERE alvazszam=:autoAlvazszam");
     oci_bind_by_name($update, ":telepID", $telepID);
     oci_bind_by_name($update, ":autoTeljesitmeny", $autoTeljesitmeny);
     oci_bind_by_name($update, ":autoSzin", $autoSzin);
@@ -482,7 +483,7 @@ function UpdateElado($eladoIgszam, $uzletID)
     if (!($conn = dbConnect())) {
         return false;
     }
-    $update = oci_parse($conn, "UPDATE elado set uzletid=:uzletID WHERE eladoigszam=:eladoIgszam");
+    $update = oci_parse($conn, "UPDATE C##admin.elado set uzletid=:uzletID WHERE eladoigszam=:eladoIgszam");
     oci_bind_by_name($update, ":uzletID", $uzletID);
     oci_bind_by_name($update, ":eladoIgszam", $eladoIgszam);
     $result = oci_execute($update);
@@ -497,7 +498,7 @@ function UpdateMuhely($muhelyID, $muhelyVaros, $muhelyNev)
     if (!($conn = dbConnect())) {
         return false;
     }
-    $update = oci_parse($conn, "UPDATE muhely set muhely_varos=:muhelyVaros, muhely_nev=:muhelyNev WHERE muhelyid=:muhelyID");
+    $update = oci_parse($conn, "UPDATE C##admin.muhely set muhely_varos=:muhelyVaros, muhely_nev=:muhelyNev WHERE muhelyid=:muhelyID");
     oci_bind_by_name($update, ":muhelyID", $muhelyID);
     oci_bind_by_name($update, ":muhelyVaros", $muhelyVaros);
     oci_bind_by_name($update, ":muhelyNev", $muhelyNev);
@@ -513,7 +514,7 @@ function UpdateSzerelo($szereloIgszam, $muhelyID)
     if (!($conn = dbConnect())) {
         return false;
     }
-    $update = oci_parse($conn, "UPDATE szerelo set muhelyid=:muhelyID WHERE szereloigszam=:szereloIgszam");
+    $update = oci_parse($conn, "UPDATE C##admin.szerelo set muhelyid=:muhelyID WHERE szereloigszam=:szereloIgszam");
     oci_bind_by_name($update, ":muhelyID", $muhelyID);
     oci_bind_by_name($update, ":szereloIgszam", $szereloIgszam);
     $result = oci_execute($update);
@@ -526,7 +527,7 @@ function UpdateUgyfel($UgyfelIgszam,$UgyfelNev, $Felhasznalonev, $Jelszo)
     if (!($conn = dbConnect())) {
         return false;
     }
-    $update = oci_parse($conn, "UPDATE ugyfel set ugyfel_nev=:ugyfelnev, Felhasznalonev=:felh, Jelszo=:jel WHERE UgyfelIgszam=:ugyfelIgszam");
+    $update = oci_parse($conn, "UPDATE C##admin.ugyfel set ugyfel_nev=:ugyfelnev, Felhasznalonev=:felh, Jelszo=:jel WHERE UgyfelIgszam=:ugyfelIgszam");
     oci_bind_by_name($update, ":ugyfelnev", $UgyfelNev);
     oci_bind_by_name($update, ":felh", $Felhasznalonev);
     oci_bind_by_name($update, ":jel", $Jelszo);
@@ -543,7 +544,7 @@ function UpdateTelephely($telepID, $telepVaros, $telepNev)
     if (!($conn = dbConnect())) {
         return false;
     }
-    $update = oci_parse($conn, "UPDATE telephely SET telep_varos=:telepVaros, telep_nev=:telepNev WHERE telepid=:telepID");
+    $update = oci_parse($conn, "UPDATE C##admin.telephely SET telep_varos=:telepVaros, telep_nev=:telepNev WHERE telepid=:telepID");
     oci_bind_by_name($update, ":telepID", $telepID);
     oci_bind_by_name($update, ":telepVaros", $telepVaros);
     oci_bind_by_name($update, ":telepNev", $telepNev);
@@ -559,7 +560,7 @@ function UpdateUzlet($uzletID,  $uzletNev, $uzletVaros)
     if (!($conn = dbConnect())) {
         return false;
     }
-    $update = oci_parse($conn, "UPDATE uzlet SET uzlet_varos=:uzletVaros, uzlet_nev=:uzletNev WHERE uzletid=:uzletID");
+    $update = oci_parse($conn, "UPDATE C##admin.uzlet SET uzlet_varos=:uzletVaros, uzlet_nev=:uzletNev WHERE uzletid=:uzletID");
     oci_bind_by_name($update, ":uzletID", $uzletID);
     oci_bind_by_name($update, ":uzletVaros", $uzletVaros);
     oci_bind_by_name($update, ":uzletNev", $uzletNev);
@@ -588,7 +589,7 @@ function CountUzemanyag(){
     if (!($conn = dbConnect())) {
         return false;
     }
-    $count = oci_parse($conn, 'SELECT COUNT(Autok.Uzemanyag_tipus),Autok.Uzemanyag_tipus FROM Autok GROUP BY Autok.Uzemanyag_tipus ORDER BY COUNT(Autok.Uzemanyag_tipus) DESC');
+    $count = oci_parse($conn, 'SELECT COUNT(Autok.Uzemanyag_tipus),Autok.Uzemanyag_tipus FROM C##admin.Autok GROUP BY Autok.Uzemanyag_tipus ORDER BY COUNT(Autok.Uzemanyag_tipus) DESC');
 
     oci_close($conn);
     return $count;
