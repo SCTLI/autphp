@@ -20,7 +20,7 @@ function getAutokList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzemanyag_tipus AS "uzemanyag", teljesitmeny AS "teljesitmeny", szin AS "szin", ar AS "ar",autok.telepid AS "telepid", eladva AS "eladva", telephely.telep_nev AS "telepnev" FROM C##admin.Autok, C##admin.telephely WHERE autok.telepid=telephely.telepid AND autok.eladva=0');
+    $result = oci_parse($conn, 'SELECT alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzemanyag_tipus AS "uzemanyag", teljesitmeny AS "teljesitmeny", szin AS "szin", ar AS "ar",autok.telepid AS "telepid", eladva AS "eladva", telephely.telep_nev AS "telepnev" FROM C##admin.Autok, C##admin.telephely WHERE autok.telepid=telephely.telepid AND autok.eladva=0 order by autok.marka, autok.modell');
 
     oci_close($conn);
     return $result;

@@ -12,7 +12,7 @@ include_once('common/dbfunctions.php');
 </head>
 <body>
 <?php echo navigation();?>
-<?php if ($_SESSION["role"]!="0"){?>
+<?php if ($_SESSION["role"]=="elado"){?>
 <h2>Új Autó felvitele az adatbázisba</h2>
 
 <p class="kozepre">Ahoz, hogy egy új autót vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</p>
