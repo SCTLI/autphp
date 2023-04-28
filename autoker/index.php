@@ -1,5 +1,7 @@
 <?php
 include_once('common/navigation.php');
+include_once('common/dbfunctions.php');
+$_SESSION["role"]="vendeg";
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -15,8 +17,8 @@ include_once('common/navigation.php');
     echo navigation();
     ?>
     <h2 id="mainh2">Üdvüzüljük a fő oldalon!</h2>
-    <span class="kozepre" id="rolunk">Röviden rólunk: A Padama Cars egy magán kezekben lévő autó kereskedés, amit 3 barát alapított csupán az autók iránti érdeklődésükből. Mára ez egy ország szintű vállakozás lett. Ami <?php $uzletszam = CountUzlet(); echo $uzletszam?> üzlettel rendelkezik és jelenleg <?php $autokszama = TotalCarCount(); echo $autokszama?> darab autót értékesít.</span>
-    <span class="kozepre" id="miert">Miért válassza a Padama Carst? Mert mi nem csak egyszerűen új és használt autókat értékesítünk hanem az autók állapotát felmérjük és a javításra szoruló autókat meg is szereljük. Eddig <?php $eladott = CountSoldCars(); echo $eladott?> elégedett vásárlónk van.</span>
+    <span class="kozepre" id="rolunk">Röviden rólunk: A Padama Cars egy magán kezekben lévő autó kereskedés, amit 3 barát alapított csupán az autók iránti érdeklődésükből. Mára ez egy ország szintű vállakozás lett. Ami <?php echo CountUzlet();?> üzlettel rendelkezik és jelenleg <?php echo TotalCarCount();?> darab autót értékesít.</span>
+    <span class="kozepre" id="miert">Miért válassza a Padama Carst? Mert mi nem csak egyszerűen új és használt autókat értékesítünk hanem az autók állapotát felmérjük és a javításra szoruló autókat meg is szereljük. Eddig <?php echo CountSoldCars()?>elégedett vásárlónk van.</span>
 
     <span class="kozepre" id="ajanlatok">Tekintse meg most ajánlatainkat!</span>
     <span class="kozepre" id="regist">Csapatunk része szeretnél lenni? Egyszerűen csak regisztrájl eladónak vagy szerelőnek és mi felvesszük veled a kapcsolatot!</span>

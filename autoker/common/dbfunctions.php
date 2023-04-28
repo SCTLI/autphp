@@ -3,7 +3,7 @@ session_start();
 function dbConnect(){
     $conn=0;
     if (!isset($_SESSION["felhasz"])){
-        $_SESSION["role"]=0;
+        $_SESSION["role"]="vendeg";
         $conn = oci_pconnect("C##vendeg", "vendeg", "localhost/XE",'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
     }else {
         $conn = oci_pconnect($_SESSION["felhasz"], $_SESSION["jelsz"], "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
@@ -378,7 +378,7 @@ function insertMuhely($muhelyNev, $muhelyVaros) {
 function insertSzerelo($SzereloIgszam,$SzereloNev, $Felhasznalonev, $Jelszo) {
 
 
-    if ( !($conn = dbConnect()) ) {
+    if ( !($conn = admincon()) ) {
         return false;
     }
 
@@ -396,7 +396,7 @@ function insertSzerelo($SzereloIgszam,$SzereloNev, $Felhasznalonev, $Jelszo) {
 function insertElado($EladoIgszam,$EladoNev, $Felhasznalonev, $Jelszo) {
 
 
-    if ( !($conn = dbConnect()) ) {
+    if ( !($conn = admincon()) ) {
         return false;
     }
     $insert = oci_parse( $conn,"INSERT INTO C##admin.elado VALUES (:eladoIgszam,30,:eladonev,:Felhasznalonev,:Jelszo)");
@@ -413,7 +413,7 @@ function insertElado($EladoIgszam,$EladoNev, $Felhasznalonev, $Jelszo) {
 function insertUgyfel($UgyfelIgszam,$UgyfelNev, $Felhasznalonev, $Jelszo) {
 
 
-    if ( !($conn = dbConnect()) ) {
+    if ( !($conn = admincon()) ) {
         return false;
     }
     $insert = oci_parse( $conn,"INSERT INTO C##admin.ugyfel VALUES (:ugyfelIgszam,:ugyfelnev,:Felhasznalonev,:Jelszo)");
@@ -582,7 +582,7 @@ function CountAutokInTelephely($telepid){
     if (!($conn = dbConnect())) {
         return false;
     }
-    $count = oci_parse($conn, 'begin :szam:=autoklistaz(:telepid); end;');
+    $count = oci_parse($conn, 'begin :szam:=C##admin.autoklistaz(:telepid); end;');
     oci_bind_by_name($count, ':szam',$szam);
     oci_bind_by_name($count, ':telepid',$telepid);
 
@@ -604,7 +604,7 @@ function AcceptVasarol($alvazszam){
     if (!($conn = dbConnect())) {
         return false;
     }
-    $accept = oci_parse($conn, 'begin vasarolelfogad(:alvazszam); end;');
+    $accept = oci_parse($conn, 'begin C##admin.vasarolelfogad(:alvazszam); end;');
     oci_bind_by_name($accept, ':alvazszam',$alvazszam);
 
     oci_execute($accept);
@@ -612,35 +612,51 @@ function AcceptVasarol($alvazszam){
     oci_close($conn);
     return $accept;
 }
+function FelhasznalonevVan($felhasznalonev){
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $count = oci_parse($conn, 'begin :szam:=C##admin.felhasznaloegyezzes(:felhasznalonev); end;');
+    oci_bind_by_name($count, ':szam',$szam);
+    oci_bind_by_name($count, ':felhasznalonev',$felhasznalonev);
+
+    oci_execute($count);
+
+    oci_close($conn);
+    return $szam;
+}
 
 function TotalCarCount(){
     if (!($conn = dbConnect())) {
         return false;
     }
-    $db = oci_parse($conn, 'SELECT COUNT(*) FROM C##admin.autok WHERE eladva == 0');
+    $db = oci_parse($conn, 'begin :szam:=C##admin.TotalCarCount(); end;');
+    oci_bind_by_name($db, ':szam',$szam);
     oci_execute($db);
     oci_close($conn);
-    return $db;
+    return $szam;
 }
 
 function CountSoldCars(){
     if (!($conn = dbConnect())) {
         return false;
     }
-    $db = oci_parse($conn, 'SELECT COUNT(*) FROM C##admin.autok WHERE eladva == 1');
+    $db = oci_parse($conn, 'begin :szam:=C##admin.CountSoldCars(); end;');
+    oci_bind_by_name($db, ':szam',$szam);
     oci_execute($db);
     oci_close($conn);
-    return $db;
+    return $szam;
 }
 
 function CountUzlet(){
     if (!($conn = dbConnect())) {
         return false;
     }
-    $db = oci_parse($conn, 'SELECT COUNT(*) FROM C##admin.uzlet');
+    $db = oci_parse($conn, 'begin :szam:=C##admin.CountUzlet(); end;');
+    oci_bind_by_name($db, ':szam',$szam);
     oci_execute($db);
     oci_close($conn);
-    return $db;
+    return $szam;
 }
 
 //
@@ -656,27 +672,22 @@ function eladoletre($eladofelh, $eladojelsz){
     if (!($conn = admincon())) {
         return false;
     }
-    $siker = oci_parse($conn, "CREATE USER C##:felsz IDENTIFIED BY :jelszo");
-    oci_bind_by_name($siker, ":felsz", $eladofelh);
-    oci_bind_by_name($siker, ":jelszo", $eladojelsz);
+    $test = 'CREATE USER C##' . $eladofelh . ' IDENTIFIED BY ' . $eladojelsz;
+    echo $test;
+    $siker = oci_parse($conn, $test);
+
     oci_execute($siker);
-    $siker2 = oci_parse($conn, "GRANT connect TO C##:felsz");
-    oci_bind_by_name($siker2, ":felsz", $eladofelh);
+    $siker2 = oci_parse($conn, "GRANT connect TO C##".$eladofelh);
     oci_execute($siker2);
-    $siker3 = oci_parse($conn, "GRANT select, insert, update, delete on C##admin.autok to C##:felsz");
-    oci_bind_by_name($siker3, ":felsz", $eladofelh);
+    $siker3 = oci_parse($conn, "GRANT select, insert, update, delete on C##admin.autok to C##".$eladofelh);
     oci_execute($siker3);
-    $siker4 = oci_parse($conn, "GRANT select on C##admin.telephely to C##:felsz");
-    oci_bind_by_name($siker4, ":felsz", $eladofelh);
+    $siker4 = oci_parse($conn, "GRANT select on C##admin.telephely to C##".$eladofelh);
     oci_execute($siker4);
-    $siker5 = oci_parse($conn, "GRANT select on C##admin.uzlet to C##:felsz");
-    oci_bind_by_name($siker5, ":felsz", $eladofelh);
+    $siker5 = oci_parse($conn, "GRANT select on C##admin.uzlet to C##".$eladofelh);
     oci_execute($siker5);
-    $siker6 = oci_parse($conn, "GRANT select, delete on C##admin.vasarol to C##:felsz");
-    oci_bind_by_name($siker6, ":felsz", $eladofelh);
+    $siker6 = oci_parse($conn, "GRANT select, delete on C##admin.vasarol to C##".$eladofelh);
     oci_execute($siker6);
-    $siker7 = oci_parse($conn, "GRANT select on C##admin.ugyfel to C##:felsz");
-    oci_bind_by_name($siker7, ":felsz", $eladofelh);
+    $siker7 = oci_parse($conn, "GRANT select on C##admin.ugyfel to C##".$eladofelh);
     oci_execute($siker7);
 
     if($siker && $siker2 && $siker3 && $siker4 && $siker5 && $siker6 && $siker7){

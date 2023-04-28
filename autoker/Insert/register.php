@@ -9,6 +9,8 @@ $felhasznalonev = $_POST['felhasznalonev'];
 $jelszo = $_POST['jelszo'];
 $szerepkor = $_POST['szerepkor'];
 
+if (felhasznalonevVan($felhasznalonev)==0){
+
 if ($szerepkor='elado'){
     if ( isset($igszam) && isset($nev) && isset($felhasznalonev) && isset($jelszo)) {
         $eladofel = eladoletre($felhasznalonev, $jelszo);
@@ -30,13 +32,16 @@ if ($szerepkor='elado'){
         error_log("Nem lett kitöltve a mező!");
     }
 } else {
-    if ( isset($igszam) && isset($nev) && isset($felhasznalonev) && isset($jelszo)) {
+    if (isset($igszam) && isset($nev) && isset($felhasznalonev) && isset($jelszo)) {
 
-        $sikeres=insertUgyfel($igszam,$nev,$felhasznalonev,password_hash($jelszo, PASSWORD_DEFAULT));
-        if ($sikeres==true){
+        $sikeres = insertUgyfel($igszam, $nev, $felhasznalonev, password_hash($jelszo, PASSWORD_DEFAULT));
+        if ($sikeres == true) {
             header("Location: ../index.php");
         }
     } else {
         error_log("Nem lett kitöltve a mező!");
     }
+}
+}else{
+    error_log("A felhasználónév máe foglalt");
 }

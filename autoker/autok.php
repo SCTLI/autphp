@@ -67,7 +67,7 @@ include_once('common/dbfunctions.php');
     <th>Teljesítmény</th>
     <th>Szín</th>
     <th>Ár (Ft)</th>
-    <th>Elhelyezkedése(Telep)</th>
+    <?php if($_SESSION['role']=='elado'){?><th>Elhelyezkedése(Telep)</th><?php } ?>
     <th></th>
 </tr>
 <?php
@@ -84,16 +84,20 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<td>'. $row["teljesitmeny"] . '</td>';
     echo '<td>'. $row["szin"] . '</td>';
     echo '<td>'. $row["ar"] . '</td>';
-    echo '<td>'. $row["telepnev"] . '</td>';
-    echo '<td><form method="POST" action="vasarolpreInsert.php">
+    if($_SESSION['role']=='elado'){ echo '<td>'. $row["telepnev"] . '</td>';}
+if($_SESSION['role']=='ugyfel'){ echo '<td><form method="POST" action="vasarolpreInsert.php">
             <input type="hidden" name="alvazszam" value="'. $row["alvazszam"] .'" />
             <input type="submit" value="Vásárol" />
-          </form></td>';
-    echo '<td><form method="POST" action="Delete/autoDelete.php">
+          </form></td>';}
+if($_SESSION['role']=='elado'){ echo '<td><form method="POST" action="Delete/autoDelete.php">
 				  <input type="hidden" name="autoDelete" value="'. $row["alvazszam"] .'" />
 				  <input type="submit" value="Törlés" />
-		          </form></td>';
-    echo '<td style="text-align: center" class="lista"><form method="POST" action="autokUpdatePage.php">
+		          </form></td>';}
+//if($_SESSION['role']=='szerelo'){ echo '<td><form method="POST" action="Insert/szerelInsert.php">
+//				  <input type="hidden" name="autoDelete" value="'. $row["alvazszam"] .'" />
+//				  <input type="submit" value="Törlés" />
+//		          </form></td>';}
+if($_SESSION['role']=='elado'){echo '<td style="text-align: center" class="lista"><form method="POST" action="autokUpdatePage.php">
 				  <input type="hidden" name="telepid" value="'. $row["telepid"] .'" />
 				  <input type="hidden" name="alvazszam" value="'. $row["alvazszam"] .'" />
 				  <input type="hidden" name="marka" value="'. $row["marka"] .'" />
@@ -103,7 +107,7 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
 				  <input type="hidden" name="szin" value="'. $row["szin"] .'" />
 				  <input type="hidden" name="ar" value="'. $row["ar"] .'" />
 				  <input type="submit" value="Szerkeszt" />
-		          </form></td>';
+		          </form></td>';}
     echo '</tr>';
 }
 echo '</table>';
