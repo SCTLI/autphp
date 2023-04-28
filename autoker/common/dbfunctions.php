@@ -375,6 +375,7 @@ function insertSzerelo($SzereloIgszam,$SzereloNev, $Felhasznalonev, $Jelszo) {
     if ( !($conn = dbConnect()) ) {
         return false;
     }
+
     $insert = oci_parse( $conn,"INSERT INTO szerelo VALUES (:szereloIgszam,30,:szerelonev,:Felhasznalonev,:Jelszo)");
     oci_bind_by_name($insert,":szereloIgszam",$SzereloIgszam  );
     oci_bind_by_name($insert,":szerelonev",$SzereloNev  );
@@ -605,3 +606,4 @@ function AcceptVasarol($alvazszam){
     oci_close($conn);
     return $accept;
 }
+function Login
