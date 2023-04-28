@@ -13,7 +13,7 @@ include_once('common/dbfunctions.php');
 <body>
 <?php echo navigation();?>
 <h2>Új Üzlet felvitele az adatbázisba</h2>
-<span class="kozepre">Ahoz, hogy egy új üzletet vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
+<p class="kozepre">Ahoz, hogy egy új üzletet vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</p>
 <form method="POST" action="Insert/uzletInsert.php" accept-charset="utf-8">
     <label>Üzlet Városa:</label>
     <input type="text" name="varos" placeholder="Tázlár">

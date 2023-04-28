@@ -15,7 +15,7 @@ include_once('common/dbfunctions.php');
 <?php if ($_SESSION["role"]!="0"){?>
 <h2>Új Autó felvitele az adatbázisba</h2>
 
-<span class="kozepre">Ahoz, hogy egy új autót vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
+<p class="kozepre">Ahoz, hogy egy új autót vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</p>
 <form method="POST" action="Insert/autoInsert.php" accept-charset="utf-8">
     <label>Alvázszám:</label>
     <input type="number" name="alvazszam" placeholder="123456">

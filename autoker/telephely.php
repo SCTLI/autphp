@@ -13,7 +13,7 @@ include_once('common/dbfunctions.php');
 <body>
 <?php echo navigation();?>
 <h2>Új Telephely felvitele az adatbázisba</h2>
-<span class="kozepre">Ahoz, hogy egy új telephelyet vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
+<p class="kozepre">Ahoz, hogy egy új telephelyet vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</p>
 <form method="POST" action="Insert/telepInsert.php" accept-charset="utf-8">
     <label>Telephely Városa:</label>
     <input type="text" name="varos" placeholder="Kiskunmajsa">

@@ -13,7 +13,7 @@ include_once('common/dbfunctions.php');
 <body>
 <?php echo navigation();?>
 <h2>Új Szerelés felvitele az adatbázisba</h2>
-<span class="kozepre">Ahoz, hogy egy új szerelés vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
+<p class="kozepre">Ahoz, hogy egy új szerelés vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</p>
 <form method="POST" action="Insert/szerelInsert.php" accept-charset="utf-8">
     <label>Szerelt Autó alvázszáma:</label>
     <select name="alvazszam">
