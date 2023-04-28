@@ -1,6 +1,8 @@
 <?php
+session_start();
+$felhasznalo = $_SESSION["felhasz"];
+$jelszo = $_SESSION["jelsz"];
 function dbConnect($felhasznalo, $jelszo){
-
     $conn = oci_connect($felhasznalo, $jelszo, "localhost/XE",'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
 
     return $conn;

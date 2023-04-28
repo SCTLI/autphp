@@ -2,6 +2,8 @@
 include_once('common/navigation.php');
 include_once('common/dbfunctions.php');
 session_start();
+$felhasznalo = $_SESSION["felhasz"];
+$jelszo = $_SESSION["jelsz"];
 ?>
 <!DOCTYPE HTML>
 <html>
