@@ -4,6 +4,8 @@ include_once('common/dbfunctions.php');
 session_start();
 $felhasznalo = $_SESSION["felhasz"];
 $jelszo = $_SESSION["jelsz"];
+echo "felhasznalo: $felhasznalo";
+echo "jelszo: $jelszo";
 ?>
 <!DOCTYPE HTML>
 <html>
