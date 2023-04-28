@@ -12,23 +12,6 @@ include_once('common/dbfunctions.php');
 </head>
 <body>
 <?php echo navigation();?>
-<h2>Új Eladó felvitele az adatbázisba</h2>
-<span class="kozepre">Ahoz, hogy egy új eladót vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
-<form method="POST" action="Insert/eladoInsert.php" accept-charset="utf-8">
-    <label>Eladó Igazolvány szám:</label>
-    <input type="number" name="igszam" placeholder="123456">
-    <br />
-    <label>Eladó teljes neve:</label>
-    <input type="text" name="nev" placeholder="Sziah Lajoush">
-    <br />
-    <label>Eladó Felhasználó neve:</label>
-    <input type="text" name="felhasznalonev" placeholder="szilajos">
-    <br />
-    <label>Eladó Jelszava:</label>
-    <input type="text" name="jelszo" placeholder="Semmi123">
-    <br />
-    <input type="submit" value="Feltöltés">
-</form>
 <h2>Eladók </h2>
 <table border="0">
     <tr>

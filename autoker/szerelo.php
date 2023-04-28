@@ -14,7 +14,7 @@ include_once('common/dbfunctions.php');
 <?php echo navigation();?>
 <h2>Új Szerelő felvitele az adatbázisba</h2>
 <span class="kozepre">Ahoz, hogy egy új szerelőt vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</span>
-<form method="POST" action="Insert/szereloInsert.php" accept-charset="utf-8">
+<form method="POST" action="Insert/szerloInsert.php" accept-charset="utf-8">
     <label>Szerelő Igazolvány szám:</label>
     <input type="number" name="igszam" placeholder="123456">
     <br />
