@@ -5,7 +5,7 @@ function navi()
     echo '<li><a href="index.php"><i class="fa fa-fw fa-home"></i>Kezdő Oldal</a></li>';
     echo '<li><a href="autok.php"><i class="fas fa-car"></i>Autók tábla</a></li>';
     if ($_SESSION["role"] == "vezeto") {
-        echo '<li><a href="telephely.php"><i class="fas fa-wrench"></i>Telephelyek tábla</a></li>';
+        echo '<li><a href="telephely.php"><i class="fas fa-building"></i>Telephelyek tábla</a></li>';
     }
     if ($_SESSION["role"] == "vezeto") {
         echo '<li><a href="muhely.php"><i class="fas fa-wrench"></i>Műhelyek tábla</a></li>';
@@ -32,10 +32,10 @@ function navi()
         echo '<li><a href="szerel.php"><i class="fas fa-wrench"></i>Szerelések tábla</a></li>';
     }
     if ($_SESSION["role"] == "vendeg") {
-        echo '<li><a href="bejelentkezes.php"><i class="fas fa-sign-out-alt"></i>Bejelentkezés</a></li>';
+        echo '<li><a href="bejelentkezes.php"><i class="fas fa-sign-in-alt"></i>Bejelentkezés</a></li>';
     }
     if ($_SESSION["role"] != "vendeg") {
-        echo '<li><a href="logout.php"><i class="fas fa-stream"></i>Kijelentkezés</a></li>';
+        echo '<li><a href="logout.php"><i class="fas fa-sign-out-alt"></i>Kijelentkezés</a></li>';
     }
     if($_SESSION["role"] != "vendeg"){
         echo $_SESSION["felhasz"];

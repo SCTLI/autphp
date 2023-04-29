@@ -94,7 +94,7 @@ if($_SESSION['role']=='ugyfel'){ echo '<td><form method="POST" action="vasarolpr
             <input type="hidden" name="alvazszam" value="'. $row["alvazszam"] .'" />
             <input type="submit" value="Vásárol" />
           </form></td>';}
-if($_SESSION['role']=='elado'){ echo '<td><form method="POST" action="Delete/autoDelete.php">
+if($_SESSION['role']=='elado'){ echo '<td><i class="fas fa-trash-alt"></i><form method="POST" action="Delete/autoDelete.php">
 				  <input type="hidden" name="autoDelete" value="'. $row["alvazszam"] .'" />
 				  <input type="submit" value="Törlés" />
 		          </form></td>';}

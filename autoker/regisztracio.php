@@ -18,7 +18,7 @@ include_once "common/header.php";
 navi();
 ?>
 <h1 class="kozepre">Regisztráció</h1>
-<span class="kozepre">Ahoz, hogy regisztráljon kérem töltse ki az álábbi űrlapot</span>
+<p class="kozepre">Ahoz, hogy regisztráljon kérem töltse ki az álábbi űrlapot</p>
 <form method="POST" action="Insert/register.php" accept-charset="utf-8">
     <label>Kérem válassza ki, hogy milyen szerepkörbe szeretne regisztrálni:</label>
     <select name="szerepkor">
