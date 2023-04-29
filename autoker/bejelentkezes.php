@@ -24,6 +24,7 @@ navi();
             <option value="ugyfel">Ügyfel</option>
             <option value="elado">Eladó</option>
             <option value="szerelo">Szerelő</option>
+            <option value="vezeto">Vezeto</option>
         </select>
         <br />
         <label>Felhasználó név:</label>
