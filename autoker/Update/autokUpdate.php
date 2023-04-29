@@ -9,9 +9,11 @@ $autoAr = $_POST["autoAr"];
 
 if ( isset($autoAlvazszam) && isset($telepID) && isset($autoTeljesitmeny) && isset($autoSzin) && isset($autoAr)) {
 
-    updateAutok($autoAlvazszam, $telepID, $autoTeljesitmeny, $autoSzin, $autoAr);
+    $siker = updateAutok($autoAlvazszam, $telepID, $autoTeljesitmeny, $autoSzin, $autoAr);
+    if($siker == true){
+        header("Location: ../autok.php");
+    }
 
-    header("Location: ../autok.php");
 
 } else {
     error_log("Nem lett kitöltve a mező!");

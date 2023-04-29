@@ -8,9 +8,11 @@ $Jelszo =$_POST["ugyfeljel"];
 
 if ( isset($UgyfelIgszam) && isset($UgyfelNev)&& isset($Felhasznalonev)&& isset($Jelszo)) {
 
-    updateUgyfel($UgyfelIgszam,$UgyfelNev, $Felhasznalonev, password_hash($Jelszo, PASSWORD_DEFAULT));
+    $siker = updateUgyfel($UgyfelIgszam,$UgyfelNev, $Felhasznalonev, password_hash($Jelszo, PASSWORD_DEFAULT));
+    if($siker == true){
+        header("Location: ../ugyfel.php");
+    }
 
-    header("Location: ../ugyfel.php");
 
 } else {
     error_log("Nem lett kitöltve minden mező!");

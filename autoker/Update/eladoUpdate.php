@@ -6,9 +6,11 @@ $uzletID = $_POST["uzletID"];
 
 if ( isset($uzletID) && isset($eladoIgszam)) {
 
-    updateElado($eladoIgszam, $uzletID);
+    $siker = updateElado($eladoIgszam, $uzletID);
+    if($siker == true){
+        header("Location: ../elado.php");
+    }
 
-    header("Location: ../elado.php");
 
 } else {
     error_log("Nem lett kitöltve a mező!");

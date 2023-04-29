@@ -8,9 +8,11 @@ $uzletNev = $_POST["uzletNev"];
 
 if ( isset($uzletID) && isset($uzletVaros) && isset($uzletNev)) {
 
-    updateUzlet($uzletID,  $uzletNev, $uzletVaros);
+    $siker = updateUzlet($uzletID,  $uzletNev, $uzletVaros);
+    if($siker == true){
+        header("Location: ../uzlet.php");
+    }
 
-    header("Location: ../uzlet.php");
 
 } else {
     error_log("Nem lett kitöltve a mező!");
