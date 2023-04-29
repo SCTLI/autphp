@@ -59,7 +59,7 @@ navi();
         ?>
     </select>
     <br />
-    <input type="submit" value="Feltöltés">
+    <input class="gomb1" type="submit" value="Feltöltés">
 </form>
 <?php } ?>
 <h2>Autók </h2>
@@ -76,7 +76,9 @@ navi();
     <th></th>
 </tr>
 <?php
-
+echo UgyfelIgszam();
+echo HolElad();
+echo HolSzerel();
 
 $stid = getAutokList();
 oci_execute($stid);
@@ -97,7 +99,7 @@ if($_SESSION['role']=='ugyfel'){ echo '<td><form method="POST" action="vasarolpr
           </form></td>';}
 if($_SESSION['role']=='elado'){ echo '<td><form method="POST" action="Delete/autoDelete.php">
 				  <input type="hidden" name="autoDelete" value="'. $row["alvazszam"] .'" />
-				  <input type="submit" value="Törlés" />
+				  <input type="submit" value="Törlés" class="gomb2"/>
 		          </form></td>';}
 //if($_SESSION['role']=='szerelo'){ echo '<td><form method="POST" action="Insert/szerelInsert.php">
 //				  <input type="hidden" name="autoDelete" value="'. $row["alvazszam"] .'" />

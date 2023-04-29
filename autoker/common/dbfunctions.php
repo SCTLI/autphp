@@ -14,12 +14,7 @@ function dbConnect(){
             $conn = oci_pconnect("C##".$_SESSION["felhasz"], $_SESSION["jelsz"], "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
             $_SESSION["role"]="szerelo";
         } else if ($loginHelp==2){
-            echo $loginHelp;
-            $username="C##".$_SESSION["felhasz"];
-            $password=$_SESSION["jelsz"];
-            echo $username;
-            echo $password;
-            $conn = oci_pconnect($username, $password, "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
+            $conn = oci_pconnect("C##".$_SESSION["felhasz"], $_SESSION["jelsz"], "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
             $_SESSION["role"]="elado";
         } else if ($loginHelp==3){
             $conn = oci_pconnect("C##".$_SESSION["felhasz"], $_SESSION["jelsz"], "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
@@ -632,20 +627,6 @@ function AcceptVasarol($alvazszam){
     oci_close($conn);
     return $accept;
 }
-function FelhasznalonevVan($felhasznalonev){
-    if (!($conn = dbConnect())) {
-        return false;
-    }
-    $count = oci_parse($conn, 'begin :szam:=C##admin.felhasznaloegyezzes(:felhasznalonev); end;');
-    oci_bind_by_name($count, ':szam',$szam);
-    oci_bind_by_name($count, ':felhasznalonev',$felhasznalonev);
-
-    oci_execute($count);
-
-    oci_close($conn);
-    return $szam;
-}
-
 function TotalCarCount(){
     if (!($conn = dbConnect())) {
         return false;
@@ -702,18 +683,30 @@ function HolSzerel()
     oci_close($conn);
     return $szam;
 }
-function UgyfelIgszam()
+function FelhasznalonevVan($felhasznalonev)
 {
     if (!($conn = dbConnect())) {
         return false;
     }
-    $db = oci_parse($conn, 'begin :szam:=C##admin.miaszamod(:felhasz); end;');
+    $db = oci_parse($conn, 'begin :szam:=C##admin.felhasznaloegyezzes(:felhasz); end;');
     oci_bind_by_name($db, ':szam',$szam);
-    oci_bind_by_name($db, ':felhasz',$_SESSION["felhasz"]);
+    oci_bind_by_name($db, ':felhasz',$felhasznalonev);
     oci_execute($db);
     oci_close($conn);
     return $szam;
 }
+//function UgyfelIgszam()
+//{
+//    if (!($conn = admincon())) {
+//        return false;
+//    }
+//    $db = oci_parse($conn, 'begin :szam:=C##admin.miaszamod(:felhasz); end;');
+//    oci_bind_by_name($db, ':szam',$szam);
+//    oci_bind_by_name($db, ':felhasz',$_SESSION["felhasz"]);
+//    oci_execute($db);
+//    oci_close($conn);
+//    return $szam;
+//}
 function LoginHelp()
 {
     if (!($conn = admincon())) {
@@ -816,4 +809,35 @@ function szereloletre($szerelofelh, $szerelojelsz){
     }else{
         return false;
     }
+}
+function geteladojelszo(){
+    if (!($conn = admincon())) {
+        return false;
+    }
+
+    $result = oci_parse($conn,'SELECT elado.jelszo AS "jelszo", elado.felhasznalonev as "felhasznalo" FROM C##admin.elado');
+    oci_close($conn);
+    return $result;
+
+}
+function getugyfeljelszo(){
+    if (!($conn = admincon())) {
+        return false;
+    }
+
+    $result = oci_parse($conn,'SELECT ugyfel.jelszo AS "jelszo", ugyfel.felhasznalonev as "felhasznalo" FROM C##admin.ugyfel');
+
+    oci_close($conn);
+    return $result;
+}
+
+function getszerelojelszo(){
+    if (!($conn = admincon())) {
+        return false;
+    }
+
+    $result = oci_parse($conn,'SELECT szerelo.jelszo AS "jelszo", szerelo.felhasznalonev as "felhasznalo" FROM C##admin.szerelo');
+
+    oci_close($conn);
+    return $result;
 }
