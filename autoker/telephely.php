@@ -47,7 +47,7 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<td>'.CountAutokInTelephely($row["telepid"]).'</td>';
     echo '<td><form method="POST" action="Delete/telepDelete.php">
 				  <input type="hidden" name="telepDelete" value="'. $row["telepid"] .'" />
-				  <input type="submit" value="Törlés" />
+				  <input type="submit" value="Törlés" class="gomb2"/>
 		          </form></td>';
     echo '<td style="text-align: center" class="lista"><form method="POST" action="telephelyUpdatePage.php">
 				  <input type="hidden" name="varos" value="'. $row["varos"] .'" />

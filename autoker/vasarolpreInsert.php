@@ -19,6 +19,7 @@ include_once "common/header.php";
 navi();
 ?>
 <h1 class="kozepre">Az autó lefoglalálásához kérem töltse ki az alábbi űrlapot</h1>
+<div class="regi" id="helyet">
 <form method="post" action="Insert/vasarolInsert.php" class="kozepre">
     <input type="hidden" name="alvazszam" value="<?php echo $autoAlvazszam ?>" />
     <label>Melyik üzletben szeretné átvenni:</label>
@@ -32,17 +33,20 @@ navi();
         ?>
     </select>
     <br />
-    <label>*Ideiglenes(ezt késöbb a bejelentkezett sessesionből szedjük majd ki)*KI veszi az autót</label>
-    <select name="igszam">
         <?php
+        $ugyfelfelhasznalo = $_SESSION["felhasz"];
         $stid = getUgyfelList();
         oci_execute($stid);
         while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
-            echo '<option value="'.$row['igsz'].'">'.$row['nev'].'</option>';
+            if($row["felhasznalonev"] == $ugyfelfelhasznalo){
+                $ugyfeligje = $row["igsz"];
+                echo $ugyfeligje;
+            }
         }
         ?>
-    </select>
+    <input type="hidden" value="<?php echo $ugyfeligje ?>" name="igszam"/>
     <input type="submit" value="Lefoglalás" class="gomb1">
 </form>
+</div>
 </body>
 </html>

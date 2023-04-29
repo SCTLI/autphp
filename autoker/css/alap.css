@@ -65,8 +65,11 @@ nav li:hover a{
     color:green;
     cursor: pointer;
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
-    transition-duration: 0.5s;
+    transition-duration: 0.8s;
     background-color: whitesmoke;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
 }
 
 .gomb2{
@@ -83,8 +86,11 @@ nav li:hover a{
     color:red;
     cursor: pointer;
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
-    transition-duration: 0.5s;
+    transition-duration: 0.8s;
     background-color: #3d3d3d;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
 }
 
 #helyet{

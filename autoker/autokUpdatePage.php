@@ -34,6 +34,7 @@ navi();
 ?>
     <h1 class="kozepre">Autó szerkesztés:</h1>
 
+    <div class="regi" id="helyet">
     <form method="POST" action="Update/autokUpdate.php" accept-charset="utf-8" class="kozepre">
         <table><tr>
                 <td><label>Alvázszám: <?php echo $autoAlvazszam ?></label></td>
@@ -64,6 +65,7 @@ navi();
                 <td><input type="hidden" name="autoAlvazszam" value="<?php echo $autoAlvazszam ?>" /><input type="submit" value="Mentés" class="gomb1"/></td>
             </tr></table>
     </form>
+    </div>
 <?php
 include_once "common/footer.php";
 ?>

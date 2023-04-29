@@ -73,7 +73,7 @@ navi();
 				  <input type="hidden" name="szerelAlvazszamDelete" value="'. $row["alvazszam"] .'" />
 				  <input type="hidden" name="szerelIdoDelete" value="'. $row["idopont"] .'" />
 				  
-				  <input type="submit" value="Törlés" />
+				  <input type="submit" value="Törlés" class="gomb2"/>
 		          </form></td>';
        // echo '<td style="text-align: center" class="lista"><form method="POST" action="szerelUpdatePage.php">
 		//		  <input type="hidden" name="szerelAlvazszamUpdate" value="'. $row["alvazszam"] .'" />

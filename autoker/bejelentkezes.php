@@ -29,10 +29,10 @@ navi();
         </select>
         <br />
         <label>Felhasználó név:</label>
-        <input name="felh" type="text" placeholder="felh">
+        <input name="felh" type="text" placeholder="csabesz">
         <br />
         <label>Jelszo:</label>
-        <input name="jel" type="password" placeholder="jel">
+        <input name="jel" type="password" placeholder="semmi123">
         <br />
         <input type="submit" value="Bejelentkezes" class="gomb1">
     </form></div>

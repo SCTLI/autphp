@@ -27,7 +27,7 @@ include_once "common/header.php";
 navi();
 ?>
 <h1 class="kozepre">Ügyfél szerkesztés:</h1>
-
+<div class="regi" id="helyet">
 <form method="POST" action="Update/ugyfelUpdate.php" accept-charset="utf-8" class="kozepre">
     <table><tr>
             <td><label>Neve:</label></td>
@@ -39,6 +39,7 @@ navi();
             <td><input type="hidden" name="ugyfeligszam" value="<?php echo $ugyfelig ?>" /><input type="submit" value="Mentés" class="gomb1"/></td>
         </tr></table>
 </form>
+</div>
 <?php
 include_once "common/footer.php";
 ?>

@@ -38,7 +38,7 @@ navi();
         echo '<td>'.$row['muhelynev'].'</td>';
         echo '<td><form method="POST" action="Delete/szereloDelete.php">
 				  <input type="hidden" name="szereloDelete" value="'. $row["igsz"] .'" />
-				  <input type="submit" value="Törlés" />
+				  <input type="submit" value="Törlés" class="gomb2"/>
 		          </form></td>';
         echo '<td style="text-align: center" class="lista"><form method="POST" action="szereloUpdatePage.php">
 				  <input type="hidden" name="igszam" value="'. $row["igsz"] .'" />
