@@ -36,7 +36,7 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<td>'.$row['nev'].'</td>';
     echo '<td>'.$row['felhasznalonev'].'</td>';
     echo '<td>'.$row['uzletnev'].'</td>';
-    echo '<td><i class="fas fa-trash-alt"></i><form method="POST" action="Delete/eladoDelete.php">
+    echo '<td><form method="POST" action="Delete/eladoDelete.php">
 				  <input type="hidden" name="eladoDelete" value="'. $row["igsz"] .'" />
 				  <input type="submit" value="Törlés" />
 		          </form></td>';
