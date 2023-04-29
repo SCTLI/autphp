@@ -17,36 +17,7 @@ include_once('common/dbfunctions.php');
 include_once "common/header.php";
 navi();
 ?>
-<h2>Új Szerelés felvitele az adatbázisba</h2>
-<p class="kozepre">Ahoz, hogy egy új szerelés vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</p>
-<form method="POST" action="Insert/szerelInsert.php" accept-charset="utf-8">
-    <label>Szerelt Autó alvázszáma:</label>
-    <select name="alvazszam">
-        <?php
-        $stid = getAutokList();
-        oci_execute($stid);
-        while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
-            echo '<option value="'.$row['alvazszam'].'">'.$row['alvazszam'].'-'.$row['marka'].'-'.$row['modell'].'</option>';
-        }
-        ?>
-    </select>
-    <br />
-    <label>Műhely ahol a szerelést végezték:</label>
-    <select name="muhelyid">
-        <?php
-        $stid = getMuhelyList();
-        oci_execute($stid);
-        while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
-            echo '<option value="'.$row['muhelyid'].'">'.$row['varos'].'-'.$row['nev'].'</option>';
-        }
-        ?>
-    </select>
-    <br />
-    <label>Szerelt alkatrész:</label>
-    <input type="text" name="alkatresz" placeholder="motor">
-    <br />
-    <input type="submit" value="Feltöltés">
-</form>
+
 <h2>Szerelések tábla</h2>
 <table border="0">
     <tr>
@@ -75,14 +46,6 @@ navi();
 				  
 				  <input type="submit" value="Törlés" class="gomb2"/>
 		          </form></td>';
-       // echo '<td style="text-align: center" class="lista"><form method="POST" action="szerelUpdatePage.php">
-		//		  <input type="hidden" name="szerelAlvazszamUpdate" value="'. $row["alvazszam"] .'" />
-		//		  <input type="hidden" name="szerelMuhelynevUpdate" value="'. $row["muhelynev"] .'" />
-		//		  <input type="hidden" name="szerelIdopontUpdate" value="'. $row["idopont"] .'" />
-		//		  <input type="hidden" name="szerelAlkatreszUpdate" value="'. $row["alkatresz"] .'" />
-		//		  <input type="submit" value="Szerkeszt" />
-		 //         </form></td>';
-       // echo '</tr>';
     }
     echo '</table>';
     ?>
