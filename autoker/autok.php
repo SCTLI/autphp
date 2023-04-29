@@ -69,7 +69,7 @@ navi();
         $stid = AVGeladott();
         oci_execute($stid);
         while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
-            echo '<p class="kozepre">Átlag bevételünk: ';
+            echo '<p class="kozepre">Átlag autó eladási ár: ';
             echo $row["jooci"];
             echo ' FT';
             echo '</p>';

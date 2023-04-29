@@ -27,7 +27,7 @@ navi();
     <label>Üzlet Neve:</label>
     <input type="text" name="nev" placeholder="Árazva">
     <br />
-    <input type="submit" value="Feltöltés">
+    <input type="submit" value="Feltöltés" class="gomb1">
 </form>
 </div>
 <h2>Üzletek </h2>

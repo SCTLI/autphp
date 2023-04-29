@@ -27,7 +27,7 @@ navi();
     <label>Telephely Neve:</label>
     <input type="text" name="nev" placeholder="Kismajkaker">
     <br />
-    <input type="submit" value="Feltöltés">
+    <input type="submit" value="Feltöltés" class="gomb1">
 </form>
 </div>
 <h2>Telephelyek</h2>

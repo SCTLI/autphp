@@ -27,7 +27,7 @@ navi();
     <label>Műhely Neve:</label>
     <input type="text" name="nev" placeholder="Nem Megy Még a Vasba">
     <br />
-    <input type="submit" value="Feltöltés">
+    <input type="submit" value="Feltöltés" class="gomb1">
 </form>
 </div>
 <h2>Műhelyek</h2>
