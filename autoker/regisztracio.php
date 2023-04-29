@@ -18,6 +18,7 @@ include_once "common/header.php";
 navi();
 ?>
 <h1 class="kozepre">Regisztráció</h1>
+<div id="regi">
 <p class="kozepre">Ahoz, hogy regisztráljon kérem töltse ki az álábbi űrlapot</p>
 <form method="POST" action="Insert/register.php" accept-charset="utf-8">
     <label>Kérem válassza ki, hogy milyen szerepkörbe szeretne regisztrálni:</label>
@@ -39,8 +40,8 @@ navi();
     <label>Jelszava:</label>
     <input type="text" name="jelszo" placeholder="Semmi123">
     <br />
-    <input type="submit" value="Feltöltés">
-</form>
+    <input type="submit" class="gomb1" value="Regisztráció">
+</form></div>
 <?php
 include_once "common/footer.php";
 ?>

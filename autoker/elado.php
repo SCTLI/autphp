@@ -45,7 +45,7 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
 				  <input type="hidden" name="nev" value="'. $row["nev"] .'" />
 				  <input type="hidden" name="felhasznalonev" value="'. $row["felhasznalonev"] .'" />
 				  <input type="hidden" name="uzletid" value="'. $row["uzletid"] .'" />
-				  <input type="submit" value="Szerkeszt" />
+				  <input type="submit" value="Szerkeszt" class="gomb1"/>
 		          </form></td>';
     echo '</tr>';
 }

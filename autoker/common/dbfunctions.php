@@ -596,6 +596,8 @@ function CountAutokInTelephely($telepid){
     oci_close($conn);
     return $szam;
 }
+
+
 function CountUzemanyag(){
     if (!($conn = dbConnect())) {
         return false;

@@ -36,7 +36,7 @@ navi();
             <td><input type="text" name="ugyfelfelhanev" value="<?php echo $ugyfelfelhnev ?>" required></td>
             <td><label>Jelszó Módosítása(minden alaklommal kötelező):</label></td>
             <td><input type="text" name="ugyfeljel" value="" required></td>
-            <td><input type="hidden" name="ugyfeligszam" value="<?php echo $ugyfelig ?>" /><input type="submit" value="Mentés" /></td>
+            <td><input type="hidden" name="ugyfeligszam" value="<?php echo $ugyfelig ?>" /><input type="submit" value="Mentés" class="gomb1"/></td>
         </tr></table>
 </form>
 <?php

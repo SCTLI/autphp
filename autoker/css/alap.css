@@ -33,6 +33,59 @@ nav li:hover a{
     transition: color 1s;
 }
 
+#valami{
+    background-color: slategray;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: whitesmoke;
+}
+
+#regi{
+    background-color: slategray;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.gomb1{
+    background-color:rgb(0, 153, 255);
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+}
+
+.gomb1:hover{
+    color:green;
+    cursor: pointer;
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
+    transition-duration: 0.5s;
+    background-color: whitesmoke;
+}
+
+.gomb2{
+    background-color:rgb(0, 153, 255);
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+}
+
+.gomb2:hover{
+    color:green;
+    cursor: pointer;
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
+    transition-duration: 0.5s;
+    background-color: whitesmoke;
+}
 
 footer{
     margin-top: 30px;

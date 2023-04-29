@@ -34,7 +34,7 @@ navi();
                 <td><input type="text" name="telepNev" value="<?php echo $telepNev ?>" required></td>
                 <td><label for="telepVaros">Városa:</label></td>
                 <td><input type="text" name="telepVaros" value="<?php echo $telepVaros ?>" required></td>
-                <td><input type="hidden" name="telepID" value="<?php echo $telepID ?>" /><input type="submit" value="Mentés" /></td>
+                <td><input type="hidden" name="telepID" value="<?php echo $telepID ?>" /><input type="submit" value="Mentés" class="gomb1"/></td>
             </tr></table>
     </form>
 <?php

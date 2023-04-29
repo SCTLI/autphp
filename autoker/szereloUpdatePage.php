@@ -47,7 +47,7 @@ navi();
                         }
                         ?>
                     </select></td>
-                <td><input type="hidden" name="szereloIgszam" value="<?php echo $szereloIgszam ?>" /><input type="submit" value="Mentés" /></td>
+                <td><input type="hidden" name="szereloIgszam" value="<?php echo $szereloIgszam ?>" /><input type="submit" value="Mentés" class="gomb1"/></td>
             </tr></table>
     </form>
 <?php

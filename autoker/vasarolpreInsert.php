@@ -42,7 +42,7 @@ navi();
         }
         ?>
     </select>
-    <input type="submit" value="Lefoglalás">
+    <input type="submit" value="Lefoglalás" class="gomb1">
 </form>
 </body>
 </html>

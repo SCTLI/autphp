@@ -34,7 +34,7 @@ navi();
                 <td><input type="text" name="muhelyNev" value="<?php echo $muhelyNev ?>" required></td>
                 <td><label for="muhelyVaros">Városa:</label></td>
                 <td><input type="text" name="muhelyVaros" value="<?php echo $muhelyVaros ?>" required></td>
-                <td><input type="hidden" name="muhelyID" value="<?php echo $muhelyID ?>" /><input type="submit" value="Mentés" /></td>
+                <td><input type="hidden" name="muhelyID" value="<?php echo $muhelyID ?>" /><input type="submit" value="Mentés" class="gomb1"/></td>
             </tr></table>
     </form>
 <?php

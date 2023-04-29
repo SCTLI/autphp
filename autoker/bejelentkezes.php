@@ -19,8 +19,19 @@ include_once "common/header.php";
 navi();
 ?>
     <form action="login.php" method="post" accept-charset="utf-8">
+        <label>Kérem válassza ki, hogy milyen szerepkörbe szeretne regisztrálni:</label>
+        <select name="szerepkor">
+            <option value="ugyfel">Ügyfel</option>
+            <option value="elado">Eladó</option>
+            <option value="szerelo">Szerelő</option>
+        </select>
+        <br />
+        <label>Felhasználó név:</label>
         <input name="felh" type="text" placeholder="felh">
+        <br />
+        <label>Jelszo:</label>
         <input name="jel" type="password" placeholder="jel">
-        <input type="submit" value="igen">
+        <br />
+        <input type="submit" value="Bejelentkezes" class="gomb1">
     </form>
 </body>

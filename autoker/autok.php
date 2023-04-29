@@ -77,6 +77,7 @@ navi();
 </tr>
 <?php
 
+
 $stid = getAutokList();
 oci_execute($stid);
 
@@ -92,7 +93,7 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     if($_SESSION['role']=='elado' || $_SESSION['role']=='szerelo'){ echo '<td>'. $row["telepnev"] . '</td>';}
 if($_SESSION['role']=='ugyfel'){ echo '<td><form method="POST" action="vasarolpreInsert.php">
             <input type="hidden" name="alvazszam" value="'. $row["alvazszam"] .'" />
-            <input type="submit" value="Vásárol" />
+            <input type="submit" value="Vásárol" class="gomb1"/>
           </form></td>';}
 if($_SESSION['role']=='elado'){ echo '<td><form method="POST" action="Delete/autoDelete.php">
 				  <input type="hidden" name="autoDelete" value="'. $row["alvazszam"] .'" />
@@ -111,7 +112,7 @@ if($_SESSION['role']=='elado'){echo '<td style="text-align: center" class="lista
 				  <input type="hidden" name="teljesitmeny" value="'. $row["teljesitmeny"] .'" />
 				  <input type="hidden" name="szin" value="'. $row["szin"] .'" />
 				  <input type="hidden" name="ar" value="'. $row["ar"] .'" />
-				  <input type="submit" value="Szerkeszt" />
+				  <input type="submit" value="Szerkeszt" class="gomb1"/>
 		          </form></td>';}
     echo '</tr>';
 }

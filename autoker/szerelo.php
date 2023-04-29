@@ -45,7 +45,7 @@ navi();
 				  <input type="hidden" name="nev" value="'. $row["nev"] .'" />
 				  <input type="hidden" name="felhasznalonev" value="'. $row["felhasznalonev"] .'" />
 				  <input type="hidden" name="muhelyid" value="'. $row["muhelyid"] .'" />
-				  <input type="submit" value="Szerkeszt" />
+				  <input type="submit" value="Szerkeszt" class="gomb1"/>
 		          </form></td>';
         echo '</tr>';
         echo '</tr>';

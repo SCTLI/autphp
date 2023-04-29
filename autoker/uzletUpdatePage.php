@@ -34,7 +34,7 @@ navi();
                 <td><input type="text" name="uzletNev" value="<?php echo $uzletNev ?>" required></td>
                 <td><label for="uzletVaros">Városa:</label></td>
                 <td><input type="text" name="uzletVaros" value="<?php echo $uzletVaros ?>" required></td>
-                <td><input type="hidden" name="uzletID" value="<?php echo $uzletID ?>" /><input type="submit" value="Mentés" /></td>
+                <td><input type="hidden" name="uzletID" value="<?php echo $uzletID ?>" /><input type="submit" value="Mentés" class="gomb1"/></td>
             </tr></table>
     </form>
 <?php
