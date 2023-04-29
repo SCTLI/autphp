@@ -9,9 +9,22 @@ function dbConnect(){
         $_SESSION["role"]="vezeto";
         $conn = oci_pconnect("C##vezeto", "vezeto", "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
     }else{
-
-        $conn = oci_pconnect($_SESSION["felhasz"], $_SESSION["jelsz"], "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
-
+        $loginHelp=LoginHelp($_SESSION["felhasz"]);
+        if ($loginHelp==1){
+            $conn = oci_pconnect("C##".$_SESSION["felhasz"], $_SESSION["jelsz"], "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
+            $_SESSION["role"]="szerelo";
+        } else if ($loginHelp==2){
+            echo $loginHelp;
+            $username="C##".$_SESSION["felhasz"];
+            $password=$_SESSION["jelsz"];
+            echo $username;
+            echo $password;
+            $conn = oci_pconnect($username, $password, "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
+            $_SESSION["role"]="elado";
+        } else if ($loginHelp==3){
+            $conn = oci_pconnect("C##".$_SESSION["felhasz"], $_SESSION["jelsz"], "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
+            $_SESSION["role"]="ugyfel";
+        }
     }
     return $conn;
 }
@@ -693,6 +706,18 @@ function UgyfelIgszam()
         return false;
     }
     $db = oci_parse($conn, 'begin :szam:=C##admin.miaszamod(:felhasz); end;');
+    oci_bind_by_name($db, ':szam',$szam);
+    oci_bind_by_name($db, ':felhasz',$_SESSION["felhasz"]);
+    oci_execute($db);
+    oci_close($conn);
+    return $szam;
+}
+function LoginHelp()
+{
+    if (!($conn = admincon())) {
+        return false;
+    }
+    $db = oci_parse($conn, 'begin :szam:=C##admin.kivagyte(:felhasz); end;');
     oci_bind_by_name($db, ':szam',$szam);
     oci_bind_by_name($db, ':felhasz',$_SESSION["felhasz"]);
     oci_execute($db);
