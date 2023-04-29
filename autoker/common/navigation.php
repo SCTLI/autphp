@@ -38,7 +38,9 @@ function navi()
         echo '<li><a href="logout.php"><i class="fas fa-sign-out-alt"></i>Kijelentkezés</a></li>';
     }
     if($_SESSION["role"] != "vendeg"){
+        echo '<li><a href="#" style="pointer-events: none"><i class="fa fa-fw fa-user"></i>';
         echo $_SESSION["felhasz"];
+        echo '</a></li>';
     }
     echo '</ul></nav>';
 }
