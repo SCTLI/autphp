@@ -6,14 +6,13 @@ $muhelyID = $_POST["muhelyID"];
 
 if ( isset($muhelyID) && isset($szereloIgszam)) {
 
-    $siker = updateSzerelo($szereloIgszam, $muhelyID);
-if($siker == true){
-    header("Location: ../szerelo.php");
-}
+    $sikeres=updateSzerelo($szereloIgszam, $muhelyID);
+    if ($sikeres==true){
+        header("Location: ../szerelo.php");
 
+    }
 
 } else {
     error_log("Nem lett kitöltve a mező!");
-
 }
 ?>

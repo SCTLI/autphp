@@ -10,7 +10,7 @@ if ( isset($autoAlvazszam) && isset($uzletID) && isset($ugyfelIgazolvanyszam)) {
 
     $sikeres=insertVasarol($autoAlvazszam,$uzletID,$ugyfelIgazolvanyszam);
     if ($sikeres==true){
-        header("Location: ../vasarol.php");
+        header("Location: ../autok.php");
     }
 
 } else {
