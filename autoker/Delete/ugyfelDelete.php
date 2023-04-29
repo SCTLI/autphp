@@ -2,10 +2,11 @@
 
 include_once("../common/dbFunctions.php");
 
-$delete = $_POST["ugyfelDelete"];
+$delete1 = $_POST["ugyfelDelete"];
+$delete2 = $_POST["ugyfelFelhasznolev"];
 
-if ( isset($delete) ) {
-    $sikeres = deleteUgyfel($delete);
+if ( isset($delete1) && isset($delete2) ) {
+    $sikeres = deleteUgyfel($delete1,$delete2);
 
     if ( $sikeres ) {
         header('Location: ../ugyfel.php');

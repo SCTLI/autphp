@@ -37,6 +37,7 @@ navi();
         echo '<td>'.$row['felhasznalonev'].'</td>';
         echo '<td><form method="POST" action="Delete/ugyfelDelete.php">
 				  <input type="hidden" name="ugyfelDelete" value="'. $row["igsz"] .'" />
+				  <input type="hidden" name="ugyfelFelhasznolev" value="'. $row["felhasznalonev"] .'" />
 				  <input type="submit" value="Törlés" class="gomb2"/>
 		          </form></td>';
         echo '<td style="text-align: center" class="lista"><form method="POST" action="ugyfelUpdatePage.php">

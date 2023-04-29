@@ -3,9 +3,10 @@
 include_once("../common/dbFunctions.php");
 
 $delete = $_POST["eladoDelete"];
+$delete2 = $_POST["eladoFelhasznalonev"];
 
-if ( isset($delete) ) {
-    $sikeres = deleteElado($delete);
+if ( isset($delete) && isset($delete2) ) {
+    $sikeres = deleteElado($delete,$delete2);
 
     if ( $sikeres ) {
         header('Location: ../elado.php');

@@ -206,9 +206,19 @@ function deleteTelephely($id)
     oci_close($conn);
     return $result;
 }
-function deleteElado($id)
+function deleteElado($id,$id2)
 {
+    if (!($conn = admincon())) {
+        return false;
+    }
 
+    $delete = oci_parse($conn, "drop user C##".$id2);
+    oci_execute($delete);
+
+    oci_close($conn);
+    if (!($conn = dbConnect())) {
+        return false;
+    }
     if (!($conn = dbConnect())) {
         return false;
     }
@@ -219,22 +229,36 @@ function deleteElado($id)
     oci_close($conn);
     return $result;
 }
-function deleteUgyfel($id)
+function deleteUgyfel($id1,$id2)
 {
+    if (!($conn = admincon())) {
+        return false;
+    }
 
+    $delete = oci_parse($conn, "drop user C##".$id2);
+    oci_execute($delete);
+
+    oci_close($conn);
     if (!($conn = dbConnect())) {
         return false;
     }
 
-    $delete = oci_parse($conn, "DELETE FROM C##admin.ugyfel WHERE ugyfeligszam = ".$id);
+    $delete = oci_parse($conn, "DELETE FROM C##admin.ugyfel WHERE ugyfeligszam = ".$id1);
     $result = oci_execute($delete);
 
     oci_close($conn);
     return $result;
 }
-function deleteSzerelo($id)
+function deleteSzerelo($id,$id2)
 {
+    if (!($conn = admincon())) {
+        return false;
+    }
 
+    $delete = oci_parse($conn, "drop user C##".$id2);
+    oci_execute($delete);
+
+    oci_close($conn);
     if (!($conn = dbConnect())) {
         return false;
     }
