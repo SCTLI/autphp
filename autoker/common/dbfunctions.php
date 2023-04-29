@@ -5,8 +5,12 @@ function dbConnect(){
     if (!isset($_SESSION["felhasz"])){
         $_SESSION["role"]="vendeg";
         $conn = oci_pconnect("C##vendeg", "vendeg", "localhost/XE",'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
-    }else {
+    }else if($_SESSION["felhasz"]=="vezeto") {
+        $conn = oci_pconnect("C##vezeto", "vezeto", "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
+    }else{
+
         $conn = oci_pconnect($_SESSION["felhasz"], $_SESSION["jelsz"], "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
+
     }
     return $conn;
 }
@@ -658,7 +662,42 @@ function CountUzlet(){
     oci_close($conn);
     return $szam;
 }
-
+function HolElad()
+{
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $db = oci_parse($conn, 'begin :szam:=C##admin.holelad(:felhasz); end;');
+    oci_bind_by_name($db, ':szam',$szam);
+    oci_bind_by_name($db, ':felhasz',$_SESSION["felhasz"]);
+    oci_execute($db);
+    oci_close($conn);
+    return $szam;
+}
+function HolSzerel()
+{
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $db = oci_parse($conn, 'begin :szam:=C##admin.holszerel(:felhasz); end;');
+    oci_bind_by_name($db, ':szam',$szam);
+    oci_bind_by_name($db, ':felhasz',$_SESSION["felhasz"]);
+    oci_execute($db);
+    oci_close($conn);
+    return $szam;
+}
+function UgyfelIgszam()
+{
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $db = oci_parse($conn, 'begin :szam:=C##admin.miaszamod(:felhasz); end;');
+    oci_bind_by_name($db, ':szam',$szam);
+    oci_bind_by_name($db, ':felhasz',$_SESSION["felhasz"]);
+    oci_execute($db);
+    oci_close($conn);
+    return $szam;
+}
 //
 // ---------------------------------------------- Felhasználó létrehozása funkciók ----------------------------------------------
 //
@@ -691,6 +730,60 @@ function eladoletre($eladofelh, $eladojelsz){
     oci_execute($siker7);
 
     if($siker && $siker2 && $siker3 && $siker4 && $siker5 && $siker6 && $siker7){
+        return true;
+    }else{
+        return false;
+    }
+}
+function ugyfelletre($ugyfelfelh, $ugyfeljelsz){
+    if (!($conn = admincon())) {
+        return false;
+    }
+    $test = 'CREATE USER C##' . $ugyfelfelh . ' IDENTIFIED BY ' . $ugyfeljelsz;
+    echo $test;
+    $siker = oci_parse($conn, $test);
+
+    oci_execute($siker);
+    $siker2 = oci_parse($conn, "GRANT connect TO C##".$ugyfelfelh);
+    oci_execute($siker2);
+    $siker3 = oci_parse($conn, "GRANT update on C##admin.ugyfel to C##".$ugyfelfelh);
+    oci_execute($siker3);
+    $siker4 = oci_parse($conn, "GRANT select on C##admin.telephely to C##".$ugyfelfelh);
+    oci_execute($siker4);
+    $siker5 = oci_parse($conn, "GRANT select on C##admin.autok to C##".$ugyfelfelh);
+    oci_execute($siker5);
+    $siker6 = oci_parse($conn, "GRANT insert on C##admin.vasarol to C##".$ugyfelfelh);
+    oci_execute($siker6);
+    $siker7 = oci_parse($conn, "GRANT select on C##admin.uzlet to C##".$ugyfelfelh);
+    oci_execute($siker7);
+
+    if($siker && $siker2 && $siker3 && $siker4 && $siker5 && $siker6 && $siker7){
+        return true;
+    }else{
+        return false;
+    }
+}
+function szereloletre($szerelofelh, $szerelojelsz){
+    if (!($conn = admincon())) {
+        return false;
+    }
+    $test = 'CREATE USER C##' . $szerelofelh . ' IDENTIFIED BY ' . $szerelojelsz;
+    echo $test;
+    $siker = oci_parse($conn, $test);
+
+    oci_execute($siker);
+    $siker2 = oci_parse($conn, "GRANT connect TO C##".$szerelofelh);
+    oci_execute($siker2);
+    $siker3 = oci_parse($conn, "GRANT select on C##admin.autok to C##".$szerelofelh);
+    oci_execute($siker3);
+    $siker4 = oci_parse($conn, "GRANT select, insert on C##admin.szerel to C##".$szerelofelh);
+    oci_execute($siker4);
+    $siker5 = oci_parse($conn, "GRANT select on C##admin.muhely to C##".$szerelofelh);
+    oci_execute($siker5);
+    $siker6 = oci_parse($conn, "GRANT select on C##admin.telephely to C##".$szerelofelh);
+    oci_execute($siker6);
+
+    if($siker && $siker2 && $siker3 && $siker4 && $siker5 && $siker6){
         return true;
     }else{
         return false;

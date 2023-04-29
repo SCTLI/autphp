@@ -72,7 +72,7 @@ navi();
     <th>Teljesítmény</th>
     <th>Szín</th>
     <th>Ár (Ft)</th>
-    <?php if($_SESSION['role']=='elado'){?><th>Elhelyezkedése(Telep)</th><?php } ?>
+    <?php if($_SESSION['role']=='elado' || $_SESSION['role']=='szerelo'){?><th>Elhelyezkedése(Telep)</th><?php } ?>
     <th></th>
 </tr>
 <?php
@@ -89,7 +89,7 @@ while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<td>'. $row["teljesitmeny"] . '</td>';
     echo '<td>'. $row["szin"] . '</td>';
     echo '<td>'. $row["ar"] . '</td>';
-    if($_SESSION['role']=='elado'){ echo '<td>'. $row["telepnev"] . '</td>';}
+    if($_SESSION['role']=='elado' || $_SESSION['role']=='szerelo'){ echo '<td>'. $row["telepnev"] . '</td>';}
 if($_SESSION['role']=='ugyfel'){ echo '<td><form method="POST" action="vasarolpreInsert.php">
             <input type="hidden" name="alvazszam" value="'. $row["alvazszam"] .'" />
             <input type="submit" value="Vásárol" />
