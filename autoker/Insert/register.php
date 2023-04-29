@@ -11,7 +11,7 @@ $szerepkor = $_POST['szerepkor'];
 
 if (felhasznalonevVan($felhasznalonev)==0){
 
-if ($szerepkor='elado'){
+if ($szerepkor=='elado'){
     if ( isset($igszam) && isset($nev) && isset($felhasznalonev) && isset($jelszo)) {
         $eladofel = eladoletre($felhasznalonev, $jelszo);
         $sikeres=insertElado($igszam,$nev,$felhasznalonev,password_hash($jelszo, PASSWORD_DEFAULT));
@@ -21,21 +21,21 @@ if ($szerepkor='elado'){
     } else {
         error_log("Nem lett kitöltve a mező!");
     }
-} elseif ($szerepkor='szerelo'){
+} elseif ($szerepkor=='szerelo'){
     if ( isset($igszam) && isset($nev) && isset($felhasznalonev) && isset($jelszo)) {
         $szerelofel = szereloletre($felhasznalonev, $jelszo);
         $sikeres=insertSzerelo($igszam,$nev,$felhasznalonev,password_hash($jelszo, PASSWORD_DEFAULT));
-        if ($sikeres==true){
+        if ($sikeres==true && $szerelofel==true){
             header("Location: ../index.php");
         }
     } else {
         error_log("Nem lett kitöltve a mező!");
     }
-} else {
+} elseif ($szerepkor=='ugyfel') {
     if (isset($igszam) && isset($nev) && isset($felhasznalonev) && isset($jelszo)) {
         $ugyfelfel = ugyfelletre($felhasznalonev, $jelszo);
         $sikeres = insertUgyfel($igszam, $nev, $felhasznalonev, password_hash($jelszo, PASSWORD_DEFAULT));
-        if ($sikeres == true) {
+        if ($sikeres == true && $ugyfelfel==true) {
             header("Location: ../index.php");
         }
     } else {
