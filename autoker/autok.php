@@ -76,7 +76,9 @@ navi();
     <th></th>
 </tr>
 <?php
-
+echo UgyfelIgszam();
+echo HolElad();
+echo HolSzerel();
 
 $stid = getAutokList();
 oci_execute($stid);

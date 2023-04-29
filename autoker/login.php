@@ -3,7 +3,7 @@ include_once ("common/dbfunctions.php");
 $felhasz = $_POST['felh'];
 $jelsz = $_POST['jel'];
 $szerepkor = $_POST['szerepkor'];
-if (FelhasznalonevVan($felhasz) ==1){
+if (FelhasznalonevVan($felhasz) == 1 || ($felhasz=="vezeto" && $jelsz=="vezeto")){
     if ($szerepkor=="elado"){
         $jelszo = geteladojelszo();
         oci_execute($jelszo);
@@ -48,7 +48,7 @@ if (FelhasznalonevVan($felhasz) ==1){
             $_SESSION["role"]="szerelo";
             header("Location: index.php");
         }
-    }elseif ($felhasz="vezeto" && $jelszo="vezeto" && $szerepkor="vezeto"){
+    }elseif ($felhasz=="vezeto" && $jelsz=="vezeto" && $szerepkor=="vezeto"){
         $_SESSION["felhasz"]=$felhasz;
         $_SESSION["jelsz"]=$jelsz;
         $_SESSION["role"]="vezeto";
