@@ -28,7 +28,9 @@ navi();
         $stid = getUzletList();
         oci_execute($stid);
         while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
-            echo '<option value="'.$row['uzletid'].'">'.$row['nev'].'-'.$row['varos'].'</option>';
+            if ($row["uzletid"]!=30){
+                echo '<option value="'.$row['uzletid'].'">'.$row['nev'].'-'.$row['varos'].'</option>';
+            }
         }
         ?>
     </select>
