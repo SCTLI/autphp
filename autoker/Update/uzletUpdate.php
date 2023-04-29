@@ -19,3 +19,4 @@ if ( isset($uzletID) && isset($uzletVaros) && isset($uzletNev)) {
 
 }
 ?>
+SELECT AVG(Autok.Ar) FROM Autok WHERE Autok.Eladva=1

@@ -63,6 +63,20 @@ navi();
 </form>
 <?php } ?>
 <h2>Autók </h2>
+<div>
+    <?php
+    if($_SESSION["role"] == "vezeto"){
+        $stid = AVGeladott();
+        oci_execute($stid);
+        while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
+            echo '<p class="kozepre">Átlag bevételünk: ';
+            echo $row["jooci"];
+            echo ' FT';
+            echo '</p>';
+        }
+    }
+    ?>
+</div>
 <table border="0">
 <tr>
     <th>Alvázszám</th>

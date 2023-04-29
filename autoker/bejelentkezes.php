@@ -20,7 +20,7 @@ navi();
 ?>
 <div id="helyet" class="regi">
     <form action="login.php" method="post" accept-charset="utf-8">
-        <label>Kérem válassza ki, hogy milyen szerepkörbe szeretne regisztrálni:</label>
+        <label>Kérem válassza ki, hogy milyen szerepkörbe szeretne bejelentkezni:</label>
         <select name="szerepkor">
             <option value="ugyfel">Ügyfel</option>
             <option value="elado">Eladó</option>

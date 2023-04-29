@@ -20,6 +20,7 @@ include_once "common/header.php";
 navi();
 ?>
 <h2>Új Szerelés felvitele az adatbázisba</h2>
+<div class="regi" id="helyet">
 <p class="kozepre">Ahoz, hogy egy új szerelés vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</p>
 <form method="POST" action="Insert/szerelInsert.php" accept-charset="utf-8">
     <label>Szerelt Autó alvázszáma: <?php echo $szerelAlvazszam ?></label>
@@ -29,8 +30,9 @@ navi();
     <input type="hidden" name="muhelyid" value="<?php echo $muhelyid ?>">
     <input type="hidden" name="alvazszam" value="<?php echo $szerelAlvazszam ?>">
     <br />
-    <input type="submit" value="Feltöltés">
+    <input type="submit" value="Feltöltés" class="gomb1">
 </form>
+</div>
 <?php
 include_once "common/footer.php";
 ?>

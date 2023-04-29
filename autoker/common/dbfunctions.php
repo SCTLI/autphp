@@ -712,6 +712,16 @@ function LoginHelp()
     oci_close($conn);
     return $szam;
 }
+
+function AVGeladott(){
+    if (!($conn = admincon())) {
+        return false;
+    }
+    $joazoci = oci_parse($conn, 'SELECT AVG(Autok.Ar) AS "jooci" FROM Autok WHERE Autok.Eladva=1 RETURN atlag');
+    oci_parse($joazoci);
+    oci_close($conn);
+    return $joazoci; //nem
+}
 //
 // ---------------------------------------------- Felhasználó létrehozása funkciók ----------------------------------------------
 //
