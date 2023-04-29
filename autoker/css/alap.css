@@ -42,7 +42,7 @@ nav li:hover a{
     color: whitesmoke;
 }
 
-#regi{
+.regi{
     background-color: slategray;
     max-width: 80%;
     margin-left: auto;
@@ -80,11 +80,15 @@ nav li:hover a{
 }
 
 .gomb2:hover{
-    color:green;
+    color:red;
     cursor: pointer;
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
     transition-duration: 0.5s;
-    background-color: whitesmoke;
+    background-color: #3d3d3d;
+}
+
+#helyet{
+    margin-top: 50px;
 }
 
 footer{

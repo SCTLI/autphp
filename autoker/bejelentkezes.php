@@ -18,6 +18,7 @@ include_once('common/navigation.php');
 include_once "common/header.php";
 navi();
 ?>
+<div id="helyet" class="regi">
     <form action="login.php" method="post" accept-charset="utf-8">
         <label>Kérem válassza ki, hogy milyen szerepkörbe szeretne regisztrálni:</label>
         <select name="szerepkor">
@@ -34,5 +35,8 @@ navi();
         <input name="jel" type="password" placeholder="jel">
         <br />
         <input type="submit" value="Bejelentkezes" class="gomb1">
-    </form>
+    </form></div>
+<?php
+include_once "common/footer.php";
+?>
 </body>
