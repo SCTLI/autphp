@@ -1,7 +1,6 @@
 <?php
 include_once('common/dbfunctions.php');
 include_once('common/navigation.php');
-session_start();
 
 ?>
 <!DOCTYPE HTML>

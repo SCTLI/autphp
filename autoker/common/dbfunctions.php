@@ -6,6 +6,7 @@ function dbConnect(){
         $_SESSION["role"]="vendeg";
         $conn = oci_pconnect("C##vendeg", "vendeg", "localhost/XE",'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
     }else if($_SESSION["felhasz"]=="vezeto") {
+        $_SESSION["role"]="vezeto";
         $conn = oci_pconnect("C##vezeto", "vezeto", "localhost/XE", 'UTF8') or die("HIBA! Nem sikerült csaltakozni az adatbázishoz!");
     }else{
 
@@ -129,7 +130,7 @@ function getVasarolList()
         return false;
     }
 
-    $result = oci_parse($conn, 'SELECT vasarol.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzlet_nev AS "uzletnev", vasarol.ugyfeligszam AS "igsz", ugyfel_nev AS "nev",vasarol.uzletid AS "uzletid"  FROM C##admin.vasarol, C##admin.uzlet, C##admin.autok, C##admin.ugyfel WHERE autok.alvazszam=vasarol.alvazszam AND uzlet.uzletid=vasarol.uzletid AND ugyfel.ugyfeligszam=vasarol.ugyfeligszam');
+    $result = oci_parse($conn, 'SELECT vasarol.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzlet_nev AS "uzletnev", vasarol.ugyfeligszam AS "igsz", ugyfel_nev AS "nev",vasarol.uzletid AS "uzletid"  FROM C##admin.vasarol, C##admin.uzlet, C##admin.autok, C##admin.ugyfel WHERE autok.alvazszam=vasarol.alvazszam AND uzlet.uzletid=vasarol.uzletid AND ugyfel.ugyfeligszam=vasarol.ugyfeligszam AND vasarol.uzletid='.HolElad($_SESSION["felhasz"]));
 
     oci_close($conn);
     return $result;
