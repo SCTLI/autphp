@@ -32,8 +32,13 @@ function getAutokList()
     if (!($conn = dbConnect())) {
         return false;
     }
+    if($_SESSION["role"]=="elado"){
+        $result = oci_parse($conn, 'SELECT alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzemanyag_tipus AS "uzemanyag", teljesitmeny AS "teljesitmeny", szin AS "szin", ar AS "ar",autok.telepid AS "telepid", eladva AS "eladva", telephely.telep_nev AS "telepnev" FROM C##admin.Autok, C##admin.telephely WHERE autok.telepid=telephely.telepid AND autok.eladva=0 order by telephely.telep_nev');
 
-    $result = oci_parse($conn, 'SELECT alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzemanyag_tipus AS "uzemanyag", teljesitmeny AS "teljesitmeny", szin AS "szin", ar AS "ar",autok.telepid AS "telepid", eladva AS "eladva", telephely.telep_nev AS "telepnev" FROM C##admin.Autok, C##admin.telephely WHERE autok.telepid=telephely.telepid AND autok.eladva=0 order by autok.marka, autok.modell');
+    }else{
+        $result = oci_parse($conn, 'SELECT alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", uzemanyag_tipus AS "uzemanyag", teljesitmeny AS "teljesitmeny", szin AS "szin", ar AS "ar",autok.telepid AS "telepid", eladva AS "eladva", telephely.telep_nev AS "telepnev" FROM C##admin.Autok, C##admin.telephely WHERE autok.telepid=telephely.telepid AND autok.eladva=0 order by autok.marka, autok.modell');
+
+    }
 
     oci_close($conn);
     return $result;
@@ -767,7 +772,7 @@ function ugyfelletre($ugyfelfelh, $ugyfeljelsz){
     oci_execute($siker);
     $siker2 = oci_parse($conn, "GRANT connect TO C##".$ugyfelfelh);
     oci_execute($siker2);
-    $siker3 = oci_parse($conn, "GRANT update on C##admin.ugyfel to C##".$ugyfelfelh);
+    $siker3 = oci_parse($conn, "GRANT select, update on C##admin.ugyfel to C##".$ugyfelfelh);
     oci_execute($siker3);
     $siker4 = oci_parse($conn, "GRANT select on C##admin.telephely to C##".$ugyfelfelh);
     oci_execute($siker4);

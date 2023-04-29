@@ -76,13 +76,9 @@ navi();
     <th></th>
 </tr>
 <?php
-echo UgyfelIgszam();
-echo HolElad();
-echo HolSzerel();
 
 $stid = getAutokList();
 oci_execute($stid);
-
 while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
     echo '<tr>';
     echo '<td>'. $row["alvazszam"] . '</td>';
@@ -101,10 +97,11 @@ if($_SESSION['role']=='elado'){ echo '<td><form method="POST" action="Delete/aut
 				  <input type="hidden" name="autoDelete" value="'. $row["alvazszam"] .'" />
 				  <input type="submit" value="Törlés" class="gomb2"/>
 		          </form></td>';}
-//if($_SESSION['role']=='szerelo'){ echo '<td><form method="POST" action="Insert/szerelInsert.php">
-//				  <input type="hidden" name="autoDelete" value="'. $row["alvazszam"] .'" />
-//				  <input type="submit" value="Törlés" />
-//		          </form></td>';}
+if($_SESSION['role']=='szerelo' && HolSzerel()!=30){ echo '<td><form method="POST" action="szerelpreInsert.php">
+				  <input type="hidden" name="muhely" value="'. HolSzerel() .'" />
+				  <input type="hidden" name="alvazszam" value="'. $row["alvazszam"] .'" />
+				  <input type="submit" value="Szerel" />
+		          </form></td>';}
 if($_SESSION['role']=='elado'){echo '<td style="text-align: center" class="lista"><form method="POST" action="autokUpdatePage.php">
 				  <input type="hidden" name="telepid" value="'. $row["telepid"] .'" />
 				  <input type="hidden" name="alvazszam" value="'. $row["alvazszam"] .'" />

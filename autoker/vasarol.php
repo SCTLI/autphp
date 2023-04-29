@@ -20,7 +20,7 @@ navi();
 <h2>Függőben Lévő Vásárlások tábla</h2>
 <table border="0">
     <tr>
-        <th>Megvasarolni Kívánt Autó Alvázszáma szám</th>
+        <th>Megvasarolni Kívánt Autó Alvázszáma</th>
         <th>Megvásárolni Kívánt Autó Márkája</th>
         <th>Megvásárolni Kívánt Autó Modellje</th>
         <th>Üzlet</th>

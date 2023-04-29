@@ -38,6 +38,7 @@ navi();
                 <td> <select name="muhelyID" required>
                         <?php
                         $muhely = getMuhelyList();
+                        oci_execute($muhely);
                         while( $row = oci_fetch_array($muhely, OCI_ASSOC + OCI_RETURN_NULLS)) {
                             if ($row["muhelyid"]==$muhelyID){
                                 echo '<option value="'.$row["muhelyid"].'" selected>'.$row["nev"].'</option>';
