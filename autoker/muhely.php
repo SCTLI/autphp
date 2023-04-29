@@ -18,6 +18,7 @@ include_once "common/header.php";
 navi();
 ?>
 <h2>Új Műhely felvitele az adatbázisba</h2>
+<div id="helyet" class="regi">
 <p class="kozepre">Ahoz, hogy egy új műhelyt vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</p>
 <form method="POST" action="Insert/muhelyInsert.php" accept-charset="utf-8">
     <label>Műhely Városa:</label>
@@ -28,6 +29,7 @@ navi();
     <br />
     <input type="submit" value="Feltöltés">
 </form>
+</div>
 <h2>Műhelyek</h2>
 <table>
     <tr>
