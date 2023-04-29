@@ -23,7 +23,9 @@ include_once('common/dbfunctions.php');
     ?>
     <h2 id="mainh2">Üdvüzüljük a fő oldalon!</h2>
     <div id="valami">
-    <p class="kozepre">Röviden rólunk: A Padama Cars egy magán kezekben lévő autó kereskedés, amit 3 barát alapított csupán az autók iránti érdeklődésükből.</p>
+        <p class="kozepre">Átlag bevétel: <?php AtlagBevetel()?></p>
+
+        <p class="kozepre">Röviden rólunk: A Padama Cars egy magán kezekben lévő autó kereskedés, amit 3 barát alapított csupán az autók iránti érdeklődésükből.</p>
     <p class="kozepre"> Mára ez egy ország szintű vállakozás lett. Ami <?php echo CountUzlet();?> üzlettel rendelkezik és jelenleg <?php echo TotalCarCount();?> darab autót értékesít.</p>
     <p class="kozepre">Miért válassza a Padama Carst? Mert mi nem csak egyszerűen új és használt autókat értékesítünk hanem az autók állapotát felmérjük és a javításra szoruló autókat meg is szereljük. Eddig <?php echo CountSoldCars()?>elégedett vásárlónk van.</p>
     <p class="kozepre">Tekintse meg most ajánlatainkat!</p>

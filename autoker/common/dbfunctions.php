@@ -700,18 +700,6 @@ function FelhasznalonevVan($felhasznalonev)
     oci_close($conn);
     return $szam;
 }
-//function UgyfelIgszam()
-//{
-//    if (!($conn = admincon())) {
-//        return false;
-//    }
-//    $db = oci_parse($conn, 'begin :szam:=C##admin.miaszamod(:felhasz); end;');
-//    oci_bind_by_name($db, ':szam',$szam);
-//    oci_bind_by_name($db, ':felhasz',$_SESSION["felhasz"]);
-//    oci_execute($db);
-//    oci_close($conn);
-//    return $szam;
-//}
 function LoginHelp()
 {
     if (!($conn = admincon())) {
