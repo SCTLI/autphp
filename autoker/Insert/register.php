@@ -23,7 +23,7 @@ if ($szerepkor='elado'){
     }
 } elseif ($szerepkor='szerelo'){
     if ( isset($igszam) && isset($nev) && isset($felhasznalonev) && isset($jelszo)) {
-
+        $szerelofel = szereloletre($felhasznalonev, $jelszo);
         $sikeres=insertSzerelo($igszam,$nev,$felhasznalonev,password_hash($jelszo, PASSWORD_DEFAULT));
         if ($sikeres==true){
             header("Location: ../index.php");
@@ -33,7 +33,7 @@ if ($szerepkor='elado'){
     }
 } else {
     if (isset($igszam) && isset($nev) && isset($felhasznalonev) && isset($jelszo)) {
-
+        $ugyfelfel = ugyfelletre($felhasznalonev, $jelszo);
         $sikeres = insertUgyfel($igszam, $nev, $felhasznalonev, password_hash($jelszo, PASSWORD_DEFAULT));
         if ($sikeres == true) {
             header("Location: ../index.php");
