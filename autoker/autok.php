@@ -19,7 +19,7 @@ navi();
 ?>
 <?php if ($_SESSION["role"]=="elado"){?>
 <h2>Új Autó felvitele az adatbázisba</h2>
-
+<div id="helyet" class="regi">
 <p class="kozepre">Ahoz, hogy egy új autót vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</p>
 <form method="POST" action="Insert/autoInsert.php" accept-charset="utf-8">
     <label>Alvázszám:</label>
@@ -61,9 +61,10 @@ navi();
     <br />
     <input class="gomb1" type="submit" value="Feltöltés">
 </form>
+</div>
 <?php } ?>
 <h2>Autók </h2>
-<div>
+<div id="helyet" class="regi">
     <?php
     if($_SESSION["role"] == "vezeto"){
         $stid = AVGeladott();
