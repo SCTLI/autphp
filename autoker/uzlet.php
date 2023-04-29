@@ -8,10 +8,15 @@ include_once('common/dbfunctions.php');
     <title>Uzletek tabla</title>
     <link rel="stylesheet" type="text/css" href="css/alap.css">
     <link rel="icon" href="image/icon.png" type="image/icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
     <meta charset="utf-8" />
 </head>
 <body>
-<?php echo navigation();?>
+<?php
+include_once "common/header.php";
+navi();
+?>
 <h2>Új Üzlet felvitele az adatbázisba</h2>
 <p class="kozepre">Ahoz, hogy egy új üzletet vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</p>
 <form method="POST" action="Insert/uzletInsert.php" accept-charset="utf-8">

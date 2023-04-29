@@ -33,6 +33,7 @@ nav li:hover a{
     transition: color 1s;
 }
 
+
 footer{
     margin-top: 30px;
     background-color: rgb(30, 30, 40);
@@ -77,6 +78,7 @@ form{
 .kozepre{
     text-align: center;
 }
+
 
 header{
     height: 300px;
