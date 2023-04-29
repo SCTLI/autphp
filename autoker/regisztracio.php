@@ -29,7 +29,7 @@ navi();
     </select>
     <br />
     <label>Igazolvány száma:</label>
-    <input type="number" name="igszam" placeholder="123456">
+    <input type="number" name="igszam" placeholder="12345678" maxlength="8" minlength="8">
     <br />
     <label>Teljes neve:</label>
     <input type="text" name="nev" placeholder="Idul Zsombor">
