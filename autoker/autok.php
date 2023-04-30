@@ -23,22 +23,22 @@ navi();
 <p class="kozepre">Ahoz, hogy egy új autót vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</p>
 <form method="POST" action="Insert/autoInsert.php" accept-charset="utf-8">
     <label>Alvázszám:</label>
-    <input type="number" name="alvazszam" placeholder="123456">
+    <input type="number" name="alvazszam" placeholder="123456" required>
     <br />
     <label>Márka:</label>
-    <input type="text" name="marka" placeholder="Audi">
+    <input type="text" name="marka" placeholder="Audi" required>
     <br />
     <label>Modell</label>
-    <input type="text" name="modell" placeholder="SUV">
+    <input type="text" name="modell" placeholder="SUV" required>
     <br />
     <label>Teljesítmény:</label>
-    <input type="text" name="teljesitmeny" placeholder="xkW, xLE">
+    <input type="text" name="teljesitmeny" placeholder="xkW, xLE" required>
     <br />
     <label>Szín:</label>
-    <input type="text" name="szin" placeholder="Piros">
+    <input type="text" name="szin" placeholder="Piros" required>
     <br />
     <label>Ár:</label>
-    <input type="number" name="ar" placeholder="100000">
+    <input type="number" name="ar" placeholder="100000" required>
     <br />
     <label>Üzemanyag típus:</label>
     <select name="uzemanyag">

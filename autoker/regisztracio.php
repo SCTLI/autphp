@@ -29,16 +29,16 @@ navi();
     </select>
     <br />
     <label>Igazolvány száma:</label>
-    <input type="number" name="igszam" placeholder="12345678" maxlength="8" minlength="8">
+    <input type="number" name="igszam" placeholder="12345678" required>
     <br />
     <label>Teljes neve:</label>
-    <input type="text" name="nev" placeholder="Idul Zsombor">
+    <input type="text" name="nev" placeholder="Idul Zsombor" required>
     <br />
     <label>Felhasználó neve:</label>
-    <input type="text" name="felhasznalonev" placeholder="zsombii">
+    <input type="text" name="felhasznalonev" placeholder="zsombii" required>
     <br />
     <label>Jelszava:</label>
-    <input type="text" name="jelszo" placeholder="Semmi123">
+    <input type="text" name="jelszo" placeholder="Semmi123" required>
     <br />
     <input type="submit" class="gomb1" value="Regisztráció">
 </form></div>

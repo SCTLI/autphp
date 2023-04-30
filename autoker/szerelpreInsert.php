@@ -26,7 +26,7 @@ navi();
     <label>Szerelt Autó alvázszáma: <?php echo $szerelAlvazszam ?></label>
     <br />
     <label>Szerelt alkatrész:</label>
-    <input type="text" name="alkatresz" placeholder="motor">
+    <input type="text" name="alkatresz" placeholder="motor" required>
     <input type="hidden" name="muhelyid" value="<?php echo $muhelyid ?>">
     <input type="hidden" name="alvazszam" value="<?php echo $szerelAlvazszam ?>">
     <br />

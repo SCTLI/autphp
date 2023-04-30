@@ -30,6 +30,15 @@ navi();
 <div class="regi" id="helyet">
     <form method="POST" action="Update/telephelyUpdate.php" accept-charset="utf-8" class="kozepre">
         <table><tr>
+                <?php
+                $stid = TelephelyAutoi();
+                oci_execute($stid);
+                while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
+                    if ($row["telepid"]==$telepID){
+                        echo '<label type="text">Telephely autói: '.$row["szam"].'</label>';
+                    }
+                }
+                ?>
                 <td><label for="telepNev">Neve:</label></td>
                 <td><input type="text" name="telepNev" value="<?php echo $telepNev ?>" required></td>
                 <td><label for="telepVaros">Városa:</label></td>

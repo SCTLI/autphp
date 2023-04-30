@@ -746,6 +746,43 @@ function AVGeladott(){
     oci_close($conn);
     return $joazoci; //nem
 }
+function MuhelyDolgozoi(){
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $count = oci_parse($conn, 'SELECT Count(*) AS "szam", muhely.muhelyid AS "muhelyid" FROM C##admin.muhely, C##admin.szerelo WHERE szerelo.muhelyid=muhely.muhelyid GROUP BY muhely.muhelyid');
+
+    oci_close($conn);
+    return $count; //nem
+}
+function UzletDolgozoi(){
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $count = oci_parse($conn, 'SELECT Count(*) AS "szam", uzlet.uzletid AS "uzletid" FROM C##admin.uzlet, C##admin.elado WHERE elado.uzletid=uzlet.uzletid GROUP BY uzlet.uzletid');
+
+    oci_close($conn);
+    return $count; //nem
+}
+function TelephelyAutoi(){
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $count = oci_parse($conn, 'SELECT Count(*) AS "szam", telephely.telepid AS "telepid" FROM C##admin.telephely, C##admin.autok WHERE autok.alvazszam=telephely.telepid GROUP BY telephely.telepid');
+
+    oci_close($conn);
+    return $count; //nem
+}
+function LegrosszabbModell(){
+    if (!($conn = dbConnect())) {
+        return false;
+    }
+    $count = oci_parse($conn, 'SELECT autok.modell AS "modell", Count(*) AS "szam" FROM C##admin.autok, C##admin.szerel WHERE autok.alvazszam=szerel.alvazszam GROUP BY autok.modell order by COUNT(*) LIMIT 1');
+
+    oci_close($conn);
+    return $count; //nem
+}
+
 //
 // ---------------------------------------------- Felhasználó létrehozása funkciók ----------------------------------------------
 //

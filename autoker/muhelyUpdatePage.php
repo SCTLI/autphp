@@ -30,6 +30,15 @@ navi();
 <div class="regi" id="helyet">
     <form method="POST" action="Update/muhelyUpdate.php" accept-charset="utf-8" class="kozepre">
         <table><tr>
+                    <?php
+                        $stid = MuhelyDolgozoi();
+                        oci_execute($stid);
+                        while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
+                            if ($row["muhelyid"]==$muhelyID){
+                                echo '<label type="text">Műhely dolgozói: '.$row["szam"].'</label>';
+                            }
+                    }
+                    ?>
                 <td><label for="muhelyNev">Neve:</label></td>
                 <td><input type="text" name="muhelyNev" value="<?php echo $muhelyNev ?>" required></td>
                 <td><label for="muhelyVaros">Városa:</label></td>

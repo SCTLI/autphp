@@ -43,7 +43,7 @@ navi();
 				  <input type="hidden" name="vasarolDeleteAlvazszam" value="'. $row["alvazszam"] .'" />
 				  <input type="hidden" name="vasarolDeleteUzletID" value="'. $row["uzletid"] .'" />
 				  <input type="hidden" name="vasarolDeleteUgyfeligsz" value="'. $row["igsz"] .'" />
-				  <input type="submit" value="Törlés" class="gomb2"/>
+				  <input type="submit" value="Elfogad" class="gomb2"/>
 		          </form></td>';
 //        echo '<td style="text-align: center" class="lista"><form method="POST" action="vasarlasUpdatePage.php">
 //				  <input type="hidden" name="vasarolAlvazszamUpdate" value="'. $row["alvazszam"] .'" />

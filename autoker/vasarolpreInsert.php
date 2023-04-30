@@ -23,7 +23,7 @@ navi();
 <form method="post" action="Insert/vasarolInsert.php" class="kozepre">
     <input type="hidden" name="alvazszam" value="<?php echo $autoAlvazszam ?>" />
     <label>Melyik üzletben szeretné átvenni:</label>
-    <select name="uzletid">
+    <select name="uzletid" required>
         <?php
         $stid = getUzletList();
         oci_execute($stid);

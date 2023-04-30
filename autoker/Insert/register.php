@@ -43,5 +43,5 @@ if ($szerepkor=='elado'){
     }
 }
 }else{
-    error_log("A felhasználónév máe foglalt");
+    header("Location: ../regisztracio.php");
 }

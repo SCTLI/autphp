@@ -22,10 +22,10 @@ navi();
 <p class="kozepre">Ahoz, hogy egy új telephelyet vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</p>
 <form method="POST" action="Insert/telepInsert.php" accept-charset="utf-8">
     <label>Telephely Városa:</label>
-    <input type="text" name="varos" placeholder="Kiskunmajsa">
+    <input type="text" name="varos" placeholder="Kiskunmajsa" required>
     <br />
     <label>Telephely Neve:</label>
-    <input type="text" name="nev" placeholder="Kismajkaker">
+    <input type="text" name="nev" placeholder="Kismajkaker" required>
     <br />
     <input type="submit" value="Feltöltés" class="gomb1">
 </form>

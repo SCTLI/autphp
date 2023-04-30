@@ -22,10 +22,10 @@ navi();
 <p class="kozepre">Ahoz, hogy egy új műhelyt vigyen fel az adatbázisba kérem töltse ki az alábbi űrlapot.(minden mező kitöltése kötelező)</p>
 <form method="POST" action="Insert/muhelyInsert.php" accept-charset="utf-8">
     <label>Műhely Városa:</label>
-    <input type="text" name="varos" placeholder="Miskolc">
+    <input type="text" name="varos" placeholder="Miskolc" required>
     <br />
     <label>Műhely Neve:</label>
-    <input type="text" name="nev" placeholder="Nem Megy Még a Vasba">
+    <input type="text" name="nev" placeholder="Nem Megy Még a Vasba" required>
     <br />
     <input type="submit" value="Feltöltés" class="gomb1">
 </form>
