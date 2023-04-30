@@ -42,7 +42,6 @@ navi();
         while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
             if($row["felhasznalonev"] == $ugyfelfelhasznalo){
                 $ugyfeligje = $row["igsz"];
-                echo $ugyfeligje;
             }
         }
         ?>

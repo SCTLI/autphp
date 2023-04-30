@@ -53,6 +53,27 @@ navi();
     }
     echo '</table>';
     ?>
+
+    <h2>Szerelések</h2>
+    <table width="25%">
+        <tr>
+            <th>Műhely neve</th>
+            <th>db</th>
+        </tr>
+        <?php
+        $stid = MuhelySzerel();
+        oci_execute($stid);
+
+        while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
+            echo '<tr>';
+            echo '<td>'.$row['nev'].'</td>';
+            echo '<td>'.$row['db'].'</td>';
+
+            echo '</tr>';
+        }
+        echo '</table>';
+
+        ?>
     <?php
     include_once "common/footer.php";
     ?>

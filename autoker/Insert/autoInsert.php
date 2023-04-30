@@ -12,8 +12,11 @@ $telepID = $_POST['telephelyid'];
 $autoAr = $_POST['ar'];
 
 if ( isset($autoAlvazszam) && isset($autoMarka) && isset($autoModell) && isset($autoTeljesitmeny) && isset($autoSzin) && isset($autoUzemanyag) && isset($telepID) && isset($autoAr)) {
-
-    $sikeres=insertAutok($telepID,$autoMarka,$autoUzemanyag,$autoModell,$autoTeljesitmeny,$autoSzin,$autoAr,$autoAlvazszam);
+    if(Lekapar($autoAlvazszam)==0){
+        $sikeres=insertAutok($telepID,$autoMarka,$autoUzemanyag,$autoModell,$autoTeljesitmeny,$autoSzin,$autoAr,$autoAlvazszam);
+    }else{
+        header("Location: ../autok.php");
+    }
 if ($sikeres==true){
     header("Location: ../autok.php");
 }

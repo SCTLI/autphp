@@ -9,7 +9,7 @@ $felhasznalonev = $_POST['felhasznalonev'];
 $jelszo = $_POST['jelszo'];
 $szerepkor = $_POST['szerepkor'];
 
-if (felhasznalonevVan($felhasznalonev)==0){
+if (felhasznalonevVan($felhasznalonev)==0 && $felhasznalonev!="vezeto" && strlen($igszam)==8 && kivagyte($igszam)==0){
 
 if ($szerepkor=='elado'){
     if ( isset($igszam) && isset($nev) && isset($felhasznalonev) && isset($jelszo)) {
@@ -44,4 +44,5 @@ if ($szerepkor=='elado'){
 }
 }else{
     header("Location: ../regisztracio.php");
+
 }

@@ -130,7 +130,7 @@ function getSzerelList()
     }
     $datesess = oci_parse($conn, 'ALTER SESSION SET NLS_DATE_FORMAT = "YYYY-MM-DD HH24:MI:SS"');
     oci_execute($datesess);
-    $result = oci_parse($conn, 'SELECT szerel.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", muhely_nev AS "muhelynev", szerelt_alkatresz AS "alkatresz",idopont AS "idopont"  FROM C##admin.Szerel, C##admin.muhely, C##admin.autok WHERE autok.alvazszam=szerel.alvazszam AND muhely.muhelyid=szerel.muhelyid');
+    $result = oci_parse($conn, 'SELECT szerel.alvazszam AS "alvazszam", marka AS "marka", modell AS "modell", muhely_nev AS "muhelynev", szerelt_alkatresz AS "alkatresz",idopont AS "idopont"  FROM C##admin.Szerel, C##admin.muhely, C##admin.autok WHERE autok.alvazszam=szerel.alvazszam AND muhely.muhelyid=szerel.muhelyid AND szerel.muhelyid='.HolSzerel($_SESSION["felhasz"]));
 
     oci_close($conn);
     return $result;
@@ -155,7 +155,7 @@ function getVasarolList()
 function deleteAuto($id)
 {
 
-    if (!($conn = dbConnect())) {
+    if (!($conn = admincon())) {
         return false;
     }
 
@@ -724,19 +724,42 @@ function FelhasznalonevVan($felhasznalonev)
     oci_close($conn);
     return $szam;
 }
-function LoginHelp()
+function LoginHelp($felhasz)
 {
     if (!($conn = admincon())) {
         return false;
     }
     $db = oci_parse($conn, 'begin :szam:=C##admin.kivagyte(:felhasz); end;');
     oci_bind_by_name($db, ':szam',$szam);
-    oci_bind_by_name($db, ':felhasz',$_SESSION["felhasz"]);
+    oci_bind_by_name($db, ':felhasz',$felhasz);
     oci_execute($db);
     oci_close($conn);
     return $szam;
 }
-
+function kivagyte($igsz)
+{
+    if (!($conn = admincon())) {
+        return false;
+    }
+    $db = oci_parse($conn, 'begin :szam:=C##admin.irathamititoe(:felhasz); end;');
+    oci_bind_by_name($db, ':szam',$szam);
+    oci_bind_by_name($db, ':felhasz',$igsz);
+    oci_execute($db);
+    oci_close($conn);
+    return $szam;
+}
+function Lekapar($alvazszam)
+{
+    if (!($conn = admincon())) {
+        return false;
+    }
+    $db = oci_parse($conn, 'begin :szam:=C##admin.lekapartad(:felhasz); end;');
+    oci_bind_by_name($db, ':szam',$szam);
+    oci_bind_by_name($db, ':felhasz',$alvazszam);
+    oci_execute($db);
+    oci_close($conn);
+    return $szam;
+}
 function AVGeladott(){
     if (!($conn = admincon())) {
         return false;
@@ -777,12 +800,27 @@ function LegrosszabbModell(){
     if (!($conn = dbConnect())) {
         return false;
     }
-    $count = oci_parse($conn, 'SELECT autok.modell AS "modell", Count(*) AS "szam" FROM C##admin.autok, C##admin.szerel WHERE autok.alvazszam=szerel.alvazszam GROUP BY autok.modell order by COUNT(*) LIMIT 1');
+    $count = oci_parse($conn, 'SELECT autok.marka AS "marka", autok.modell AS "modell", Count(*) AS "szam" FROM C##admin.autok, C##admin.szerel WHERE autok.alvazszam=szerel.alvazszam GROUP BY autok.marka, autok.modell order by COUNT(*) desc fetch first 1 row only');
 
     oci_close($conn);
     return $count; //nem
 }
-
+function VarakozoVasarlas(){
+    if (!($conn = admincon())) {
+        return false;
+    }
+    $count = oci_parse($conn, 'SELECT COUNT(Vasarol.Alvazszam) AS "db", Uzlet.Uzlet_nev AS "nev" FROM Vasarol, Uzlet WHERE Vasarol.UzletId=Uzlet.UzletId GROUP BY Uzlet.Uzlet_nev ORDER BY COUNT(Vasarol.Alvazszam)');
+    oci_close($conn);
+    return $count; //nem
+}
+function MuhelySzerel(){
+    if (!($conn = admincon())) {
+        return false;
+    }
+    $count = oci_parse($conn, 'SELECT Muhely.Muhely_nev AS "nev", COUNT(Szerel.Alvazszam) AS "db" FROM Szerel, Muhely WHERE Szerel.Muhelyid=Muhely.MuhelyId GROUP BY muhely.Muhely_nev ORDER BY COUNT(Szerel.Alvazszam)');
+    oci_close($conn);
+    return $count; //nem
+}
 //
 // ---------------------------------------------- Felhasználó létrehozása funkciók ----------------------------------------------
 //
@@ -861,7 +899,7 @@ function szereloletre($szerelofelh, $szerelojelsz){
     oci_execute($siker2);
     $siker3 = oci_parse($conn, "GRANT select on C##admin.autok to C##".$szerelofelh);
     oci_execute($siker3);
-    $siker4 = oci_parse($conn, "GRANT select, insert on C##admin.szerel to C##".$szerelofelh);
+    $siker4 = oci_parse($conn, "GRANT select, insert, delete on C##admin.szerel to C##".$szerelofelh);
     oci_execute($siker4);
     $siker5 = oci_parse($conn, "GRANT select on C##admin.muhely to C##".$szerelofelh);
     oci_execute($siker5);

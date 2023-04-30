@@ -19,6 +19,13 @@ navi();
 ?>
 
 <h2>Szerelések tábla</h2>
+<?php
+$stid = LegrosszabbModell();
+oci_execute($stid);
+while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
+        echo '<div id="valami"><p class="kozepre">Letgtöbbet szerelt Márka-modell: '.$row["marka"].'-'.$row["modell"].' '.$row["szam"].' alkalommal</p></div>';
+}
+?>
 <table border="0">
     <tr>
         <th>Szerelt Autó Alvázszáma szám</th>
