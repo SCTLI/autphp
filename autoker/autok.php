@@ -115,7 +115,7 @@ if($_SESSION['role']=='elado'){ echo '<td><form method="POST" action="Delete/aut
 if($_SESSION['role']=='szerelo' && HolSzerel()!=30){ echo '<td><form method="POST" action="szerelpreInsert.php">
 				  <input type="hidden" name="muhely" value="'. HolSzerel() .'" />
 				  <input type="hidden" name="alvazszam" value="'. $row["alvazszam"] .'" />
-				  <input type="submit" value="Szerel" />
+				  <input type="submit" value="Szerel" class="gomb1"/>
 		          </form></td>';}
 if($_SESSION['role']=='elado'){echo '<td style="text-align: center" class="lista"><form method="POST" action="autokUpdatePage.php">
 				  <input type="hidden" name="telepid" value="'. $row["telepid"] .'" />

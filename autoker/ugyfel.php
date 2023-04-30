@@ -40,12 +40,6 @@ navi();
 				  <input type="hidden" name="ugyfelFelhasznolev" value="'. $row["felhasznalonev"] .'" />
 				  <input type="submit" value="Törlés" class="gomb2"/>
 		          </form></td>';
-        echo '<td style="text-align: center" class="lista"><form method="POST" action="ugyfelUpdatePage.php">
-				  <input type="hidden" name="ugyfeligszam" value="'. $row["igsz"] .'" />
-				  <input type="hidden" name="ugyfelneve" value="'. $row["nev"] .'" />
-				  <input type="hidden" name="ugyfelfelhnev" value="'. $row["felhasznalonev"] .'" />
-				  <input type="submit" value="Szerkeszt" class="gomb1"/>
-		          </form></td>';
         echo '</tr>';
     }
     echo '</table>';
