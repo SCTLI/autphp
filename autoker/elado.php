@@ -18,6 +18,13 @@ include_once "common/header.php";
 navi();
 ?>
 <h2>Eladók </h2>
+<?php
+$stid = CountUzemanyag();
+oci_execute($stid);
+while ( $row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
+    echo '<div id="valami"><p class="kozepre">Legkelendőbb üzemanyagtípus: '.$row["tipus"].' - '.$row["szam"].' autó</p></div>';
+}
+?>
 <table border="0">
     <tr>
         <th>Igazolvány szám</th>

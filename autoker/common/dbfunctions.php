@@ -639,7 +639,7 @@ function CountUzemanyag(){
     if (!($conn = dbConnect())) {
         return false;
     }
-    $count = oci_parse($conn, 'SELECT COUNT(Autok.Uzemanyag_tipus),Autok.Uzemanyag_tipus FROM C##admin.Autok GROUP BY Autok.Uzemanyag_tipus ORDER BY COUNT(Autok.Uzemanyag_tipus) DESC');
+    $count = oci_parse($conn, 'SELECT COUNT(Autok.Uzemanyag_tipus) AS "szam",Autok.Uzemanyag_tipus AS "tipus" FROM C##admin.Autok WHERE autok.eladva=1 GROUP BY Autok.Uzemanyag_tipus ORDER BY COUNT(Autok.Uzemanyag_tipus) DESC fetch first 1 row only');
 
     oci_close($conn);
     return $count;
@@ -791,7 +791,7 @@ function TelephelyAutoi(){
     if (!($conn = dbConnect())) {
         return false;
     }
-    $count = oci_parse($conn, 'SELECT Count(*) AS "szam", telephely.telepid AS "telepid" FROM C##admin.telephely, C##admin.autok WHERE autok.alvazszam=telephely.telepid GROUP BY telephely.telepid');
+    $count = oci_parse($conn, 'SELECT Count(*) AS "szam", telephely.telepid AS "telepid" FROM C##admin.telephely, C##admin.autok WHERE autok.telepid=telephely.telepid AND autok.eladva=0 GROUP BY telephely.telepid');
 
     oci_close($conn);
     return $count; //nem
